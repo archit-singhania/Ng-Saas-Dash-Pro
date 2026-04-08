@@ -13,14 +13,39 @@ export const routes: Routes = [
         title: 'Overview — Operations Console'
       },
       {
+        path: 'calls',
+        loadComponent: () => import('./pages/calls/calls').then(m => m.Calls),
+        title: 'Call Logs — Operations Console'
+      },
+      {
         path: 'features',
         loadComponent: () => import('./pages/features/features').then(m => m.Features),
         title: 'Features — Operations Console'
       },
       {
-        path: 'calls',
-        loadComponent: () => import('./pages/calls/calls').then(m => m.Calls),
-        title: 'Call Logs — Operations Console'
+        path: 'features/bookings',
+        loadComponent: () => import('./pages/features/bookings/bookings').then(m => m.Bookings),
+        title: 'Bookings — Operations Console'
+      },
+      {
+        path: 'features/transcripts',
+        loadComponent: () => import('./pages/features/transcripts/transcripts').then(m => m.Transcripts),
+        title: 'Transcripts — Operations Console'
+      },
+      {
+        path: 'features/analytics',
+        loadComponent: () => import('./pages/features/analytics/analytics').then(m => m.Analytics),
+        title: 'Analytics — Operations Console'
+      },
+      {
+        path: 'features/sentiment',
+        loadComponent: () => import('./pages/features/sentiment/sentiment').then(m => m.Sentiment),
+        title: 'Sentiment — Operations Console'
+      },
+      {
+        path: 'features/crm',
+        loadComponent: () => import('./pages/features/crm/crm').then(m => m.Crm),
+        title: 'CRM — Operations Console'
       },
       {
         path: 'settings',
@@ -31,3 +56,4 @@ export const routes: Routes = [
   },
   { path: '**', redirectTo: 'dashboard' }
 ];
+

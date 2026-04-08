@@ -11,14 +11,37 @@
 
   <nav class="sidebar-nav">
     @for (item of navItems; track item.route) {
-      <a class="nav-item"
-         [routerLink]="item.route"
-         routerLinkActive="active"
-         [routerLinkActiveOptions]="{ exact: item.route === '/dashboard' }"
-         [pTooltip]="item.label"
-         tooltipPosition="right">
-        <i [class]="item.icon"></i>
-      </a>
+      @if (item.children) {
+        <button
+          class="nav-item"
+          [class.active]="featuresExpanded()"
+          (click)="toggleFeatures($event)"
+          [pTooltip]="item.label"
+          tooltipPosition="right">
+          <i [class]="item.icon"></i>
+        </button>
+        <div class="sub-nav" [class.expanded]="featuresExpanded()">
+          @for (child of item.children; track child.route) {
+            <a
+              class="sub-item"
+              [routerLink]="child.route"
+              routerLinkActive="active"
+              [pTooltip]="child.label"
+              tooltipPosition="right">
+              <i [class]="child.icon"></i>
+            </a>
+          }
+        </div>
+      } @else {
+        <a class="nav-item"
+           [routerLink]="item.route"
+           routerLinkActive="active"
+           [routerLinkActiveOptions]="{ exact: item.route === '/dashboard' }"
+           [pTooltip]="item.label"
+           tooltipPosition="right">
+          <i [class]="item.icon"></i>
+        </a>
+      }
     }
   </nav>
 
@@ -31,3 +54,4 @@
   </div>
 
 </aside>
+
