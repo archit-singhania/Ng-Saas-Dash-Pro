@@ -10,13 +10,13 @@
   </div>
 
   <nav class="sidebar-nav">
-    @for (item of navItems; track item.route) {
+    @for (item of navItems; track item.route; let i = $index) {
       @if (item.children) {
         <button
           class="nav-item"
           [class.active]="featuresExpanded()"
           (click)="toggleFeatures($event)"
-          [pTooltip]="item.label"
+          [pTooltip]="featuresExpanded() ? '' : item.label"
           tooltipPosition="right">
           <i [class]="item.icon"></i>
         </button>
@@ -46,12 +46,111 @@
   </nav>
 
   <div class="sidebar-footer">
+    <button class="nav-item footer-item"
+       pTooltip="Settings"
+       tooltipPosition="right"
+       (click)="openSettings($event)">
+      <i class="pi pi-cog"></i>
+    </button>
     <div class="account-avatar"
-         pTooltip="Admin — Operator"
-         tooltipPosition="right">
+         pTooltip="Profile"
+         tooltipPosition="right"
+         (click)="openProfile()">
       A
     </div>
   </div>
 
 </aside>
 
+<p-dialog
+  [(visible)]="profileOpen"
+  [modal]="true"
+  [closable]="true"
+  [draggable]="false"
+  [resizable]="false"
+  styleClass="profile-dialog"
+  [style]="{ width: '420px' }">
+
+  <ng-template #header>
+    <span class="profile-dialog-title">Account Profile</span>
+  </ng-template>
+
+  <div class="profile-body">
+    <div class="profile-avatar-lg">
+      <span>A</span>
+    </div>
+    <div class="profile-name">Admin Operator</div>
+    <div class="profile-email">admin&#64;operationsconsole.io</div>
+    <div class="profile-badge">
+      <p-tag value="Administrator" severity="info" />
+      <p-tag value="Coming Soon: SSO" severity="secondary" />
+    </div>
+
+    <div class="profile-divider"></div>
+
+    <div class="profile-stats">
+      <div class="ps-item">
+        <span class="ps-label">Role</span>
+        <span class="ps-value">Super Admin</span>
+      </div>
+      <div class="ps-item">
+        <span class="ps-label">Plan</span>
+        <span class="ps-value">Enterprise</span>
+      </div>
+      <div class="ps-item">
+        <span class="ps-label">Region</span>
+        <span class="ps-value">IN-South Asia</span>
+      </div>
+      <div class="ps-item">
+        <span class="ps-label">2FA</span>
+        <span class="ps-value coming">Coming Soon</span>
+      </div>
+    </div>
+
+    <div class="profile-divider"></div>
+
+    <div class="profile-actions">
+      <button class="pa-btn pa-secondary" disabled>
+        <i class="pi pi-user-edit"></i> Edit Profile
+        <span class="pa-soon">Soon</span>
+      </button>
+      <button class="pa-btn pa-secondary" disabled>
+        <i class="pi pi-key"></i> Change Password
+        <span class="pa-soon">Soon</span>
+      </button>
+      <button class="pa-btn pa-danger" disabled>
+        <i class="pi pi-sign-out"></i> Sign Out
+        <span class="pa-soon">Soon</span>
+      </button>
+    </div>
+  </div>
+
+</p-dialog>
+
+<p-drawer
+  [(visible)]="settingsOpen"
+  position="right"
+  styleClass="settings-drawer"
+  [style]="{ width: '420px' }"
+  [modal]="true"
+  [showCloseIcon]="false">
+
+  <ng-template #header>
+    <div class="sd-header">
+      <span class="sd-title">Settings</span>
+      <button class="sd-close" (click)="closeSettings()" aria-label="Close">
+        <i class="pi pi-times"></i>
+      </button>
+    </div>
+  </ng-template>
+
+  <div class="sd-coming-soon">
+    <div class="sd-cs-icon">
+      <i class="pi pi-cog"></i>
+    </div>
+    <div class="sd-cs-title">Coming Soon</div>
+    <div class="sd-cs-desc">Settings &amp; configuration will be available in a future release.</div>
+    <p-tag value="Coming Soon" severity="secondary" />
+  </div>
+
+</p-drawer>

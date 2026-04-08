@@ -1,16 +1,222 @@
-<div class="page-content">
-  <div class="page-header">
-    <h1>Settings</h1>
-    <p>Configure your AI voice agent and integrations</p>
+<div class="page-content settings-page">
+
+  <div class="settings-header">
+    <div class="settings-user">
+      <div class="settings-avatar">A</div>
+      <div>
+        <div class="settings-name">Admin Operator</div>
+        <div class="settings-role">Super Admin &mdash; Operations Console</div>
+      </div>
+    </div>
+    <p-tag value="Coming Soon: Edit" severity="secondary" />
   </div>
 
-  <div class="coming-soon-wrap">
-    <div class="coming-soon-card">
-      <div class="cs-icon">
-        <i class="pi pi-cog"></i>
-      </div>
-      <h2 class="cs-title">Coming Soon</h2>
-      <p class="cs-desc">Settings and configuration panels are being built. Agent setup, API credentials, and toggles will appear here.</p>
+  <div class="settings-body">
+
+    <nav class="settings-tabs">
+      @for (tab of tabs; track tab.id) {
+        <button
+          class="stab"
+          [class.active]="activeTab() === tab.id"
+          (click)="setTab(tab.id)">
+          <i [class]="tab.icon"></i>
+          {{ tab.label }}
+        </button>
+      }
+    </nav>
+
+    <div class="settings-panel">
+
+      @if (activeTab() === 'profile') {
+        <div class="panel-section">
+          <div class="panel-section-head">
+            <span class="panel-section-title">Personal Information</span>
+            <p-tag value="Coming Soon" severity="secondary" />
+          </div>
+          <p-divider />
+          <div class="field-grid">
+            <div class="field-row">
+              <label class="field-label">Full Name</label>
+              <div class="field-mock">Admin Operator</div>
+            </div>
+            <div class="field-row">
+              <label class="field-label">Email</label>
+              <div class="field-mock">admin&#64;operationsconsole.io</div>
+            </div>
+            <div class="field-row">
+              <label class="field-label">Role</label>
+              <div class="field-mock">Super Admin</div>
+            </div>
+            <div class="field-row">
+              <label class="field-label">Region</label>
+              <div class="field-mock">IN &mdash; South Asia</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel-section">
+          <div class="panel-section-head">
+            <span class="panel-section-title">Security</span>
+            <p-tag value="Coming Soon" severity="secondary" />
+          </div>
+          <p-divider />
+          <div class="field-grid">
+            <div class="field-row">
+              <label class="field-label">Password</label>
+              <div class="field-mock mock-password">&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;</div>
+            </div>
+            <div class="field-row">
+              <label class="field-label">Two-Factor Auth</label>
+              <div class="field-mock mock-toggle">
+                <p-toggleswitch [ngModel]="false" [disabled]="true" />
+                <span class="toggle-label">Disabled</span>
+              </div>
+            </div>
+            <div class="field-row">
+              <label class="field-label">Session Timeout</label>
+              <div class="field-mock">30 minutes</div>
+            </div>
+          </div>
+        </div>
+      }
+
+      @if (activeTab() === 'agent') {
+        <div class="panel-section">
+          <div class="panel-section-head">
+            <span class="panel-section-title">Voice Agent Settings</span>
+            <p-tag value="Coming Soon" severity="secondary" />
+          </div>
+          <p-divider />
+          <div class="field-grid">
+            <div class="field-row">
+              <label class="field-label">Agent Name</label>
+              <div class="field-mock">VoiceBot Alpha</div>
+            </div>
+            <div class="field-row">
+              <label class="field-label">Language</label>
+              <div class="field-mock">English (US)</div>
+            </div>
+            <div class="field-row">
+              <label class="field-label">Voice Model</label>
+              <div class="field-mock">OpenAI TTS &mdash; Alloy</div>
+            </div>
+            <div class="field-row">
+              <label class="field-label">Max Call Duration</label>
+              <div class="field-mock">10 minutes</div>
+            </div>
+            <div class="field-row">
+              <label class="field-label">Fallback Behaviour</label>
+              <div class="field-mock">Transfer to Human</div>
+            </div>
+            <div class="field-row">
+              <label class="field-label">Active</label>
+              <div class="field-mock mock-toggle">
+                <p-toggleswitch [ngModel]="true" [disabled]="true" />
+                <span class="toggle-label">Enabled</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      }
+
+      @if (activeTab() === 'api') {
+        <div class="panel-section">
+          <div class="panel-section-head">
+            <span class="panel-section-title">API Credentials</span>
+            <p-tag value="Coming Soon" severity="secondary" />
+          </div>
+          <p-divider />
+          <div class="field-grid">
+            <div class="field-row">
+              <label class="field-label">OpenAI API Key</label>
+              <div class="field-mock mock-password">sk-&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;</div>
+            </div>
+            <div class="field-row">
+              <label class="field-label">Twilio SID</label>
+              <div class="field-mock mock-password">AC&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;</div>
+            </div>
+            <div class="field-row">
+              <label class="field-label">Twilio Auth Token</label>
+              <div class="field-mock mock-password">&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;</div>
+            </div>
+            <div class="field-row">
+              <label class="field-label">FastAPI Webhook URL</label>
+              <div class="field-mock">https://api.yourdomain.com/webhook</div>
+            </div>
+            <div class="field-row">
+              <label class="field-label">Webhook Secret</label>
+              <div class="field-mock mock-password">&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;</div>
+            </div>
+          </div>
+        </div>
+      }
+
+      @if (activeTab() === 'notifications') {
+        <div class="panel-section">
+          <div class="panel-section-head">
+            <span class="panel-section-title">Notification Preferences</span>
+            <p-tag value="Coming Soon" severity="secondary" />
+          </div>
+          <p-divider />
+          <div class="field-grid">
+            <div class="field-row">
+              <label class="field-label">Missed Call Alerts</label>
+              <div class="field-mock mock-toggle">
+                <p-toggleswitch [ngModel]="true" [disabled]="true" />
+                <span class="toggle-label">Enabled</span>
+              </div>
+            </div>
+            <div class="field-row">
+              <label class="field-label">Daily Summary Email</label>
+              <div class="field-mock mock-toggle">
+                <p-toggleswitch [ngModel]="false" [disabled]="true" />
+                <span class="toggle-label">Disabled</span>
+              </div>
+            </div>
+            <div class="field-row">
+              <label class="field-label">Agent Downtime Alert</label>
+              <div class="field-mock mock-toggle">
+                <p-toggleswitch [ngModel]="true" [disabled]="true" />
+                <span class="toggle-label">Enabled</span>
+              </div>
+            </div>
+            <div class="field-row">
+              <label class="field-label">Slack Webhook</label>
+              <div class="field-mock">Not configured</div>
+            </div>
+          </div>
+        </div>
+      }
+
+      @if (activeTab() === 'billing') {
+        <div class="panel-section">
+          <div class="panel-section-head">
+            <span class="panel-section-title">Plan &amp; Billing</span>
+            <p-tag value="Coming Soon" severity="secondary" />
+          </div>
+          <p-divider />
+          <div class="billing-plan-card">
+            <div class="bp-badge"><i class="pi pi-star-fill"></i> Enterprise</div>
+            <div class="bp-desc">Unlimited calls &middot; Priority support &middot; Custom SLA</div>
+            <div class="bp-price">Custom Pricing</div>
+          </div>
+          <div class="field-grid" style="margin-top:1.25rem">
+            <div class="field-row">
+              <label class="field-label">Billing Contact</label>
+              <div class="field-mock">admin&#64;operationsconsole.io</div>
+            </div>
+            <div class="field-row">
+              <label class="field-label">Next Invoice</label>
+              <div class="field-mock">Coming Soon</div>
+            </div>
+            <div class="field-row">
+              <label class="field-label">Payment Method</label>
+              <div class="field-mock">Not configured</div>
+            </div>
+          </div>
+        </div>
+      }
+
     </div>
   </div>
 </div>

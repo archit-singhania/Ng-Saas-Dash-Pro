@@ -2,7 +2,7 @@
 
 :root {
   --font-sans: 'Inter', system-ui, sans-serif;
-  --sidebar-width: 64px;
+  --sidebar-width: 72px;
   --topbar-height: 60px;
   --transition-fast: 150ms ease;
   --transition-base: 250ms ease;
@@ -26,15 +26,15 @@
 }
 
 [data-theme="dark"] {
-  --bg-app:        #020617;
-  --bg-sidebar:    #0f172a;
-  --bg-topbar:     #0f172a;
-  --bg-card:       #1e293b;
-  --bg-card-hover: #253349;
-  --border-color:  #1e293b;
-  --text-primary:  #f1f5f9;
-  --text-secondary:#94a3b8;
-  --text-muted:    #475569;
+  --bg-app:        var(--p-surface-950);
+  --bg-sidebar:    var(--p-surface-900);
+  --bg-topbar:     var(--p-surface-900);
+  --bg-card:       var(--p-surface-800);
+  --bg-card-hover: var(--p-surface-700);
+  --border-color:  var(--p-surface-700);
+  --text-primary:  var(--p-surface-50);
+  --text-secondary:var(--p-surface-400);
+  --text-muted:    var(--p-surface-600);
   --shadow-card:   0 1px 2px rgba(0,0,0,.4);
   --shadow-hover:  0 4px 12px rgba(0,0,0,.5);
 }
@@ -83,7 +83,7 @@ html, body {
   }
 
   .p-datatable-tbody > tr {
-    background: transparent !important;
+    background: var(--bg-card) !important;
 
     &:hover { background: var(--bg-card-hover) !important; }
 
@@ -91,6 +91,7 @@ html, body {
       border-bottom: 1px solid var(--border-color) !important;
       padding: 0.875rem 1rem !important;
       color: var(--text-primary) !important;
+      font-size: .875rem !important;
     }
   }
 }
