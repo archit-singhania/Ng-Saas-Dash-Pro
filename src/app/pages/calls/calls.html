@@ -1,4 +1,49 @@
-<div class="page">
-  <h1>Call Logs</h1>
-  <p>Recent call history and details will be listed here.</p>
+<div class="page-content">
+  <div class="page-header">
+    <h1>Call Logs</h1>
+    <p>Full history of inbound AI voice agent calls</p>
+  </div>
+
+  <p-card>
+    <p-table
+      [value]="calls"
+      [paginator]="calls.length > 0"
+      [rows]="15"
+      [rowsPerPageOptions]="[10, 15, 25, 50]"
+      styleClass="p-datatable-sm"
+      [tableStyle]="{ 'min-width': '50rem' }">
+
+      <ng-template #header>
+        <tr>
+          <th pSortableColumn="date">Date &amp; Time <p-sortIcon field="date" /></th>
+          <th pSortableColumn="phone">Phone <p-sortIcon field="phone" /></th>
+          <th pSortableColumn="duration">Duration <p-sortIcon field="duration" /></th>
+          <th pSortableColumn="status">Status <p-sortIcon field="status" /></th>
+          <th>Actions</th>
+        </tr>
+      </ng-template>
+
+      <ng-template #body let-call>
+        <tr>
+          <td>{{ call.date }}</td>
+          <td><span class="phone-mono">{{ call.phone }}</span></td>
+          <td>{{ call.duration }}</td>
+          <td><p-tag [value]="call.status" [severity]="getStatusSeverity(call.status)" /></td>
+          <td>
+            <p-button label="Download" icon="pi pi-download"
+              severity="secondary" size="small" [text]="true" />
+          </td>
+        </tr>
+      </ng-template>
+
+      <ng-template #emptymessage>
+        <tr>
+          <td colspan="5" class="empty-state">
+            <i class="pi pi-phone"></i>
+            <p>No call records yet — they will appear here once calls come in</p>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </p-card>
 </div>

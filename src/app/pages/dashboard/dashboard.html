@@ -1,3 +1,63 @@
-<div class="page">
-  <h1>Dashboard</h1>
+<div class="page-content">
+  <div class="page-header">
+    <h1>Overview</h1>
+    <p>Real-time summary of your AI voice agent activity</p>
+  </div>
+
+  <div class="kpi-grid">
+    @for (kpi of kpis; track kpi.label) {
+      <app-stat-tile
+        [label]="kpi.label"
+        [value]="kpi.value"
+        [subtitle]="kpi.subtitle"
+        [icon]="kpi.icon"
+        [trend]="kpi.trend"
+        [trendLabel]="kpi.trendLabel"
+        [accentColor]="kpi.accentColor" />
+    }
+  </div>
+
+  <p-card>
+    <ng-template #header>
+      <div class="card-header-row">
+        <div>
+          <h3 class="card-title">Recent Calls</h3>
+          <p class="card-sub">Latest inbound call activity</p>
+        </div>
+        <p-button label="View All" icon="pi pi-arrow-right" iconPos="right"
+          severity="secondary" size="small" routerLink="/calls" />
+      </div>
+    </ng-template>
+
+    <p-table [value]="recentCalls" styleClass="p-datatable-sm">
+      <ng-template #header>
+        <tr>
+          <th>Date &amp; Time</th>
+          <th>Phone</th>
+          <th>Duration</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </ng-template>
+      <ng-template #body let-call>
+        <tr>
+          <td>{{ call.date }}</td>
+          <td><span class="phone-mono">{{ call.phone }}</span></td>
+          <td>{{ call.duration }}</td>
+          <td><p-tag [value]="call.status" [severity]="getStatusSeverity(call.status)" /></td>
+          <td>
+            <p-button icon="pi pi-download" severity="secondary" size="small" [text]="true" />
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template #emptymessage>
+        <tr>
+          <td colspan="5" class="empty-state">
+            <i class="pi pi-phone"></i>
+            <p>No calls yet — data will appear here once calls come in</p>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </p-card>
 </div>

@@ -1,8 +1,38 @@
-<nav class="sidebar">
-  <ul class="sidebar__menu">
-    <li><a routerLink="/dashboard" routerLinkActive="active">Dashboard</a></li>
-    <li><a routerLink="/features" routerLinkActive="active">Features</a></li>
-    <li><a routerLink="/calls" routerLinkActive="active">Call Logs</a></li>
-    <li><a routerLink="/settings" routerLinkActive="active">Settings</a></li>
-  </ul>
-</nav>
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <div class="logo-mark">
+      <i class="pi pi-server"></i>
+    </div>
+    <span class="logo-title">Operations Console</span>
+  </div>
+
+  <nav class="sidebar-nav">
+    @for (group of navGroups; track group.label) {
+      <div class="nav-group">
+        <span class="nav-group-label">{{ group.label }}</span>
+        @for (item of group.items; track item.route) {
+          <a class="nav-item"
+             [routerLink]="item.route"
+             routerLinkActive="active"
+             [routerLinkActiveOptions]="{ exact: item.route === '/dashboard' }">
+            <i [class]="item.icon"></i>
+            <span>{{ item.label }}</span>
+          </a>
+        }
+      </div>
+    }
+  </nav>
+
+  <div class="sidebar-footer">
+    <div class="account-row">
+      <div class="account-avatar">A</div>
+      <div class="account-info">
+        <span class="account-name">Admin</span>
+        <span class="account-role">Operator</span>
+      </div>
+      <button class="download-btn" pTooltip="Download Report" tooltipPosition="top">
+        <i class="pi pi-download"></i>
+      </button>
+    </div>
+  </div>
+</aside>

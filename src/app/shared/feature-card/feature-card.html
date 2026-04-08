@@ -1,3 +1,17 @@
-<div class="feature-card">
-  <!-- Feature name, category, status badge — to be implemented -->
-</div>
+@if (feature) {
+  <div class="feature-card">
+    <div class="feature-card-top">
+      <div class="feature-icon">
+        <i [class]="feature.icon"></i>
+      </div>
+      <p-tag [value]="statusLabel" [severity]="tagSeverity" />
+    </div>
+    <div class="feature-card-body">
+      <h4 class="feature-name">{{ feature.name }}</h4>
+      <p class="feature-desc">{{ feature.description }}</p>
+    </div>
+    <div class="feature-card-foot">
+      <span class="feature-category">{{ feature.category }}</span>
+    </div>
+  </div>
+}

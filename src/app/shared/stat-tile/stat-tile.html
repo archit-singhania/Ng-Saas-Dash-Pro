@@ -1,1 +1,18 @@
-<p>stat-tile works!</p>
+<div class="stat-tile">
+  <div class="stat-top">
+    <span class="stat-label">{{ label }}</span>
+    <div class="stat-icon" [style.background]="accentColor + '15'" [style.color]="accentColor">
+      <i [class]="icon"></i>
+    </div>
+  </div>
+  <div class="stat-value">{{ value }}</div>
+  <div class="stat-bottom">
+    <span class="stat-subtitle">{{ subtitle }}</span>
+    @if (trendLabel) {
+      <span class="stat-trend" [class]="'trend-' + trend">
+        <i [class]="trend === 'up' ? 'pi pi-arrow-up' : trend === 'down' ? 'pi pi-arrow-down' : 'pi pi-minus'"></i>
+        {{ trendLabel }}
+      </span>
+    }
+  </div>
+</div>

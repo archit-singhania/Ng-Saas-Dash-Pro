@@ -1,0 +1,18 @@
+.phone-mono {
+  font-family: 'SF Mono', 'Fira Code', monospace;
+  font-size: .825rem;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 3.5rem 1rem !important;
+  color: var(--text-muted);
+
+  i {
+    font-size: 2rem;
+    display: block;
+    margin-bottom: .75rem;
+  }
+
+  p { margin: 0; font-size: .875rem; }
+}

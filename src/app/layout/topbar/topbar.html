@@ -1,3 +1,26 @@
-<div class="topbar">
-  <span class="topbar__logo">VoBiz Dashboard</span>
-</div>
+<header class="topbar">
+  <div class="topbar-left">
+    <button class="icon-btn" (click)="menuToggle.emit()" pTooltip="Toggle sidebar" tooltipPosition="bottom">
+      <i class="pi pi-bars"></i>
+    </button>
+  </div>
+
+  <div class="topbar-right">
+    <div class="theme-switcher">
+      @for (t of themeModes; track t.mode) {
+        <button
+          class="theme-btn"
+          [class.active]="themeService.mode() === t.mode"
+          (click)="setTheme(t.mode)"
+          [pTooltip]="t.label"
+          tooltipPosition="bottom">
+          <i [class]="t.icon"></i>
+        </button>
+      }
+    </div>
+
+    <button class="icon-btn" pTooltip="Notifications" tooltipPosition="bottom">
+      <i class="pi pi-bell"></i>
+    </button>
+  </div>
+</header>

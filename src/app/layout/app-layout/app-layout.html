@@ -1,8 +1,8 @@
-<div class="layout">
-  <app-topbar />
-  <div class="layout__body">
-    <app-sidebar />
-    <main class="layout__content">
+<div class="layout-wrapper" [class.sidebar-collapsed]="!sidebarVisible">
+  <app-sidebar [visible]="sidebarVisible" />
+  <div class="layout-main">
+    <app-topbar (menuToggle)="toggleSidebar()" />
+    <main class="layout-content">
       <router-outlet />
     </main>
   </div>

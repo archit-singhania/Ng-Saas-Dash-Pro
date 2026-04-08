@@ -1,18 +1,33 @@
-.layout {
+.layout-wrapper {
+  display: flex;
+  min-height: 100vh;
+  background: var(--bg-app);
+
+  app-sidebar {
+    flex-shrink: 0;
+    width: var(--sidebar-width);
+    transition: width var(--transition-base), opacity var(--transition-base);
+  }
+
+  &.sidebar-collapsed {
+    app-sidebar {
+      width: 0;
+      overflow: hidden;
+      opacity: 0;
+      pointer-events: none;
+    }
+  }
+}
+
+.layout-main {
+  flex: 1;
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  min-width: 0;
+}
 
-  &__body {
-    display: flex;
-    flex: 1;
-    overflow: hidden;
-  }
-
-  &__content {
-    flex: 1;
-    padding: 1.5rem;
-    overflow-y: auto;
-    background: var(--p-surface-100);
-  }
+.layout-content {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
 }

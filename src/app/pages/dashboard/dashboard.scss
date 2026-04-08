@@ -1,0 +1,40 @@
+.card-header-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 1.25rem 1.5rem 0;
+  gap: 1rem;
+}
+
+.card-title {
+  font-size: .9375rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 .2rem 0;
+  letter-spacing: -0.02em;
+}
+
+.card-sub {
+  font-size: .8rem;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.phone-mono {
+  font-family: 'SF Mono', 'Fira Code', monospace;
+  font-size: .825rem;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 3rem 1rem !important;
+  color: var(--text-muted);
+
+  i {
+    font-size: 2rem;
+    display: block;
+    margin-bottom: .75rem;
+  }
+
+  p { margin: 0; font-size: .875rem; }
+}
