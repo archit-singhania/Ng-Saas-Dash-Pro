@@ -1,8 +1,6 @@
 <header class="topbar">
   <div class="topbar-left">
-    <button class="icon-btn" (click)="menuToggle.emit()" pTooltip="Toggle sidebar" tooltipPosition="bottom">
-      <i class="pi pi-bars"></i>
-    </button>
+    <span class="topbar-title">Operations Console</span>
   </div>
 
   <div class="topbar-right">
@@ -16,6 +14,45 @@
           tooltipPosition="bottom">
           <i [class]="t.icon"></i>
         </button>
+      }
+    </div>
+
+    <div class="config-wrap">
+      <button class="icon-btn" (click)="toggleConfig()" pTooltip="Theme" tooltipPosition="bottom">
+        <i class="pi pi-palette"></i>
+      </button>
+
+      @if (configOpen) {
+        <div class="config-panel">
+          <div class="config-section-label">Primary</div>
+          <div class="color-grid">
+            @for (c of primaryColors; track c.name) {
+              <button
+                class="color-dot"
+                [style.background]="c.hex"
+                [class.selected]="selectedPrimary === c.hex"
+                (click)="selectPrimary(c)"
+                [pTooltip]="c.name"
+                tooltipPosition="top">
+              </button>
+            }
+          </div>
+
+          <div class="config-divider"></div>
+
+          <div class="config-section-label">Mode</div>
+          <div class="mode-group">
+            @for (t of themeModes; track t.mode) {
+              <button
+                class="mode-btn"
+                [class.active]="themeService.mode() === t.mode"
+                (click)="setTheme(t.mode)">
+                <i [class]="t.icon"></i>
+                {{ t.label }}
+              </button>
+            }
+          </div>
+        </div>
       }
     </div>
 

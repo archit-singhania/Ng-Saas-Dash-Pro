@@ -9,10 +9,4 @@ import { Sidebar } from '../sidebar/sidebar';
   templateUrl: './app-layout.html',
   styleUrl: './app-layout.scss'
 })
-export class AppLayout {
-  sidebarVisible = true;
-
-  toggleSidebar(): void {
-    this.sidebarVisible = !this.sidebarVisible;
-  }
-}
+export class AppLayout {}

@@ -1,7 +1,7 @@
-<div class="layout-wrapper" [class.sidebar-collapsed]="!sidebarVisible">
-  <app-sidebar [visible]="sidebarVisible" />
+<div class="layout-wrapper">
+  <app-sidebar />
   <div class="layout-main">
-    <app-topbar (menuToggle)="toggleSidebar()" />
+    <app-topbar />
     <main class="layout-content">
       <router-outlet />
     </main>

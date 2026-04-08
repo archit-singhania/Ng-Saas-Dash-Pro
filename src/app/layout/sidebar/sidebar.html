@@ -1,38 +1,33 @@
 <aside class="sidebar">
+
   <div class="sidebar-logo">
     <div class="logo-mark">
-      <i class="pi pi-server"></i>
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M11 2L3 6.5V11C3 15.14 6.41 19.02 11 20C15.59 19.02 19 15.14 19 11V6.5L11 2Z" fill="white" fill-opacity="0.15" stroke="white" stroke-width="1.5" stroke-linejoin="round"/>
+        <path d="M8 11L10 13L14 9" stroke="white" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
     </div>
-    <span class="logo-title">Operations Console</span>
   </div>
 
   <nav class="sidebar-nav">
-    @for (group of navGroups; track group.label) {
-      <div class="nav-group">
-        <span class="nav-group-label">{{ group.label }}</span>
-        @for (item of group.items; track item.route) {
-          <a class="nav-item"
-             [routerLink]="item.route"
-             routerLinkActive="active"
-             [routerLinkActiveOptions]="{ exact: item.route === '/dashboard' }">
-            <i [class]="item.icon"></i>
-            <span>{{ item.label }}</span>
-          </a>
-        }
-      </div>
+    @for (item of navItems; track item.route) {
+      <a class="nav-item"
+         [routerLink]="item.route"
+         routerLinkActive="active"
+         [routerLinkActiveOptions]="{ exact: item.route === '/dashboard' }"
+         [pTooltip]="item.label"
+         tooltipPosition="right">
+        <i [class]="item.icon"></i>
+      </a>
     }
   </nav>
 
   <div class="sidebar-footer">
-    <div class="account-row">
-      <div class="account-avatar">A</div>
-      <div class="account-info">
-        <span class="account-name">Admin</span>
-        <span class="account-role">Operator</span>
-      </div>
-      <button class="download-btn" pTooltip="Download Report" tooltipPosition="top">
-        <i class="pi pi-download"></i>
-      </button>
+    <div class="account-avatar"
+         pTooltip="Admin — Operator"
+         tooltipPosition="right">
+      A
     </div>
   </div>
+
 </aside>

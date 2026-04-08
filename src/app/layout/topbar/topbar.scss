@@ -11,11 +11,22 @@
   z-index: 100;
 }
 
-.topbar-left,
+.topbar-left {
+  display: flex;
+  align-items: center;
+}
+
+.topbar-title {
+  font-size: .8125rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  letter-spacing: -0.01em;
+}
+
 .topbar-right {
   display: flex;
   align-items: center;
-  gap: .5rem;
+  gap: .375rem;
 }
 
 .icon-btn {
@@ -65,13 +76,112 @@
 
   i { font-size: 12px; }
 
-  &:hover {
-    color: var(--text-primary);
-  }
+  &:hover { color: var(--text-primary); }
 
   &.active {
     background: var(--bg-card);
     color: #7c3aed;
     box-shadow: 0 1px 3px rgba(0,0,0,.1);
+  }
+}
+
+.config-wrap {
+  position: relative;
+}
+
+.config-panel {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  width: 240px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 8px 32px rgba(0,0,0,.14);
+  padding: 1rem;
+  z-index: 500;
+  animation: fadeSlide .15s ease;
+}
+
+@keyframes fadeSlide {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.config-section-label {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: var(--text-muted);
+  margin-bottom: .625rem;
+}
+
+.color-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: .25rem;
+}
+
+.color-dot {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: transform var(--transition-fast), border-color var(--transition-fast);
+  padding: 0;
+
+  &:hover { transform: scale(1.2); }
+
+  &.selected {
+    border-color: var(--text-primary);
+    transform: scale(1.15);
+    outline: 2px solid var(--bg-card);
+    outline-offset: -4px;
+  }
+}
+
+.config-divider {
+  height: 1px;
+  background: var(--border-color);
+  margin: .875rem 0;
+}
+
+.mode-group {
+  display: flex;
+  gap: 4px;
+}
+
+.mode-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: .375rem .5rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-color);
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: .75rem;
+  font-weight: 500;
+  font-family: var(--font-sans);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+
+  i { font-size: 12px; }
+
+  &:hover {
+    background: var(--bg-card-hover);
+    color: var(--text-primary);
+  }
+
+  &.active {
+    background: rgba(124, 58, 237, .1);
+    color: #7c3aed;
+    border-color: rgba(124, 58, 237, .25);
+    font-weight: 600;
   }
 }

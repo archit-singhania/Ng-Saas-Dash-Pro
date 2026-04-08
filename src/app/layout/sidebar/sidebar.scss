@@ -1,95 +1,69 @@
 .sidebar {
-  width: var(--sidebar-width);
+  width: 64px;
   height: 100vh;
   background: var(--bg-sidebar);
   border-right: 1px solid var(--border-color);
   display: flex;
   flex-direction: column;
+  align-items: center;
   position: sticky;
   top: 0;
-  overflow: hidden;
+  flex-shrink: 0;
+  z-index: 200;
 }
 
 .sidebar-logo {
+  width: 100%;
+  height: var(--topbar-height);
   display: flex;
   align-items: center;
-  gap: .625rem;
-  padding: 0 1rem;
-  height: var(--topbar-height);
+  justify-content: center;
   border-bottom: 1px solid var(--border-color);
   flex-shrink: 0;
 }
 
 .logo-mark {
-  width: 30px;
-  height: 30px;
-  border-radius: var(--radius-sm);
-  background: linear-gradient(135deg, #7c3aed, #6d28d9);
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%);
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(124, 58, 237, .4);
+  transition: box-shadow var(--transition-fast), transform var(--transition-fast);
+  cursor: pointer;
 
-  i {
-    color: #fff;
-    font-size: 13px;
+  &:hover {
+    box-shadow: 0 4px 14px rgba(124, 58, 237, .55);
+    transform: translateY(-1px);
   }
-}
-
-.logo-title {
-  font-size: .8rem;
-  font-weight: 600;
-  color: var(--text-primary);
-  letter-spacing: -0.01em;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 .sidebar-nav {
   flex: 1;
-  padding: 1rem .75rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 1rem 0;
   overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 1.75rem;
-}
-
-.nav-group {
-  display: flex;
-  flex-direction: column;
-  gap: 1px;
-}
-
-.nav-group-label {
-  font-size: 10px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: .1em;
-  color: var(--text-muted);
-  padding: 0 .625rem;
-  margin-bottom: .375rem;
-  display: block;
+  width: 100%;
 }
 
 .nav-item {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
   display: flex;
   align-items: center;
-  gap: .625rem;
-  padding: .5rem .625rem;
-  border-radius: var(--radius-sm);
-  color: var(--text-secondary);
+  justify-content: center;
+  color: var(--text-muted);
   text-decoration: none;
-  font-size: .8125rem;
-  font-weight: 500;
   transition: background var(--transition-fast), color var(--transition-fast);
+  cursor: pointer;
 
-  i {
-    font-size: 14px;
-    width: 16px;
-    text-align: center;
-    flex-shrink: 0;
-  }
+  i { font-size: 16px; }
 
   &:hover {
     background: var(--border-color);
@@ -97,81 +71,33 @@
   }
 
   &.active {
-    background: rgba(124, 58, 237, .1);
+    background: rgba(124, 58, 237, .12);
     color: #7c3aed;
-    font-weight: 600;
-
-    i { color: #7c3aed; }
   }
 }
 
 .sidebar-footer {
-  padding: .875rem .75rem;
+  padding: .875rem 0;
   border-top: 1px solid var(--border-color);
+  width: 100%;
+  display: flex;
+  justify-content: center;
   flex-shrink: 0;
 }
 
-.account-row {
-  display: flex;
-  align-items: center;
-  gap: .625rem;
-}
-
 .account-avatar {
-  width: 30px;
-  height: 30px;
+  width: 34px;
+  height: 34px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #7c3aed, #6d28d9);
+  background: linear-gradient(135deg, #7c3aed, #4f46e5);
   color: #fff;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-shrink: 0;
-}
-
-.account-info {
-  flex: 1;
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 1px;
-}
-
-.account-name {
-  font-size: .8rem;
-  font-weight: 600;
-  color: var(--text-primary);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.account-role {
-  font-size: .7rem;
-  color: var(--text-muted);
-}
-
-.download-btn {
-  width: 28px;
-  height: 28px;
-  border-radius: var(--radius-sm);
-  border: 1px solid var(--border-color);
-  background: transparent;
-  color: var(--text-muted);
-  display: flex;
-  align-items: center;
-  justify-content: center;
   cursor: pointer;
-  flex-shrink: 0;
-  transition: all var(--transition-fast);
+  transition: opacity var(--transition-fast);
 
-  i { font-size: 12px; }
-
-  &:hover {
-    background: var(--border-color);
-    color: var(--text-primary);
-    border-color: transparent;
-  }
+  &:hover { opacity: .8; }
 }

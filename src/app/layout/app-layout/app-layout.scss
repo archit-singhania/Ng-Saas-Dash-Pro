@@ -2,21 +2,6 @@
   display: flex;
   min-height: 100vh;
   background: var(--bg-app);
-
-  app-sidebar {
-    flex-shrink: 0;
-    width: var(--sidebar-width);
-    transition: width var(--transition-base), opacity var(--transition-base);
-  }
-
-  &.sidebar-collapsed {
-    app-sidebar {
-      width: 0;
-      overflow: hidden;
-      opacity: 0;
-      pointer-events: none;
-    }
-  }
 }
 
 .layout-main {
