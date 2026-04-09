@@ -1,14 +1,100 @@
 <div class="page-content">
   <div class="page-header">
-    <h1>Transcripts</h1>
-    <p>Full text transcripts of every AI voice agent call</p>
-  </div>
-  <div class="coming-soon-wrap">
-    <div class="coming-soon-card">
-      <div class="cs-icon"><i class="pi pi-file-edit"></i></div>
-      <h2 class="cs-title">Coming Soon</h2>
-      <p class="cs-desc">Call transcripts are being wired up. Searchable, timestamped conversation logs will appear here.</p>
+    <div class="header-row">
+      <div>
+        <h1>Transcripts &amp; Recordings</h1>
+        <p>Full call transcripts and audio recordings from every AI voice agent session</p>
+      </div>
+      <p-button label="Export All" icon="pi pi-download" severity="secondary" variant="outlined" />
     </div>
   </div>
+
+  <p-card>
+    <p-table
+      [value]="records"
+      [paginator]="records.length > 0"
+      [rows]="15"
+      [rowsPerPageOptions]="[10, 15, 25, 50]"
+      styleClass="p-datatable-sm"
+      [tableStyle]="{ 'min-width': '62rem' }">
+
+      <ng-template #header>
+        <tr>
+          <th pSortableColumn="date">Date &amp; Time <p-sortIcon field="date" /></th>
+          <th pSortableColumn="phone">Phone <p-sortIcon field="phone" /></th>
+          <th pSortableColumn="duration">Duration <p-sortIcon field="duration" /></th>
+          <th pSortableColumn="status">Status <p-sortIcon field="status" /></th>
+          <th>Transcript Record</th>
+          <th>Recording</th>
+        </tr>
+      </ng-template>
+
+      <ng-template #body let-rec>
+        <tr>
+          <td>{{ rec.date }}</td>
+          <td><span class="phone-mono">{{ rec.phone }}</span></td>
+          <td>{{ rec.duration }}</td>
+          <td><p-tag [value]="rec.status" [severity]="getStatusSeverity(rec.status)" /></td>
+          <td>
+            <p-button
+              label="View Transcript"
+              icon="pi pi-file-edit"
+              severity="secondary"
+              variant="text"
+              size="small"
+              (onClick)="openTranscript(rec)" />
+          </td>
+          <td>
+            <p-button
+              label="Download"
+              icon="pi pi-headphones"
+              severity="secondary"
+              variant="text"
+              size="small"
+              (onClick)="downloadRecording(rec)" />
+          </td>
+        </tr>
+      </ng-template>
+
+      <ng-template #emptymessage>
+        <tr>
+          <td colspan="6" class="empty-state">
+            <i class="pi pi-file-edit"></i>
+            <p>No transcripts yet — they will appear here once calls come in</p>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </p-card>
 </div>
 
+<!-- Transcript Viewer Dialog -->
+<p-dialog
+  [(visible)]="showTranscript"
+  header="Call Transcript"
+  [modal]="true"
+  [style]="{ width: '620px' }"
+  [draggable]="false"
+  [resizable]="false">
+
+  @if (selectedRecord) {
+    <div class="transcript-meta">
+      <span><i class="pi pi-calendar"></i> {{ selectedRecord.date }}</span>
+      <span><i class="pi pi-phone"></i> {{ selectedRecord.phone }}</span>
+      <span><i class="pi pi-clock"></i> {{ selectedRecord.duration }}</span>
+      <p-tag [value]="selectedRecord.status" [severity]="getStatusSeverity(selectedRecord.status)" />
+    </div>
+    <p-divider />
+    <div class="transcript-body">
+      @for (line of selectedRecord.transcript; track $index) {
+        <div class="transcript-line" [class.agent]="line.speaker === 'Agent'" [class.caller]="line.speaker === 'Caller'">
+          <span class="speaker-label">{{ line.speaker }}</span>
+          <span class="speaker-text">{{ line.text }}</span>
+          <span class="speaker-time">{{ line.timestamp }}</span>
+        </div>
+      }
+    </div>
+  }
+</p-dialog>
+
+<p-toast />

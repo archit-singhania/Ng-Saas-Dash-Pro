@@ -6,6 +6,7 @@ import { DialogModule } from 'primeng/dialog';
 import { DrawerModule } from 'primeng/drawer';
 import { TagModule } from 'primeng/tag';
 import { DividerModule } from 'primeng/divider';
+import { ButtonModule } from 'primeng/button';
 import { ThemeService } from '../../core/services/theme.service';
 
 interface SubItem {
@@ -23,7 +24,7 @@ interface NavItem {
 
 @Component({
   selector: 'app-sidebar',
-  imports: [RouterLink, RouterLinkActive, CommonModule, TooltipModule, DialogModule, DrawerModule, TagModule, DividerModule],
+  imports: [RouterLink, RouterLinkActive, CommonModule, TooltipModule, DialogModule, DrawerModule, TagModule, DividerModule, ButtonModule],
   templateUrl: './sidebar.html',
   styleUrl: './sidebar.scss'
 })
@@ -65,11 +66,12 @@ export class Sidebar {
       icon: 'pi pi-box',
       route: '/features',
       children: [
-        { label: 'Booking Details',    icon: 'pi pi-calendar',  route: '/features/bookings'    },
-        { label: 'Transcripts',        icon: 'pi pi-file-edit', route: '/features/transcripts' },
-        { label: 'Data Analytics',     icon: 'pi pi-chart-bar', route: '/features/analytics'   },
-        { label: 'Sentiment Analysis', icon: 'pi pi-heart',     route: '/features/sentiment'   },
-        { label: 'CRM Integration',    icon: 'pi pi-users',     route: '/features/crm'         }
+        { label: 'Bookings Calendar',        icon: 'pi pi-calendar',   route: '/features/bookings'         },
+        { label: 'Transcripts & Recordings', icon: 'pi pi-file-edit',  route: '/features/transcripts'      },
+        { label: 'Prompt & Knowledge Base',  icon: 'pi pi-sliders-h',  route: '/features/prompt-settings'  },
+        { label: 'Data Analytics',           icon: 'pi pi-chart-bar',  route: '/features/analytics'        },
+        { label: 'Sentiment Analysis',       icon: 'pi pi-heart',      route: '/features/sentiment'        },
+        { label: 'CRM Integration',          icon: 'pi pi-users',      route: '/features/crm'              }
       ]
     }
   ];
@@ -86,6 +88,4 @@ export class Sidebar {
   closeProfile(): void {
     this.profileOpen.set(false);
   }
-
-
 }

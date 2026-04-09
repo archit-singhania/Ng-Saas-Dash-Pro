@@ -15,5 +15,5 @@ export class StatTile {
   @Input() icon = 'pi pi-chart-bar';
   @Input() trend: StatTrend = 'neutral';
   @Input() trendLabel = '';
-  @Input() accentColor = '#7c3aed';
+  @Input() accentColor = 'var(--p-primary-500)';
 }

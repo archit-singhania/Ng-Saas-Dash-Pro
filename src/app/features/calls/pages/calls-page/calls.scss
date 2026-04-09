@@ -5,30 +5,6 @@
   gap: 1rem;
 }
 
-.download-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: .5rem;
-  padding: .5rem 1rem;
-  border-radius: var(--radius-sm);
-  border: 1px solid var(--p-primary-500);
-  background: color-mix(in srgb, var(--p-primary-500) 8%, transparent);
-  color: var(--p-primary-500);
-  font-size: .875rem;
-  font-weight: 600;
-  font-family: var(--font-sans);
-  cursor: pointer;
-  transition: all var(--transition-fast);
-  white-space: nowrap;
-  flex-shrink: 0;
-
-  i { font-size: 14px; }
-
-  &:hover {
-    background: color-mix(in srgb, var(--p-primary-500) 16%, transparent);
-  }
-}
-
 .phone-mono {
   font-family: 'SF Mono', 'Fira Code', monospace;
   font-size: .825rem;

@@ -36,7 +36,6 @@
           <th>Phone</th>
           <th>Duration</th>
           <th>Status</th>
-          <th>Actions</th>
         </tr>
       </ng-template>
       <ng-template #body let-call>
@@ -45,14 +44,11 @@
           <td><span class="phone-mono">{{ call.phone }}</span></td>
           <td>{{ call.duration }}</td>
           <td><p-tag [value]="call.status" [severity]="getStatusSeverity(call.status)" /></td>
-          <td>
-            <p-button icon="pi pi-download" severity="secondary" size="small" [text]="true" />
-          </td>
         </tr>
       </ng-template>
       <ng-template #emptymessage>
         <tr>
-          <td colspan="5" class="empty-state">
+          <td colspan="4" class="empty-state">
             <i class="pi pi-phone"></i>
             <p>No calls yet — data will appear here once calls come in</p>
           </td>

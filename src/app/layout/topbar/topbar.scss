@@ -26,29 +26,24 @@
 .topbar-right {
   display: flex;
   align-items: center;
-  gap: .375rem;
+  gap: .25rem;
 }
 
-.icon-btn {
+:host ::ng-deep .topbar-icon-btn.p-button {
   width: 32px;
   height: 32px;
   border-radius: var(--radius-sm);
-  border: 1px solid var(--border-color);
-  background: transparent;
-  color: var(--text-secondary);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all var(--transition-fast);
-
-  i { font-size: 14px; }
+  border: 1px solid var(--border-color) !important;
+  color: var(--text-secondary) !important;
+  padding: 0;
 
   &:hover {
-    background: var(--bg-card-hover);
-    color: var(--text-primary);
-    border-color: transparent;
+    background: var(--bg-card-hover) !important;
+    color: var(--text-primary) !important;
+    border-color: transparent !important;
   }
+
+  .p-button-icon { font-size: 14px; }
 }
 
 .config-wrap {
@@ -115,39 +110,21 @@
   margin: .875rem 0;
 }
 
-.mode-group {
-  display: flex;
-  gap: 4px;
-}
+:host ::ng-deep .theme-mode-select {
+  width: 100%;
 
-.mode-btn {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 5px;
-  padding: .375rem .5rem;
-  border-radius: var(--radius-sm);
-  border: 1px solid var(--border-color);
-  background: transparent;
-  color: var(--text-secondary);
-  font-size: .75rem;
-  font-weight: 500;
-  font-family: var(--font-sans);
-  cursor: pointer;
-  transition: all var(--transition-fast);
-
-  i { font-size: 12px; }
-
-  &:hover {
-    background: var(--bg-card-hover);
-    color: var(--text-primary);
+  .p-selectbutton {
+    width: 100%;
+    display: flex;
   }
 
-  &.active {
-    background: color-mix(in srgb, var(--p-primary-500) 10%, transparent);
-    color: var(--p-primary-500);
-    border-color: color-mix(in srgb, var(--p-primary-500) 25%, transparent);
-    font-weight: 600;
+  .p-togglebutton {
+    flex: 1;
+    font-size: .75rem;
+    font-weight: 500;
+    padding: .375rem .5rem;
+    gap: 4px;
+
+    .p-togglebutton-icon { font-size: 12px; }
   }
 }

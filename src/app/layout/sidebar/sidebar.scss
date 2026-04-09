@@ -166,6 +166,7 @@
   }
 }
 
+/* Profile dialog */
 .profile-dialog-title {
   font-size: 1rem;
   font-weight: 700;
@@ -267,23 +268,16 @@
   gap: 8px;
 }
 
-.pa-btn {
+:host ::ng-deep .pa-action-btn.p-button {
   width: 100%;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: .6875rem 1rem;
+  justify-content: flex-start;
   border-radius: 10px;
+  padding: .6875rem 1rem;
   font-size: .875rem;
-  font-weight: 500;
-  font-family: var(--font-sans);
-  cursor: not-allowed;
-  border: 1px solid var(--border-color);
-  transition: all var(--transition-fast);
+  gap: 10px;
   opacity: .65;
-  position: relative;
 
-  i { font-size: 15px; }
+  .p-button-icon { font-size: 15px; }
 
   .pa-soon {
     margin-left: auto;
@@ -295,24 +289,14 @@
     color: var(--p-primary-500);
     letter-spacing: .04em;
   }
-}
 
-.pa-secondary {
-  background: var(--bg-app);
-  color: var(--text-primary);
-}
-
-.pa-danger {
-  background: rgba(220, 38, 38, .06);
-  color: #dc2626;
-  border-color: rgba(220, 38, 38, .15);
-
-  .pa-soon {
+  .pa-soon-danger {
     background: rgba(220, 38, 38, .1);
     color: #dc2626;
   }
 }
 
+/* Settings drawer */
 :host ::ng-deep .settings-drawer {
   .p-drawer-header {
     padding: 1rem 1.25rem;
@@ -341,27 +325,13 @@
   letter-spacing: -0.02em;
 }
 
-.sd-close {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+:host ::ng-deep .sd-close-btn.p-button {
   width: 1.75rem;
   height: 1.75rem;
   border-radius: 50%;
-  border: none;
-  background: transparent;
-  color: var(--text-secondary);
-  cursor: pointer;
-  transition: background var(--transition-fast), color var(--transition-fast);
+  padding: 0;
 
-  i {
-    font-size: 12px;
-  }
-
-  &:hover {
-    background: var(--bg-app);
-    color: var(--text-primary);
-  }
+  .p-button-icon { font-size: 12px; }
 }
 
 .sd-coming-soon {
@@ -404,4 +374,3 @@
   max-width: 260px;
   line-height: 1.55;
 }
-

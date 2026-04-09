@@ -66,44 +66,28 @@
   box-shadow: var(--shadow-card);
 }
 
-.stab {
-  display: flex;
-  align-items: center;
-  gap: .625rem;
-  padding: .625rem .875rem;
+:host ::ng-deep .stab-btn.p-button {
+  width: 100%;
+  justify-content: flex-start;
   border-radius: var(--radius-md);
-  border: none;
-  background: transparent;
-  color: var(--text-secondary);
+  padding: .625rem .875rem;
   font-size: .875rem;
   font-weight: 500;
-  font-family: var(--font-sans);
-  cursor: pointer;
-  width: 100%;
-  text-align: left;
-  transition: background var(--transition-fast), color var(--transition-fast);
+  gap: .625rem;
+  color: var(--text-secondary);
+  border: none;
 
-  i {
+  .p-button-icon {
     font-size: 14px;
     width: 16px;
-    flex-shrink: 0;
     color: var(--text-muted);
-    transition: color var(--transition-fast);
   }
 
   &:hover {
-    background: var(--bg-app);
-    color: var(--text-primary);
+    background: var(--bg-app) !important;
+    color: var(--text-primary) !important;
 
-    i { color: var(--text-secondary); }
-  }
-
-  &.active {
-    background: color-mix(in srgb, var(--p-primary-500) 10%, transparent);
-    color: var(--p-primary-500);
-    font-weight: 600;
-
-    i { color: var(--p-primary-500); }
+    .p-button-icon { color: var(--text-secondary); }
   }
 }
 
@@ -225,4 +209,3 @@
   letter-spacing: -0.02em;
   white-space: nowrap;
 }
-

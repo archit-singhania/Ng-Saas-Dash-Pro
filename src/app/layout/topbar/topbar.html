@@ -5,9 +5,15 @@
 
   <div class="topbar-right">
     <div class="config-wrap">
-      <button class="icon-btn" (click)="toggleConfig()" pTooltip="Theme" tooltipPosition="bottom">
-        <i class="pi pi-palette"></i>
-      </button>
+      <p-button
+        icon="pi pi-palette"
+        severity="secondary"
+        variant="text"
+        size="small"
+        (onClick)="toggleConfig()"
+        pTooltip="Customise Theme"
+        tooltipPosition="bottom"
+        styleClass="topbar-icon-btn" />
 
       @if (configOpen) {
         <div class="config-panel">
@@ -44,24 +50,23 @@
           <div class="config-divider"></div>
 
           <div class="config-section-label">Mode</div>
-          <div class="mode-group">
-            @for (t of themeModes; track t.mode) {
-              <button
-                class="mode-btn"
-                [class.active]="themeService.mode() === t.mode"
-                (click)="themeService.setMode(t.mode)">
-                <i [class]="t.icon"></i>
-                {{ t.label }}
-              </button>
-            }
-          </div>
+          <p-selectButton
+            [options]="themeModes"
+            [(ngModel)]="selectedMode"
+            optionLabel="label"
+            optionValue="mode"
+            styleClass="theme-mode-select" />
         </div>
       }
     </div>
 
-    <button class="icon-btn" pTooltip="Notifications" tooltipPosition="bottom">
-      <i class="pi pi-bell"></i>
-    </button>
+    <p-button
+      icon="pi pi-bell"
+      severity="secondary"
+      variant="text"
+      size="small"
+      pTooltip="Notifications"
+      tooltipPosition="bottom"
+      styleClass="topbar-icon-btn" />
   </div>
 </header>
-

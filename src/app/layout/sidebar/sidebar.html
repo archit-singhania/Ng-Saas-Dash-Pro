@@ -62,6 +62,7 @@
 
 </aside>
 
+<!-- Profile Dialog -->
 <p-dialog
   [(visible)]="profileOpen"
   [modal]="true"
@@ -110,23 +111,48 @@
     <div class="profile-divider"></div>
 
     <div class="profile-actions">
-      <button class="pa-btn pa-secondary" disabled>
-        <i class="pi pi-user-edit"></i> Edit Profile
-        <span class="pa-soon">Soon</span>
-      </button>
-      <button class="pa-btn pa-secondary" disabled>
-        <i class="pi pi-key"></i> Change Password
-        <span class="pa-soon">Soon</span>
-      </button>
-      <button class="pa-btn pa-danger" disabled>
-        <i class="pi pi-sign-out"></i> Sign Out
-        <span class="pa-soon">Soon</span>
-      </button>
+      <p-button
+        severity="secondary"
+        variant="outlined"
+        styleClass="pa-action-btn"
+        [disabled]="true"
+        [fluid]="true">
+        <ng-template #content>
+          <i class="pi pi-user-edit"></i>
+          <span>Edit Profile</span>
+          <span class="pa-soon">Soon</span>
+        </ng-template>
+      </p-button>
+      <p-button
+        severity="secondary"
+        variant="outlined"
+        styleClass="pa-action-btn"
+        [disabled]="true"
+        [fluid]="true">
+        <ng-template #content>
+          <i class="pi pi-key"></i>
+          <span>Change Password</span>
+          <span class="pa-soon">Soon</span>
+        </ng-template>
+      </p-button>
+      <p-button
+        severity="danger"
+        variant="outlined"
+        styleClass="pa-action-btn pa-danger-btn"
+        [disabled]="true"
+        [fluid]="true">
+        <ng-template #content>
+          <i class="pi pi-sign-out"></i>
+          <span>Sign Out</span>
+          <span class="pa-soon pa-soon-danger">Soon</span>
+        </ng-template>
+      </p-button>
     </div>
   </div>
 
 </p-dialog>
 
+<!-- Settings Drawer -->
 <p-drawer
   [(visible)]="settingsOpen"
   position="right"
@@ -138,9 +164,14 @@
   <ng-template #header>
     <div class="sd-header">
       <span class="sd-title">Settings</span>
-      <button class="sd-close" (click)="closeSettings()" aria-label="Close">
-        <i class="pi pi-times"></i>
-      </button>
+      <p-button
+        icon="pi pi-times"
+        severity="secondary"
+        variant="text"
+        size="small"
+        (onClick)="closeSettings()"
+        aria-label="Close"
+        styleClass="sd-close-btn" />
     </div>
   </ng-template>
 

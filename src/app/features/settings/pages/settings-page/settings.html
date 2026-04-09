@@ -15,13 +15,14 @@
 
     <nav class="settings-tabs">
       @for (tab of tabs; track tab.id) {
-        <button
-          class="stab"
-          [class.active]="activeTab() === tab.id"
-          (click)="setTab(tab.id)">
-          <i [class]="tab.icon"></i>
-          {{ tab.label }}
-        </button>
+        <p-button
+          [label]="tab.label"
+          [icon]="tab.icon"
+          [severity]="activeTab() === tab.id ? 'primary' : 'secondary'"
+          [text]="activeTab() !== tab.id"
+          styleClass="stab-btn"
+          [style]="activeTab() === tab.id ? { background: 'color-mix(in srgb, var(--p-primary-500) 10%, transparent)', color: 'var(--p-primary-500)', fontWeight: '600' } : {}"
+          (onClick)="setTab(tab.id)" />
       }
     </nav>
 
@@ -68,7 +69,7 @@
             <div class="field-row">
               <label class="field-label">Two-Factor Auth</label>
               <div class="field-mock mock-toggle">
-                <p-toggleswitch [ngModel]="false" [disabled]="true" />
+                <p-toggleSwitch [ngModel]="false" [disabled]="true" />
                 <span class="toggle-label">Disabled</span>
               </div>
             </div>
@@ -90,15 +91,15 @@
           <div class="field-grid">
             <div class="field-row">
               <label class="field-label">Agent Name</label>
-              <div class="field-mock">VoiceBot Alpha</div>
+              <div class="field-mock">Aria</div>
             </div>
             <div class="field-row">
               <label class="field-label">Language</label>
-              <div class="field-mock">English (US)</div>
+              <div class="field-mock">English (IN)</div>
             </div>
             <div class="field-row">
               <label class="field-label">Voice Model</label>
-              <div class="field-mock">OpenAI TTS &mdash; Alloy</div>
+              <div class="field-mock">OpenAI TTS &mdash; Nova</div>
             </div>
             <div class="field-row">
               <label class="field-label">Max Call Duration</label>
@@ -111,7 +112,7 @@
             <div class="field-row">
               <label class="field-label">Active</label>
               <div class="field-mock mock-toggle">
-                <p-toggleswitch [ngModel]="true" [disabled]="true" />
+                <p-toggleSwitch [ngModel]="true" [disabled]="true" />
                 <span class="toggle-label">Enabled</span>
               </div>
             </div>
@@ -162,21 +163,21 @@
             <div class="field-row">
               <label class="field-label">Missed Call Alerts</label>
               <div class="field-mock mock-toggle">
-                <p-toggleswitch [ngModel]="true" [disabled]="true" />
+                <p-toggleSwitch [ngModel]="true" [disabled]="true" />
                 <span class="toggle-label">Enabled</span>
               </div>
             </div>
             <div class="field-row">
               <label class="field-label">Daily Summary Email</label>
               <div class="field-mock mock-toggle">
-                <p-toggleswitch [ngModel]="false" [disabled]="true" />
+                <p-toggleSwitch [ngModel]="false" [disabled]="true" />
                 <span class="toggle-label">Disabled</span>
               </div>
             </div>
             <div class="field-row">
               <label class="field-label">Agent Downtime Alert</label>
               <div class="field-mock mock-toggle">
-                <p-toggleswitch [ngModel]="true" [disabled]="true" />
+                <p-toggleSwitch [ngModel]="true" [disabled]="true" />
                 <span class="toggle-label">Enabled</span>
               </div>
             </div>

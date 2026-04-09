@@ -4,9 +4,7 @@ import { CommonModule } from '@angular/common';
 import { TagModule } from 'primeng/tag';
 import { DividerModule } from 'primeng/divider';
 import { ToggleSwitchModule } from 'primeng/toggleswitch';
-import { InputTextModule } from 'primeng/inputtext';
-import { SelectButtonModule } from 'primeng/selectbutton';
-import { AvatarModule } from 'primeng/avatar';
+import { ButtonModule } from 'primeng/button';
 
 export interface SettingsTab {
   id: string;
@@ -16,7 +14,7 @@ export interface SettingsTab {
 
 @Component({
   selector: 'app-settings',
-  imports: [CommonModule, FormsModule, TagModule, DividerModule, ToggleSwitchModule, InputTextModule, SelectButtonModule, AvatarModule],
+  imports: [CommonModule, FormsModule, TagModule, DividerModule, ToggleSwitchModule, ButtonModule],
   templateUrl: './settings.html',
   styleUrl: './settings.scss'
 })
