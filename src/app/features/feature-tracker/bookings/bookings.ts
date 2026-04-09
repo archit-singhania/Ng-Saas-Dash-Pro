@@ -57,33 +57,33 @@ export class Bookings {
 
     const entries: [number, Appointment[]][] = [
       [2, [
-        { id: 1, name: 'Priya Sharma', phone: '+91 98765 43210', time: '10:00 AM', type: 'Consultation', status: 'Confirmed', notes: 'First-time patient' },
-        { id: 2, name: 'Rahul Mehta', phone: '+91 87654 32109', time: '11:30 AM', type: 'Follow-up', status: 'Confirmed', notes: 'Post-surgery checkup' },
+        { id: 1, name: 'Priya Sharma', phone: '+91 98765 43210', time: '10:00 AM', type: 'Booking', status: 'Confirmed', notes: 'Talk to human agent' },
+        { id: 2, name: 'Rahul Mehta', phone: '+91 87654 32109', time: '11:30 AM', type: 'Follow-up', status: 'Confirmed', notes: 'Talk to human agent' },
       ]],
       [5, [
-        { id: 3, name: 'Anita Patel', phone: '+91 76543 21098', time: '9:00 AM', type: 'General', status: 'Pending', notes: 'BP monitoring' },
+        { id: 3, name: 'Anita Patel', phone: '+91 76543 21098', time: '9:00 AM', type: 'General', status: 'Pending', notes: 'Talk to human agent' },
       ]],
       [8, [
-        { id: 4, name: 'Vikram Nair', phone: '+91 65432 10987', time: '2:00 PM', type: 'Dental', status: 'Confirmed', notes: 'Root canal follow-up' },
-        { id: 5, name: 'Sunita Rao', phone: '+91 54321 09876', time: '3:30 PM', type: 'Consultation', status: 'Confirmed', notes: 'Diabetes management' },
-        { id: 6, name: 'Arjun Kapoor', phone: '+91 43210 98765', time: '4:45 PM', type: 'Emergency', status: 'Pending', notes: 'Urgent review' },
+        { id: 4, name: 'Vikram Nair', phone: '+91 65432 10987', time: '2:00 PM', type: 'Booking', status: 'Confirmed', notes: 'Talk to human agent' },
+        { id: 5, name: 'Sunita Rao', phone: '+91 54321 09876', time: '3:30 PM', type: 'General', status: 'Confirmed', notes: 'Talk to human agent' },
+        { id: 6, name: 'Arjun Kapoor', phone: '+91 43210 98765', time: '4:45 PM', type: 'Booking', status: 'Pending', notes: 'Talk to human agent' },
       ]],
       [12, [
-        { id: 7, name: 'Meera Iyer', phone: '+91 32109 87654', time: '11:00 AM', type: 'Follow-up', status: 'Cancelled', notes: 'Patient cancelled' },
+        { id: 7, name: 'Meera Iyer', phone: '+91 32109 87654', time: '11:00 AM', type: 'Follow-up', status: 'Cancelled', notes: 'Talk to human agent' },
       ]],
       [15, [
-        { id: 8, name: 'Deepak Singh', phone: '+91 21098 76543', time: '9:30 AM', type: 'General', status: 'Confirmed', notes: 'Routine checkup' },
-        { id: 9, name: 'Kavya Reddy', phone: '+91 10987 65432', time: '10:45 AM', type: 'Consultation', status: 'Confirmed', notes: 'Thyroid review' },
+        { id: 8, name: 'Deepak Singh', phone: '+91 21098 76543', time: '9:30 AM', type: 'General', status: 'Confirmed', notes: 'Talk to human agent' },
+        { id: 9, name: 'Kavya Reddy', phone: '+91 10987 65432', time: '10:45 AM', type: 'Booking', status: 'Confirmed', notes: 'Talk to human agent' },
       ]],
       [20, [
-        { id: 10, name: 'Sanjay Gupta', phone: '+91 99887 76655', time: '3:00 PM', type: 'Dental', status: 'Confirmed', notes: 'Braces adjustment' },
+        { id: 10, name: 'Sanjay Gupta', phone: '+91 99887 76655', time: '3:00 PM', type: 'General', status: 'Confirmed', notes: 'Talk to human agent' },
       ]],
       [23, [
-        { id: 11, name: 'Pooja Bhatia', phone: '+91 88776 65544', time: '12:00 PM', type: 'Follow-up', status: 'Pending', notes: 'Lab results review' },
-        { id: 12, name: 'Manish Tiwari', phone: '+91 77665 54433', time: '2:30 PM', type: 'General', status: 'Confirmed', notes: 'Annual physical' },
+        { id: 11, name: 'Pooja Bhatia', phone: '+91 88776 65544', time: '12:00 PM', type: 'Follow-up', status: 'Pending', notes: 'Talk to human agent' },
+        { id: 12, name: 'Manish Tiwari', phone: '+91 77665 54433', time: '2:30 PM', type: 'General', status: 'Confirmed', notes: 'Talk to human agent' },
       ]],
       [27, [
-        { id: 13, name: 'Neha Joshi', phone: '+91 66554 43322', time: '10:00 AM', type: 'Consultation', status: 'Confirmed', notes: 'Nutrition counseling' },
+        { id: 13, name: 'Neha Joshi', phone: '+91 66554 43322', time: '10:00 AM', type: 'Follow-up', status: 'Confirmed', notes: 'Talk to human agent' },
       ]],
     ];
 
