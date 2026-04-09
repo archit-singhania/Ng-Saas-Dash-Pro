@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { TagModule } from 'primeng/tag';
-import { Feature } from '../../core/models/feature.model';
+import { Feature } from '../../models/feature.model';
 
 @Component({
   selector: 'app-feature-card',

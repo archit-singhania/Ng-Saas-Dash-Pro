@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
-import { Feature, FeatureStatus, FeatureCategory } from '../models/feature.model';
+import { Feature, FeatureStatus, FeatureCategory } from '../../shared/models/feature.model';
 
 @Injectable({ providedIn: 'root' })
 export class FeatureStatusService {

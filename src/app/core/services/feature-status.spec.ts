@@ -1,13 +1,15 @@
 import { TestBed } from '@angular/core/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { FeatureStatusService } from './feature-status';
 
-import { FeatureStatus } from './feature-status';
-
-describe('FeatureStatus', () => {
-  let service: FeatureStatus;
+describe('FeatureStatusService', () => {
+  let service: FeatureStatusService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(FeatureStatus);
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule]
+    });
+    service = TestBed.inject(FeatureStatusService);
   });
 
   it('should be created', () => {

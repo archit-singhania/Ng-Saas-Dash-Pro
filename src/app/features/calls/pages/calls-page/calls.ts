@@ -1,23 +1,19 @@
 import { Component, inject } from '@angular/core';
-import { RouterLink } from '@angular/router';
-import { StatTile } from '../../shared/stat-tile/stat-tile';
-import { StatsService } from '../../core/services/stats';
 import { TableModule } from 'primeng/table';
 import { TagModule } from 'primeng/tag';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
+import { StatsService, CallRecord } from '../../../../core/services/stats';
 
 @Component({
-  selector: 'app-dashboard',
-  imports: [RouterLink, StatTile, TableModule, TagModule, ButtonModule, CardModule],
-  templateUrl: './dashboard.html',
-  styleUrl: './dashboard.scss'
+  selector: 'app-calls',
+  imports: [TableModule, TagModule, ButtonModule, CardModule],
+  templateUrl: './calls.html',
+  styleUrl: './calls.scss'
 })
-export class Dashboard {
+export class Calls {
   private statsService = inject(StatsService);
-
-  kpis = this.statsService.getKpis();
-  recentCalls = this.statsService.getRecentCalls();
+  calls: CallRecord[] = this.statsService.getRecentCalls();
 
   getStatusSeverity(status: string): 'success' | 'warn' | 'danger' | 'secondary' {
     switch (status) {

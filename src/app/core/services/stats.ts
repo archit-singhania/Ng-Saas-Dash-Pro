@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { StatTrend } from '../../shared/stat-tile/stat-tile';
+import { StatTrend } from '../../shared/components/stat-tile/stat-tile';
 
 export interface KpiData {
   label: string;
