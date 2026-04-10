@@ -27,7 +27,11 @@
           [class.other-month]="!cell.isCurrentMonth"
           [class.today]="cell.isToday"
           [class.has-appointments]="cell.appointments.length > 0"
-          (click)="cell.appointments.length > 0 && openDayModal(cell)">
+          role="button"
+          tabindex="0"
+          (click)="cell.appointments.length > 0 && openDayModal(cell)"
+          (keydown.enter)="cell.appointments.length > 0 && openDayModal(cell)"
+          (keydown.space)="cell.appointments.length > 0 && openDayModal(cell)">
           <span class="cal-date-num">{{ cell.date.getDate() }}</span>
           @if (cell.isCurrentMonth && cell.appointments.length > 0) {
             <p-badge
@@ -41,7 +45,6 @@
   </p-card>
 </div>
 
-<!-- Day Detail Dialog -->
 <p-dialog
   [(visible)]="showModal"
   [header]="modalHeader"

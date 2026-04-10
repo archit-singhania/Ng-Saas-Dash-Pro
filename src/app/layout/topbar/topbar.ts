@@ -14,7 +14,7 @@ import { ThemeService, ThemeMode, SurfaceKey, PRIMARY_PALETTES, SURFACE_PALETTES
 })
 export class Topbar {
   themeService = inject(ThemeService);
-  private elRef = inject(ElementRef);
+  private elRef = inject(ElementRef<HTMLElement>);
 
   configOpen = false;
 
@@ -43,6 +43,7 @@ export class Topbar {
 
   @HostListener('document:click', ['$event'])
   onDocClick(e: MouseEvent): void {
-    if (!this.elRef.nativeElement.contains(e.target)) this.configOpen = false;
+    const nativeEl = this.elRef.nativeElement as HTMLElement;
+    if (!nativeEl.contains(e.target as Node)) this.configOpen = false;
   }
 }

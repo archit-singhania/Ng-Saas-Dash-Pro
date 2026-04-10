@@ -16,5 +16,6 @@ export class CallsService {
   }
 
   exportCsv(_filters?: CallFilters): void {
+    return;
   }
 }

@@ -30,7 +30,7 @@ export class StatsService {
         icon: 'pi pi-phone',
         trend: 'neutral',
         trendLabel: 'No data yet',
-        accentColor: '#7c3aed'
+        accentColor: 'var(--p-primary-500)'
       },
       {
         label: 'Bookings Made',
@@ -39,7 +39,7 @@ export class StatsService {
         icon: 'pi pi-calendar-plus',
         trend: 'neutral',
         trendLabel: 'No data yet',
-        accentColor: '#0ea5e9'
+        accentColor: 'var(--p-primary-400)'
       },
       {
         label: 'Avg Duration',
@@ -48,7 +48,7 @@ export class StatsService {
         icon: 'pi pi-clock',
         trend: 'neutral',
         trendLabel: 'No data yet',
-        accentColor: '#f59e0b'
+        accentColor: 'var(--p-primary-600)'
       },
       {
         label: 'Booking Rate',
@@ -57,7 +57,7 @@ export class StatsService {
         icon: 'pi pi-chart-line',
         trend: 'neutral',
         trendLabel: 'No data yet',
-        accentColor: '#10b981'
+        accentColor: 'var(--p-primary-300)'
       }
     ];
   }

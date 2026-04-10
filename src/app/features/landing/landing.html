@@ -1,0 +1,126 @@
+<div class="landing-page">
+
+  <!-- NAV -->
+  <header class="landing-nav">
+    <div class="nav-logo">
+      <div class="nav-logo-mark">
+        <svg width="20" height="20" viewBox="0 0 22 22" fill="none">
+          <path d="M11 2L3 6.5V11C3 15.14 6.41 19.02 11 20C15.59 19.02 19 15.14 19 11V6.5L11 2Z"
+            fill="white" fill-opacity="0.2" stroke="white" stroke-width="1.5" stroke-linejoin="round"/>
+          <path d="M8 11L10 13L14 9" stroke="white" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <span class="nav-brand">Operations Console</span>
+    </div>
+    <div class="nav-actions">
+      <p-button label="Sign In" severity="secondary" variant="text" routerLink="/login" />
+      <p-button label="Get Started" routerLink="/register" />
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero-section">
+    <div class="hero-badge">
+      <p-tag value="AI-Powered Voice Operations" severity="info" />
+    </div>
+    <h1 class="hero-headline">
+      Your AI receptionist.<br />
+      <span class="hero-accent">Always on. Never misses a call.</span>
+    </h1>
+    <p class="hero-sub">
+      Operations Console gives your business a full-stack AI voice agent — answering calls,
+      booking appointments, and delivering insights — all from one dashboard.
+    </p>
+    <div class="hero-cta">
+      <p-button label="Get Started Free" icon="pi pi-arrow-right" iconPos="right" size="large" routerLink="/register" />
+      <p-button label="Sign In" severity="secondary" variant="outlined" size="large" routerLink="/login" />
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <span class="stat-num">24/7</span>
+        <span class="stat-desc">Always Available</span>
+      </div>
+      <div class="stat-sep"></div>
+      <div class="hero-stat">
+        <span class="stat-num">&lt; 1s</span>
+        <span class="stat-desc">Answer Time</span>
+      </div>
+      <div class="stat-sep"></div>
+      <div class="hero-stat">
+        <span class="stat-num">100%</span>
+        <span class="stat-desc">Calls Handled</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="features-section">
+    <div class="section-label">Features</div>
+    <h2 class="section-heading">Everything your voice operations need</h2>
+    <p class="section-sub">From inbound call handling to deep analytics — built on FastAPI, OpenAI, and Twilio.</p>
+    <div class="features-grid">
+      @for (f of features; track f.title) {
+        <div class="feature-card">
+          <div class="fc-icon-wrap">
+            <i [class]="f.icon"></i>
+          </div>
+          <div class="fc-body">
+            <div class="fc-title-row">
+              <span class="fc-title">{{ f.title }}</span>
+              @if (f.status === 'live') {
+                <p-tag value="Live" severity="success" />
+              } @else {
+                <p-tag value="Coming Soon" severity="secondary" />
+              }
+            </div>
+            <p class="fc-desc">{{ f.description }}</p>
+          </div>
+        </div>
+      }
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="how-section">
+    <div class="section-label">How It Works</div>
+    <h2 class="section-heading">Up and running in minutes</h2>
+    <div class="steps-grid">
+      @for (step of steps; track step.number) {
+        <div class="step-card">
+          <div class="step-num">{{ step.number }}</div>
+          <div class="step-icon-wrap"><i [class]="step.icon"></i></div>
+          <div class="step-title">{{ step.title }}</div>
+          <p class="step-desc">{{ step.description }}</p>
+        </div>
+      }
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="cta-card">
+      <h2 class="cta-heading">Ready to automate your call operations?</h2>
+      <p class="cta-sub">Create an account and have your AI agent live in under 5 minutes.</p>
+      <div class="cta-actions">
+        <p-button label="Create Free Account" icon="pi pi-user-plus" size="large" routerLink="/register" />
+        <p-button label="Sign In" severity="secondary" variant="outlined" size="large" routerLink="/login" />
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="landing-footer">
+    <div class="footer-logo">
+      <div class="nav-logo-mark small">
+        <svg width="16" height="16" viewBox="0 0 22 22" fill="none">
+          <path d="M11 2L3 6.5V11C3 15.14 6.41 19.02 11 20C15.59 19.02 19 15.14 19 11V6.5L11 2Z"
+            fill="white" fill-opacity="0.2" stroke="white" stroke-width="1.5" stroke-linejoin="round"/>
+          <path d="M8 11L10 13L14 9" stroke="white" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <span>Operations Console</span>
+    </div>
+    <p class="footer-copy">&copy; {{ currentYear }} Operations Console. All rights reserved.</p>
+  </footer>
+
+</div>

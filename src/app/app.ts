@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { ThemeService } from './core/services/theme.service';
 
@@ -8,8 +8,6 @@ import { ThemeService } from './core/services/theme.service';
   template: `<router-outlet />`,
   styles: []
 })
-export class App implements OnInit {
+export class App {
   private themeService = inject(ThemeService);
-
-  ngOnInit(): void {}
 }

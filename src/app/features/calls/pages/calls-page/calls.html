@@ -18,7 +18,7 @@
       styleClass="p-datatable-sm"
       [tableStyle]="{ 'min-width': '50rem' }">
 
-      <ng-template #header>
+      <ng-template pTemplate="header">
         <tr>
           <th pSortableColumn="date">Date &amp; Time <p-sortIcon field="date" /></th>
           <th pSortableColumn="phone">Phone <p-sortIcon field="phone" /></th>
@@ -27,7 +27,7 @@
         </tr>
       </ng-template>
 
-      <ng-template #body let-call>
+      <ng-template pTemplate="body" let-call>
         <tr>
           <td>{{ call.date }}</td>
           <td><span class="phone-mono">{{ call.phone }}</span></td>
@@ -36,7 +36,7 @@
         </tr>
       </ng-template>
 
-      <ng-template #emptymessage>
+      <ng-template pTemplate="emptymessage">
         <tr>
           <td colspan="4" class="empty-state">
             <i class="pi pi-phone"></i>

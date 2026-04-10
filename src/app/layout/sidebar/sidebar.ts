@@ -1,6 +1,5 @@
 import { Component, inject, signal, ElementRef } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { CommonModule } from '@angular/common';
 import { TooltipModule } from 'primeng/tooltip';
 import { DialogModule } from 'primeng/dialog';
 import { DrawerModule } from 'primeng/drawer';
@@ -24,7 +23,7 @@ interface NavItem {
 
 @Component({
   selector: 'app-sidebar',
-  imports: [RouterLink, RouterLinkActive, CommonModule, TooltipModule, DialogModule, DrawerModule, TagModule, DividerModule, ButtonModule],
+  imports: [RouterLink, RouterLinkActive, TooltipModule, DialogModule, DrawerModule, TagModule, DividerModule, ButtonModule],
   templateUrl: './sidebar.html',
   styleUrl: './sidebar.scss'
 })
@@ -45,7 +44,7 @@ export class Sidebar {
     { id: 'billing',       label: 'Billing',       icon: 'pi pi-credit-card' },
   ];
 
-  openSettings(event: MouseEvent): void {
+  openSettings(event: Event): void {
     event.preventDefault();
     this.settingsOpen.set(true);
   }
@@ -66,17 +65,17 @@ export class Sidebar {
       icon: 'pi pi-box',
       route: '/features',
       children: [
-        { label: 'Bookings Calendar',        icon: 'pi pi-calendar',   route: '/features/bookings'         },
-        { label: 'Transcripts & Recordings', icon: 'pi pi-file-edit',  route: '/features/transcripts'      },
-        { label: 'Prompt & Knowledge Base',  icon: 'pi pi-sliders-h',  route: '/features/prompt-settings'  },
-        { label: 'Data Analytics',           icon: 'pi pi-chart-bar',  route: '/features/analytics'        },
-        { label: 'Sentiment Analysis',       icon: 'pi pi-heart',      route: '/features/sentiment'        },
-        { label: 'CRM Integration',          icon: 'pi pi-users',      route: '/features/crm'              }
+        { label: 'Bookings Calendar',        icon: 'pi pi-calendar',   route: '/features/bookings'        },
+        { label: 'Transcripts & Recordings', icon: 'pi pi-file-edit',  route: '/features/transcripts'     },
+        { label: 'Prompt & Knowledge Base',  icon: 'pi pi-sliders-h',  route: '/features/prompt-settings' },
+        { label: 'Data Analytics',           icon: 'pi pi-chart-bar',  route: '/features/analytics'       },
+        { label: 'Sentiment Analysis',       icon: 'pi pi-heart',      route: '/features/sentiment'       },
+        { label: 'CRM Integration',          icon: 'pi pi-users',      route: '/features/crm'             }
       ]
     }
   ];
 
-  toggleFeatures(event: MouseEvent): void {
+  toggleFeatures(event: Event): void {
     event.preventDefault();
     this.featuresExpanded.update(v => !v);
   }

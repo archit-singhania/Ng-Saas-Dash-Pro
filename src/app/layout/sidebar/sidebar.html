@@ -10,12 +10,14 @@
   </div>
 
   <nav class="sidebar-nav">
-    @for (item of navItems; track item.route; let i = $index) {
+    @for (item of navItems; track item.route) {
       @if (item.children) {
         <button
           class="nav-item"
           [class.active]="featuresExpanded()"
           (click)="toggleFeatures($event)"
+          (keydown.enter)="toggleFeatures($event)"
+          (keydown.space)="toggleFeatures($event)"
           [pTooltip]="featuresExpanded() ? '' : item.label"
           tooltipPosition="right">
           <i [class]="item.icon"></i>
@@ -46,23 +48,30 @@
   </nav>
 
   <div class="sidebar-footer">
-    <button class="nav-item footer-item"
-       pTooltip="Settings"
-       tooltipPosition="right"
-       (click)="openSettings($event)">
+    <button
+      class="nav-item footer-item"
+      pTooltip="Settings"
+      tooltipPosition="right"
+      (click)="openSettings($event)"
+      (keydown.enter)="openSettings($event)"
+      (keydown.space)="openSettings($event)">
       <i class="pi pi-cog"></i>
     </button>
-    <div class="account-avatar"
-         pTooltip="Profile"
-         tooltipPosition="right"
-         (click)="openProfile()">
+    <div
+      class="account-avatar"
+      role="button"
+      tabindex="0"
+      pTooltip="Profile"
+      tooltipPosition="right"
+      (click)="openProfile()"
+      (keydown.enter)="openProfile()"
+      (keydown.space)="openProfile()">
       A
     </div>
   </div>
 
 </aside>
 
-<!-- Profile Dialog -->
 <p-dialog
   [(visible)]="profileOpen"
   [modal]="true"
@@ -72,7 +81,7 @@
   styleClass="profile-dialog"
   [style]="{ width: '420px' }">
 
-  <ng-template #header>
+  <ng-template pTemplate="header">
     <span class="profile-dialog-title">Account Profile</span>
   </ng-template>
 
@@ -117,7 +126,7 @@
         styleClass="pa-action-btn"
         [disabled]="true"
         [fluid]="true">
-        <ng-template #content>
+        <ng-template pTemplate="content">
           <i class="pi pi-user-edit"></i>
           <span>Edit Profile</span>
           <span class="pa-soon">Soon</span>
@@ -129,7 +138,7 @@
         styleClass="pa-action-btn"
         [disabled]="true"
         [fluid]="true">
-        <ng-template #content>
+        <ng-template pTemplate="content">
           <i class="pi pi-key"></i>
           <span>Change Password</span>
           <span class="pa-soon">Soon</span>
@@ -141,7 +150,7 @@
         styleClass="pa-action-btn pa-danger-btn"
         [disabled]="true"
         [fluid]="true">
-        <ng-template #content>
+        <ng-template pTemplate="content">
           <i class="pi pi-sign-out"></i>
           <span>Sign Out</span>
           <span class="pa-soon pa-soon-danger">Soon</span>
@@ -152,7 +161,6 @@
 
 </p-dialog>
 
-<!-- Settings Drawer -->
 <p-drawer
   [(visible)]="settingsOpen"
   position="right"
@@ -161,7 +169,7 @@
   [modal]="true"
   [showCloseIcon]="false">
 
-  <ng-template #header>
+  <ng-template pTemplate="header">
     <div class="sd-header">
       <span class="sd-title">Settings</span>
       <p-button

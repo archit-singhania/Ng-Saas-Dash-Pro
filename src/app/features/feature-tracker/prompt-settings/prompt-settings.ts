@@ -8,7 +8,7 @@ import { SliderModule } from 'primeng/slider';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { ToggleSwitchModule } from 'primeng/toggleswitch';
 import { InputNumberModule } from 'primeng/inputnumber';
-import { AutoComplete, AutoCompleteModule } from 'primeng/autocomplete';
+import { AutoCompleteModule } from 'primeng/autocomplete';
 import { SelectModule } from 'primeng/select';
 import { FileUploadModule } from 'primeng/fileupload';
 import { DividerModule } from 'primeng/divider';
@@ -102,7 +102,7 @@ export class PromptSettings {
   }
 
   saveAll(): void {
-    console.log('Saving prompt settings...');
+    return;
   }
 
   resetAll(): void {

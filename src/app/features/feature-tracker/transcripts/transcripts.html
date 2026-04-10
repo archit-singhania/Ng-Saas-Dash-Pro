@@ -18,7 +18,7 @@
       styleClass="p-datatable-sm"
       [tableStyle]="{ 'min-width': '62rem' }">
 
-      <ng-template #header>
+      <ng-template pTemplate="header">
         <tr>
           <th pSortableColumn="date">Date &amp; Time <p-sortIcon field="date" /></th>
           <th pSortableColumn="phone">Phone <p-sortIcon field="phone" /></th>
@@ -29,7 +29,7 @@
         </tr>
       </ng-template>
 
-      <ng-template #body let-rec>
+      <ng-template pTemplate="body" let-rec>
         <tr>
           <td>{{ rec.date }}</td>
           <td><span class="phone-mono">{{ rec.phone }}</span></td>
@@ -56,7 +56,7 @@
         </tr>
       </ng-template>
 
-      <ng-template #emptymessage>
+      <ng-template pTemplate="emptymessage">
         <tr>
           <td colspan="6" class="empty-state">
             <i class="pi pi-file-edit"></i>
@@ -68,7 +68,6 @@
   </p-card>
 </div>
 
-<!-- Transcript Viewer Dialog -->
 <p-dialog
   [(visible)]="showTranscript"
   header="Call Transcript"

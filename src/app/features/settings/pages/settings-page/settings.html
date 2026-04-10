@@ -18,10 +18,12 @@
         <p-button
           [label]="tab.label"
           [icon]="tab.icon"
-          [severity]="activeTab() === tab.id ? 'primary' : 'secondary'"
-          [text]="activeTab() !== tab.id"
+          severity="secondary"
+          variant="text"
           styleClass="stab-btn"
-          [style]="activeTab() === tab.id ? { background: 'color-mix(in srgb, var(--p-primary-500) 10%, transparent)', color: 'var(--p-primary-500)', fontWeight: '600' } : {}"
+          [style]="activeTab() === tab.id
+            ? { background: 'color-mix(in srgb, var(--p-primary-500) 10%, transparent)', color: 'var(--p-primary-500)', fontWeight: '600' }
+            : {}"
           (onClick)="setTab(tab.id)" />
       }
     </nav>
@@ -37,20 +39,20 @@
           <p-divider />
           <div class="field-grid">
             <div class="field-row">
-              <label class="field-label">Full Name</label>
-              <div class="field-mock">Admin Operator</div>
+              <label for="field-fullname" class="field-label">Full Name</label>
+              <div id="field-fullname" class="field-mock">Admin Operator</div>
             </div>
             <div class="field-row">
-              <label class="field-label">Email</label>
-              <div class="field-mock">admin&#64;operationsconsole.io</div>
+              <label for="field-email" class="field-label">Email</label>
+              <div id="field-email" class="field-mock">admin&#64;operationsconsole.io</div>
             </div>
             <div class="field-row">
-              <label class="field-label">Role</label>
-              <div class="field-mock">Super Admin</div>
+              <label for="field-role" class="field-label">Role</label>
+              <div id="field-role" class="field-mock">Super Admin</div>
             </div>
             <div class="field-row">
-              <label class="field-label">Region</label>
-              <div class="field-mock">IN &mdash; South Asia</div>
+              <label for="field-region" class="field-label">Region</label>
+              <div id="field-region" class="field-mock">IN &mdash; South Asia</div>
             </div>
           </div>
         </div>
@@ -63,19 +65,19 @@
           <p-divider />
           <div class="field-grid">
             <div class="field-row">
-              <label class="field-label">Password</label>
-              <div class="field-mock mock-password">&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;</div>
+              <label for="field-password" class="field-label">Password</label>
+              <div id="field-password" class="field-mock mock-password">&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;</div>
             </div>
             <div class="field-row">
-              <label class="field-label">Two-Factor Auth</label>
+              <label for="toggle-2fa" class="field-label">Two-Factor Auth</label>
               <div class="field-mock mock-toggle">
-                <p-toggleSwitch [ngModel]="false" [disabled]="true" />
+                <p-toggleSwitch inputId="toggle-2fa" [(ngModel)]="toggleDisabled2fa" [disabled]="true" />
                 <span class="toggle-label">Disabled</span>
               </div>
             </div>
             <div class="field-row">
-              <label class="field-label">Session Timeout</label>
-              <div class="field-mock">30 minutes</div>
+              <label for="field-session" class="field-label">Session Timeout</label>
+              <div id="field-session" class="field-mock">30 minutes</div>
             </div>
           </div>
         </div>
@@ -90,29 +92,29 @@
           <p-divider />
           <div class="field-grid">
             <div class="field-row">
-              <label class="field-label">Agent Name</label>
-              <div class="field-mock">Aria</div>
+              <label for="field-agentname" class="field-label">Agent Name</label>
+              <div id="field-agentname" class="field-mock">Aria</div>
             </div>
             <div class="field-row">
-              <label class="field-label">Language</label>
-              <div class="field-mock">English (IN)</div>
+              <label for="field-lang" class="field-label">Language</label>
+              <div id="field-lang" class="field-mock">English (IN)</div>
             </div>
             <div class="field-row">
-              <label class="field-label">Voice Model</label>
-              <div class="field-mock">OpenAI TTS &mdash; Nova</div>
+              <label for="field-voice" class="field-label">Voice Model</label>
+              <div id="field-voice" class="field-mock">OpenAI TTS &mdash; Nova</div>
             </div>
             <div class="field-row">
-              <label class="field-label">Max Call Duration</label>
-              <div class="field-mock">10 minutes</div>
+              <label for="field-duration" class="field-label">Max Call Duration</label>
+              <div id="field-duration" class="field-mock">10 minutes</div>
             </div>
             <div class="field-row">
-              <label class="field-label">Fallback Behaviour</label>
-              <div class="field-mock">Transfer to Human</div>
+              <label for="field-fallback" class="field-label">Fallback Behaviour</label>
+              <div id="field-fallback" class="field-mock">Transfer to Human</div>
             </div>
             <div class="field-row">
-              <label class="field-label">Active</label>
+              <label for="toggle-agent-active" class="field-label">Active</label>
               <div class="field-mock mock-toggle">
-                <p-toggleSwitch [ngModel]="true" [disabled]="true" />
+                <p-toggleSwitch inputId="toggle-agent-active" [(ngModel)]="toggleAgentActive" [disabled]="true" />
                 <span class="toggle-label">Enabled</span>
               </div>
             </div>
@@ -129,24 +131,24 @@
           <p-divider />
           <div class="field-grid">
             <div class="field-row">
-              <label class="field-label">OpenAI API Key</label>
-              <div class="field-mock mock-password">sk-&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;</div>
+              <label for="field-openai" class="field-label">OpenAI API Key</label>
+              <div id="field-openai" class="field-mock mock-password">sk-&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;</div>
             </div>
             <div class="field-row">
-              <label class="field-label">Twilio SID</label>
-              <div class="field-mock mock-password">AC&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;</div>
+              <label for="field-twilio-sid" class="field-label">Twilio SID</label>
+              <div id="field-twilio-sid" class="field-mock mock-password">AC&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;</div>
             </div>
             <div class="field-row">
-              <label class="field-label">Twilio Auth Token</label>
-              <div class="field-mock mock-password">&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;</div>
+              <label for="field-twilio-token" class="field-label">Twilio Auth Token</label>
+              <div id="field-twilio-token" class="field-mock mock-password">&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;</div>
             </div>
             <div class="field-row">
-              <label class="field-label">FastAPI Webhook URL</label>
-              <div class="field-mock">https://api.yourdomain.com/webhook</div>
+              <label for="field-webhook" class="field-label">FastAPI Webhook URL</label>
+              <div id="field-webhook" class="field-mock">https://api.yourdomain.com/webhook</div>
             </div>
             <div class="field-row">
-              <label class="field-label">Webhook Secret</label>
-              <div class="field-mock mock-password">&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;</div>
+              <label for="field-webhook-secret" class="field-label">Webhook Secret</label>
+              <div id="field-webhook-secret" class="field-mock mock-password">&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;</div>
             </div>
           </div>
         </div>
@@ -161,29 +163,29 @@
           <p-divider />
           <div class="field-grid">
             <div class="field-row">
-              <label class="field-label">Missed Call Alerts</label>
+              <label for="toggle-missed-calls" class="field-label">Missed Call Alerts</label>
               <div class="field-mock mock-toggle">
-                <p-toggleSwitch [ngModel]="true" [disabled]="true" />
+                <p-toggleSwitch inputId="toggle-missed-calls" [(ngModel)]="toggleMissedCallAlerts" [disabled]="true" />
                 <span class="toggle-label">Enabled</span>
               </div>
             </div>
             <div class="field-row">
-              <label class="field-label">Daily Summary Email</label>
+              <label for="toggle-daily-summary" class="field-label">Daily Summary Email</label>
               <div class="field-mock mock-toggle">
-                <p-toggleSwitch [ngModel]="false" [disabled]="true" />
+                <p-toggleSwitch inputId="toggle-daily-summary" [(ngModel)]="toggleDailySummary" [disabled]="true" />
                 <span class="toggle-label">Disabled</span>
               </div>
             </div>
             <div class="field-row">
-              <label class="field-label">Agent Downtime Alert</label>
+              <label for="toggle-agent-downtime" class="field-label">Agent Downtime Alert</label>
               <div class="field-mock mock-toggle">
-                <p-toggleSwitch [ngModel]="true" [disabled]="true" />
+                <p-toggleSwitch inputId="toggle-agent-downtime" [(ngModel)]="toggleAgentDowntime" [disabled]="true" />
                 <span class="toggle-label">Enabled</span>
               </div>
             </div>
             <div class="field-row">
-              <label class="field-label">Slack Webhook</label>
-              <div class="field-mock">Not configured</div>
+              <label for="field-slack" class="field-label">Slack Webhook</label>
+              <div id="field-slack" class="field-mock">Not configured</div>
             </div>
           </div>
         </div>
@@ -203,16 +205,16 @@
           </div>
           <div class="field-grid" style="margin-top:1.25rem">
             <div class="field-row">
-              <label class="field-label">Billing Contact</label>
-              <div class="field-mock">admin&#64;operationsconsole.io</div>
+              <label for="field-billing-contact" class="field-label">Billing Contact</label>
+              <div id="field-billing-contact" class="field-mock">admin&#64;operationsconsole.io</div>
             </div>
             <div class="field-row">
-              <label class="field-label">Next Invoice</label>
-              <div class="field-mock">Coming Soon</div>
+              <label for="field-next-invoice" class="field-label">Next Invoice</label>
+              <div id="field-next-invoice" class="field-mock">Coming Soon</div>
             </div>
             <div class="field-row">
-              <label class="field-label">Payment Method</label>
-              <div class="field-mock">Not configured</div>
+              <label for="field-payment" class="field-label">Payment Method</label>
+              <div id="field-payment" class="field-mock">Not configured</div>
             </div>
           </div>
         </div>

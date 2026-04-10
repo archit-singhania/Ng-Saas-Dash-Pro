@@ -8,9 +8,8 @@
     </div>
   </div>
 
-  <!-- Opening Greeting -->
   <p-card styleClass="prompt-section">
-    <ng-template #header>
+    <ng-template pTemplate="header">
       <div class="section-header">
         <div class="section-icon"><i class="pi pi-comments"></i></div>
         <div>
@@ -22,23 +21,22 @@
     </ng-template>
     <div class="field-row">
       <div class="field">
-        <label>Agent Name</label>
-        <input pInputText [ngModel]="agentName()" (ngModelChange)="agentName.set($event)" placeholder="e.g. Aria" />
+        <label for="agent-name">Agent Name</label>
+        <p-inputtext inputId="agent-name" [ngModel]="agentName()" (ngModelChange)="agentName.set($event)" placeholder="e.g. Aria" />
       </div>
       <div class="field toggle-field">
-        <label>Enable Greeting</label>
-        <p-toggleSwitch [ngModel]="greetingEnabled()" (ngModelChange)="greetingEnabled.set($event)" />
+        <label for="greeting-toggle">Enable Greeting</label>
+        <p-toggleSwitch inputId="greeting-toggle" [ngModel]="greetingEnabled()" (ngModelChange)="greetingEnabled.set($event)" />
       </div>
     </div>
     <div class="field full">
-      <label>Greeting Script</label>
-      <textarea pTextarea [ngModel]="greetingText()" (ngModelChange)="greetingText.set($event)" [rows]="3" placeholder="What the agent says first..."></textarea>
+      <label for="greeting-script">Greeting Script</label>
+      <p-textarea inputId="greeting-script" [ngModel]="greetingText()" (ngModelChange)="greetingText.set($event)" rows="3" placeholder="What the agent says first..." />
     </div>
   </p-card>
 
-  <!-- System Prompt -->
   <p-card styleClass="prompt-section">
-    <ng-template #header>
+    <ng-template pTemplate="header">
       <div class="section-header">
         <div class="section-icon"><i class="pi pi-code"></i></div>
         <div>
@@ -49,13 +47,12 @@
       </div>
     </ng-template>
     <div class="field full">
-      <textarea pTextarea [ngModel]="systemPrompt()" (ngModelChange)="systemPrompt.set($event)" [rows]="8" [maxlength]="4000" placeholder="You are a helpful AI voice agent..."></textarea>
+      <p-textarea inputId="system-prompt" [ngModel]="systemPrompt()" (ngModelChange)="systemPrompt.set($event)" rows="8" [maxlength]="4000" placeholder="You are a helpful AI voice agent..." />
     </div>
   </p-card>
 
-  <!-- Listening Sensitivity -->
   <p-card styleClass="prompt-section">
-    <ng-template #header>
+    <ng-template pTemplate="header">
       <div class="section-header">
         <div class="section-icon"><i class="pi pi-volume-up"></i></div>
         <div>
@@ -65,22 +62,21 @@
       </div>
     </ng-template>
     <div class="field full">
-      <label>Sensitivity Level — <strong>{{ listeningLabel }}</strong> ({{ listeningScore() }})</label>
+      <label for="sensitivity-slider">Sensitivity Level — <strong>{{ listeningLabel }}</strong> ({{ listeningScore() }})</label>
       <div class="slider-row">
         <span class="slider-label">Low</span>
-        <p-slider [ngModel]="listeningScore()" (ngModelChange)="listeningScore.set($event)" [min]="0" [max]="100" styleClass="flex-1" />
+        <p-slider inputId="sensitivity-slider" [ngModel]="listeningScore()" (ngModelChange)="listeningScore.set($event)" [min]="0" [max]="100" styleClass="flex-1" />
         <span class="slider-label">High</span>
       </div>
     </div>
     <div class="field">
-      <label>Voice Activity Detection (VAD) Mode</label>
-      <p-selectButton [options]="vadOptions" [ngModel]="vadMode()" (ngModelChange)="vadMode.set($event)" optionLabel="label" optionValue="value" />
+      <label for="vad-mode">Voice Activity Detection (VAD) Mode</label>
+      <p-selectButton inputId="vad-mode" [options]="vadOptions" [ngModel]="vadMode()" (ngModelChange)="vadMode.set($event)" optionLabel="label" optionValue="value" />
     </div>
   </p-card>
 
-  <!-- Interruption Handling -->
   <p-card styleClass="prompt-section">
-    <ng-template #header>
+    <ng-template pTemplate="header">
       <div class="section-header">
         <div class="section-icon"><i class="pi pi-exclamation-circle"></i></div>
         <div>
@@ -91,19 +87,18 @@
     </ng-template>
     <div class="field-row">
       <div class="field toggle-field">
-        <label>Allow Caller Interruptions</label>
-        <p-toggleSwitch [ngModel]="allowInterruptions()" (ngModelChange)="allowInterruptions.set($event)" />
+        <label for="allow-interruptions">Allow Caller Interruptions</label>
+        <p-toggleSwitch inputId="allow-interruptions" [ngModel]="allowInterruptions()" (ngModelChange)="allowInterruptions.set($event)" />
       </div>
       <div class="field">
-        <label>Silence Threshold (ms)</label>
-        <p-inputNumber [ngModel]="silenceThreshold()" (ngModelChange)="silenceThreshold.set($event ?? 0)" [min]="300" [max]="5000" [step]="100" suffix=" ms" />
+        <label for="silence-threshold">Silence Threshold (ms)</label>
+        <p-inputNumber inputId="silence-threshold" [ngModel]="silenceThreshold()" (ngModelChange)="silenceThreshold.set($event ?? 0)" [min]="300" [max]="5000" [step]="100" suffix=" ms" />
       </div>
     </div>
   </p-card>
 
-  <!-- Fallback Responses -->
   <p-card styleClass="prompt-section">
-    <ng-template #header>
+    <ng-template pTemplate="header">
       <div class="section-header">
         <div class="section-icon"><i class="pi pi-question-circle"></i></div>
         <div>
@@ -113,18 +108,23 @@
       </div>
     </ng-template>
     <div class="field full">
-      <label>Fallback Message</label>
-      <textarea pTextarea [ngModel]="fallbackMessage()" (ngModelChange)="fallbackMessage.set($event)" [rows]="2" placeholder="What to say when confused..."></textarea>
+      <label for="fallback-message">Fallback Message</label>
+      <p-textarea inputId="fallback-message" [ngModel]="fallbackMessage()" (ngModelChange)="fallbackMessage.set($event)" rows="2" placeholder="What to say when confused..." />
     </div>
     <div class="field full">
-      <label>Trigger Keywords (press Enter to add)</label>
-      <p-chips [ngModel]="fallbackTriggers()" (ngModelChange)="fallbackTriggers.set($event)" placeholder="Add keyword..." />
+      <label for="fallback-triggers">Trigger Keywords (press Enter to add)</label>
+      <p-autocomplete
+        inputId="fallback-triggers"
+        [ngModel]="fallbackTriggers()"
+        (ngModelChange)="fallbackTriggers.set($event)"
+        [multiple]="true"
+        [dropdown]="false"
+        placeholder="Add keyword..." />
     </div>
   </p-card>
 
-  <!-- Knowledge Base Documents -->
   <p-card styleClass="prompt-section">
-    <ng-template #header>
+    <ng-template pTemplate="header">
       <div class="section-header">
         <div class="section-icon"><i class="pi pi-book"></i></div>
         <div>
@@ -157,9 +157,8 @@
     </div>
   </p-card>
 
-  <!-- Call Wrap-up Behaviour -->
   <p-card styleClass="prompt-section">
-    <ng-template #header>
+    <ng-template pTemplate="header">
       <div class="section-header">
         <div class="section-icon"><i class="pi pi-check-circle"></i></div>
         <div>
@@ -169,18 +168,17 @@
       </div>
     </ng-template>
     <div class="field">
-      <label>Post-Call Action</label>
-      <p-select [options]="postCallActions" [ngModel]="selectedPostCallAction()" (ngModelChange)="selectedPostCallAction.set($event)" optionLabel="label" optionValue="value" styleClass="w-full" />
+      <label for="post-call-action">Post-Call Action</label>
+      <p-select inputId="post-call-action" [options]="postCallActions" [ngModel]="selectedPostCallAction()" (ngModelChange)="selectedPostCallAction.set($event)" optionLabel="label" optionValue="value" styleClass="w-full" />
     </div>
     <div class="field full">
-      <label>Wrap-up Note Template</label>
-      <textarea pTextarea [ngModel]="wrapUpNote()" (ngModelChange)="wrapUpNote.set($event)" [rows]="2" placeholder="Message sent to caller after the call..."></textarea>
+      <label for="wrapup-note">Wrap-up Note Template</label>
+      <p-textarea inputId="wrapup-note" [ngModel]="wrapUpNote()" (ngModelChange)="wrapUpNote.set($event)" rows="2" placeholder="Message sent to caller after the call..." />
     </div>
   </p-card>
 
-  <!-- Language & Accent -->
   <p-card styleClass="prompt-section">
-    <ng-template #header>
+    <ng-template pTemplate="header">
       <div class="section-header">
         <div class="section-icon"><i class="pi pi-globe"></i></div>
         <div>
@@ -191,19 +189,18 @@
     </ng-template>
     <div class="field-row">
       <div class="field">
-        <label>Language</label>
-        <p-select [options]="languages" [ngModel]="selectedLanguage()" (ngModelChange)="selectedLanguage.set($event)" optionLabel="label" optionValue="value" styleClass="w-full" />
+        <label for="language-select">Language</label>
+        <p-select inputId="language-select" [options]="languages" [ngModel]="selectedLanguage()" (ngModelChange)="selectedLanguage.set($event)" optionLabel="label" optionValue="value" styleClass="w-full" />
       </div>
       <div class="field">
-        <label>Voice &amp; Accent</label>
-        <p-select [options]="voices" [ngModel]="selectedVoice()" (ngModelChange)="selectedVoice.set($event)" optionLabel="label" optionValue="value" styleClass="w-full" />
+        <label for="voice-select">Voice &amp; Accent</label>
+        <p-select inputId="voice-select" [options]="voices" [ngModel]="selectedVoice()" (ngModelChange)="selectedVoice.set($event)" optionLabel="label" optionValue="value" styleClass="w-full" />
       </div>
     </div>
   </p-card>
 
-  <!-- Escalation Rules -->
   <p-card styleClass="prompt-section">
-    <ng-template #header>
+    <ng-template pTemplate="header">
       <div class="section-header">
         <div class="section-icon"><i class="pi pi-arrow-up-right"></i></div>
         <div>
@@ -213,22 +210,27 @@
       </div>
     </ng-template>
     <div class="field full">
-      <label>Escalation Trigger Phrases (press Enter to add)</label>
-      <p-chips [ngModel]="escalationPhrases()" (ngModelChange)="escalationPhrases.set($event)" placeholder="Add phrase..." />
+      <label for="escalation-phrases">Escalation Trigger Phrases (press Enter to add)</label>
+      <p-autocomplete
+        inputId="escalation-phrases"
+        [ngModel]="escalationPhrases()"
+        (ngModelChange)="escalationPhrases.set($event)"
+        [multiple]="true"
+        [dropdown]="false"
+        placeholder="Add phrase..." />
     </div>
     <div class="field-row">
       <div class="field">
-        <label>Escalation Phone</label>
-        <input pInputText [ngModel]="escalationPhone()" (ngModelChange)="escalationPhone.set($event)" placeholder="+91 99000 00000" />
+        <label for="escalation-phone">Escalation Phone</label>
+        <p-inputtext inputId="escalation-phone" [ngModel]="escalationPhone()" (ngModelChange)="escalationPhone.set($event)" placeholder="+91 99000 00000" />
       </div>
       <div class="field">
-        <label>Escalation Email</label>
-        <input pInputText [ngModel]="escalationEmail()" (ngModelChange)="escalationEmail.set($event)" placeholder="support@yourbusiness.com" />
+        <label for="escalation-email">Escalation Email</label>
+        <p-inputtext inputId="escalation-email" [ngModel]="escalationEmail()" (ngModelChange)="escalationEmail.set($event)" placeholder="support@yourbusiness.com" />
       </div>
     </div>
   </p-card>
 
-  <!-- Save Controls -->
   <div class="save-bar">
     <p-button label="Reset to Defaults" icon="pi pi-refresh" severity="secondary" variant="outlined" (onClick)="resetAll()" />
     <p-button label="Save Changes" icon="pi pi-check" (onClick)="saveAll()" />
