@@ -13,14 +13,17 @@ import { FileUploadModule } from 'primeng/fileupload';
 import { ToastModule } from 'primeng/toast';
 import { TagModule } from 'primeng/tag';
 import { MessageService } from 'primeng/api';
+import { CardModule } from 'primeng/card';
 
 @Component({
   selector: 'app-prompt-settings',
+  standalone: true,
   imports: [
     FormsModule,
     ButtonModule, InputTextModule, TextareaModule,
     SliderModule, SelectButtonModule, ToggleSwitchModule, InputNumberModule,
-    AutoCompleteModule, SelectModule, FileUploadModule, ToastModule, TagModule
+    AutoCompleteModule, SelectModule, FileUploadModule, ToastModule, TagModule,
+    CardModule 
   ],
   providers: [MessageService],
   templateUrl: './prompt-settings.html',

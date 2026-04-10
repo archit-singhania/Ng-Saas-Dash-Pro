@@ -7,6 +7,7 @@ import { TagModule } from 'primeng/tag';
 import { DividerModule } from 'primeng/divider';
 import { ButtonModule } from 'primeng/button';
 import { AvatarModule } from 'primeng/avatar';
+import { CardModule } from 'primeng/card';
 import { ThemeService } from '../../core/services/theme.service';
 import { AuthService } from '../../core/services/auth.service';
 
@@ -25,7 +26,7 @@ interface NavItem {
 
 @Component({
   selector: 'app-sidebar',
-  imports: [RouterLink, RouterLinkActive, TooltipModule, DialogModule, DrawerModule, TagModule, DividerModule, ButtonModule, AvatarModule],
+  imports: [RouterLink, RouterLinkActive, TooltipModule, DialogModule, DrawerModule, TagModule, DividerModule, ButtonModule, AvatarModule, CardModule],
   templateUrl: './sidebar.html',
   styleUrl: './sidebar.scss'
 })

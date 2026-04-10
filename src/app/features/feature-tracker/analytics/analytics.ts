@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
+import { CardModule } from 'primeng/card';
 
 @Component({
   selector: 'app-analytics',
-  imports: [],
+  imports: [CardModule],
   templateUrl: './analytics.html',
   styleUrl: './analytics.scss',
 })
-export class Analytics {
-
-}
+export class Analytics {}

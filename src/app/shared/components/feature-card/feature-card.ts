@@ -1,10 +1,11 @@
 import { Component, Input } from '@angular/core';
+import { CardModule } from 'primeng/card';
 import { TagModule } from 'primeng/tag';
 import { Feature } from '../../models/feature.model';
 
 @Component({
   selector: 'app-feature-card',
-  imports: [TagModule],
+  imports: [CardModule, TagModule],
   templateUrl: './feature-card.html',
   styleUrl: './feature-card.scss'
 })

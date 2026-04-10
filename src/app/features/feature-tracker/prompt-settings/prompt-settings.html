@@ -145,14 +145,16 @@
         [disabled]="true" />
       <div class="doc-list">
         @for (doc of uploadedDocs(); track doc.name; let i = $index) {
-          <div class="doc-row">
-            <i class="pi pi-file-pdf doc-icon"></i>
-            <div class="doc-info">
-              <span class="doc-name">{{ doc.name }}</span>
-              <span class="doc-meta">{{ doc.size }} · Uploaded {{ doc.uploadedAt }}</span>
+          <p-card styleClass="doc-row-card">
+            <div class="doc-row-inner">
+              <i class="pi pi-file-pdf doc-icon"></i>
+              <div class="doc-info">
+                <span class="doc-name">{{ doc.name }}</span>
+                <span class="doc-meta">{{ doc.size }} · Uploaded {{ doc.uploadedAt }}</span>
+              </div>
+              <p-button icon="pi pi-trash" severity="danger" variant="text" size="small" (onClick)="removeDoc(i)" />
             </div>
-            <p-button icon="pi pi-trash" severity="danger" variant="text" size="small" (onClick)="removeDoc(i)" />
-          </div>
+          </p-card>
         }
       </div>
     </div>

@@ -8,7 +8,6 @@ export interface KpiData {
   icon: string;
   trend: StatTrend;
   trendLabel: string;
-  accentColor: string;
 }
 
 export interface CallRecord {
@@ -29,8 +28,7 @@ export class StatsService {
         subtitle: 'All time',
         icon: 'pi pi-phone',
         trend: 'neutral',
-        trendLabel: 'No data yet',
-        accentColor: 'var(--p-primary-500)'
+        trendLabel: 'No data yet'
       },
       {
         label: 'Bookings Made',
@@ -38,8 +36,7 @@ export class StatsService {
         subtitle: 'Confirmed appointments',
         icon: 'pi pi-calendar-plus',
         trend: 'neutral',
-        trendLabel: 'No data yet',
-        accentColor: 'var(--p-primary-400)'
+        trendLabel: 'No data yet'
       },
       {
         label: 'Avg Duration',
@@ -47,8 +44,7 @@ export class StatsService {
         subtitle: 'Seconds per call',
         icon: 'pi pi-clock',
         trend: 'neutral',
-        trendLabel: 'No data yet',
-        accentColor: 'var(--p-primary-600)'
+        trendLabel: 'No data yet'
       },
       {
         label: 'Booking Rate',
@@ -56,8 +52,7 @@ export class StatsService {
         subtitle: 'Calls that converted',
         icon: 'pi pi-chart-line',
         trend: 'neutral',
-        trendLabel: 'No data yet',
-        accentColor: 'var(--p-primary-300)'
+        trendLabel: 'No data yet'
       }
     ];
   }

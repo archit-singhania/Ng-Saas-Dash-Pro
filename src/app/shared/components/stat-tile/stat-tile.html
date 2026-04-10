@@ -1,7 +1,7 @@
-<div class="stat-tile">
+<p-card styleClass="stat-tile-wrap">
   <div class="stat-top">
     <span class="stat-label">{{ label }}</span>
-    <div class="stat-icon" [style.background]="accentColor + '15'" [style.color]="accentColor">
+    <div class="stat-icon" [style.background]="'color-mix(in srgb, var(--p-primary-500) 12%, transparent)'" [style.color]="'var(--p-primary-500)'">
       <i [class]="icon"></i>
     </div>
   </div>
@@ -9,10 +9,11 @@
   <div class="stat-bottom">
     <span class="stat-subtitle">{{ subtitle }}</span>
     @if (trendLabel) {
-      <span class="stat-trend" [class]="'trend-' + trend">
-        <i [class]="trend === 'up' ? 'pi pi-arrow-up' : trend === 'down' ? 'pi pi-arrow-down' : 'pi pi-minus'"></i>
-        {{ trendLabel }}
-      </span>
+      <p-tag
+        [value]="trendLabel"
+        [severity]="trend === 'up' ? 'success' : trend === 'down' ? 'danger' : 'secondary'"
+        [icon]="trend === 'up' ? 'pi pi-arrow-up' : trend === 'down' ? 'pi pi-arrow-down' : 'pi pi-minus'"
+        styleClass="trend-tag" />
     }
   </div>
-</div>
+</p-card>

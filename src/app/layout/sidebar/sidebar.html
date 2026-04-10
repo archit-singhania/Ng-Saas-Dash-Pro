@@ -12,16 +12,17 @@
   <nav class="sidebar-nav">
     @for (item of navItems; track item.route) {
       @if (item.children) {
-        <button
-          class="nav-item"
-          [class.active]="featuresExpanded()"
-          (click)="toggleFeatures($event)"
-          (keydown.enter)="toggleFeatures($event)"
-          (keydown.space)="toggleFeatures($event)"
+        <p-button
+          [icon]="item.icon"
+          severity="secondary"
+          variant="text"
+          class="nav-btn"
+          [class.nav-btn-active]="featuresExpanded()"
           [pTooltip]="featuresExpanded() ? '' : item.label"
-          tooltipPosition="right">
-          <i [class]="item.icon"></i>
-        </button>
+          tooltipPosition="right"
+          (onClick)="toggleFeatures($event)"
+          (keydown.enter)="toggleFeatures($event)"
+          (keydown.space)="toggleFeatures($event)" />
         <div class="sub-nav" [class.expanded]="featuresExpanded()">
           @for (child of item.children; track child.route) {
             <a
@@ -35,12 +36,13 @@
           }
         </div>
       } @else {
-        <a class="nav-item"
-           [routerLink]="item.route"
-           routerLinkActive="active"
-           [routerLinkActiveOptions]="{ exact: item.route === '/dashboard' }"
-           [pTooltip]="item.label"
-           tooltipPosition="right">
+        <a
+          class="nav-link"
+          [routerLink]="item.route"
+          routerLinkActive="nav-link-active"
+          [routerLinkActiveOptions]="{ exact: item.route === '/dashboard' }"
+          [pTooltip]="item.label"
+          tooltipPosition="right">
           <i [class]="item.icon"></i>
         </a>
       }
@@ -48,26 +50,27 @@
   </nav>
 
   <div class="sidebar-footer">
-    <button
-      class="nav-item footer-item"
+    <p-button
+      icon="pi pi-cog"
+      severity="secondary"
+      variant="text"
+      class="nav-btn footer-nav-btn"
       pTooltip="Settings"
       tooltipPosition="right"
-      (click)="openSettings($event)"
+      (onClick)="openSettings($event)"
       (keydown.enter)="openSettings($event)"
-      (keydown.space)="openSettings($event)">
-      <i class="pi pi-cog"></i>
-    </button>
-    <div
+      (keydown.space)="openSettings($event)" />
+    <p-avatar
+      label="A"
+      shape="circle"
       class="account-avatar"
-      role="button"
-      tabindex="0"
       pTooltip="Profile"
       tooltipPosition="right"
       (click)="openProfile()"
       (keydown.enter)="openProfile()"
-      (keydown.space)="openProfile()">
-      A
-    </div>
+      (keydown.space)="openProfile()"
+      role="button"
+      tabindex="0" />
   </div>
 
 </aside>
@@ -97,22 +100,22 @@
     <p-divider />
 
     <div class="profile-stats">
-      <div class="ps-item">
-        <span class="ps-label">Role</span>
-        <span class="ps-value">Super Admin</span>
-      </div>
-      <div class="ps-item">
-        <span class="ps-label">Plan</span>
-        <span class="ps-value">Enterprise</span>
-      </div>
-      <div class="ps-item">
-        <span class="ps-label">Region</span>
-        <span class="ps-value">IN-South Asia</span>
-      </div>
-      <div class="ps-item">
-        <span class="ps-label">2FA</span>
-        <span class="ps-value coming">Coming Soon</span>
-      </div>
+      <p-card styleClass="ps-card">
+        <div class="ps-label">Role</div>
+        <div class="ps-value">Super Admin</div>
+      </p-card>
+      <p-card styleClass="ps-card">
+        <div class="ps-label">Plan</div>
+        <div class="ps-value">Enterprise</div>
+      </p-card>
+      <p-card styleClass="ps-card">
+        <div class="ps-label">Region</div>
+        <div class="ps-value">IN-South Asia</div>
+      </p-card>
+      <p-card styleClass="ps-card">
+        <div class="ps-label">2FA</div>
+        <div class="ps-value coming">Coming Soon</div>
+      </p-card>
     </div>
 
     <p-divider />

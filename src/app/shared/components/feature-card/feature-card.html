@@ -1,17 +1,19 @@
 @if (feature) {
-  <div class="feature-card">
-    <div class="feature-card-top">
-      <div class="feature-icon">
-        <i [class]="feature.icon"></i>
+  <p-card styleClass="feature-card-wrap">
+    <ng-template pTemplate="header">
+      <div class="fc-header">
+        <div class="feature-icon">
+          <i [class]="feature.icon"></i>
+        </div>
+        <p-tag [value]="statusLabel" [severity]="tagSeverity" />
       </div>
-      <p-tag [value]="statusLabel" [severity]="tagSeverity" />
-    </div>
+    </ng-template>
     <div class="feature-card-body">
       <h4 class="feature-name">{{ feature.name }}</h4>
       <p class="feature-desc">{{ feature.description }}</p>
     </div>
-    <div class="feature-card-foot">
+    <ng-template pTemplate="footer">
       <span class="feature-category">{{ feature.category }}</span>
-    </div>
-  </div>
+    </ng-template>
+  </p-card>
 }

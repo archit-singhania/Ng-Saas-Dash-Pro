@@ -1,19 +1,14 @@
-.stat-tile {
-  background: var(--bg-card);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-lg);
-  padding: 1.25rem;
-  display: flex;
-  flex-direction: column;
-  gap: .5rem;
-  box-shadow: var(--shadow-card);
-  transition: box-shadow var(--transition-base), transform var(--transition-base);
+:host ::ng-deep .stat-tile-wrap.p-card {
   cursor: default;
+  transition: box-shadow var(--transition-base), transform var(--transition-base) !important;
 
   &:hover {
-    box-shadow: var(--shadow-hover);
+    box-shadow: var(--shadow-hover) !important;
     transform: translateY(-1px);
   }
+
+  .p-card-body { padding: 1.25rem !important; }
+  .p-card-content { padding: 0 !important; display: flex; flex-direction: column; gap: .5rem; }
 }
 
 .stat-top {
@@ -63,29 +58,10 @@
   color: var(--text-secondary);
 }
 
-.stat-trend {
-  display: inline-flex;
-  align-items: center;
-  gap: 3px;
-  font-size: .7rem;
-  font-weight: 600;
-  padding: 2px 7px;
-  border-radius: 99px;
+:host ::ng-deep .trend-tag.p-tag {
+  font-size: .7rem !important;
+  padding: 2px 7px !important;
+  border-radius: 99px !important;
 
-  i { font-size: 9px; }
-
-  &.trend-up {
-    color: #16a34a;
-    background: rgba(22, 163, 74, .1);
-  }
-
-  &.trend-down {
-    color: #dc2626;
-    background: rgba(220, 38, 38, .1);
-  }
-
-  &.trend-neutral {
-    color: var(--text-muted);
-    background: var(--bg-app);
-  }
+  .p-tag-icon { font-size: 9px !important; }
 }
