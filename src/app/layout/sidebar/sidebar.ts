@@ -7,6 +7,7 @@ import { TagModule } from 'primeng/tag';
 import { DividerModule } from 'primeng/divider';
 import { ButtonModule } from 'primeng/button';
 import { ThemeService } from '../../core/services/theme.service';
+import { AuthService } from '../../core/services/auth.service';
 
 interface SubItem {
   label: string;
@@ -29,6 +30,7 @@ interface NavItem {
 })
 export class Sidebar {
   themeService = inject(ThemeService);
+  authService = inject(AuthService);
   private elRef = inject(ElementRef);
 
   featuresExpanded = signal(false);
@@ -78,6 +80,11 @@ export class Sidebar {
   toggleFeatures(event: Event): void {
     event.preventDefault();
     this.featuresExpanded.update(v => !v);
+  }
+
+  signOut(): void {
+    this.profileOpen.set(false);
+    this.authService.logout();
   }
 
   openProfile(): void {

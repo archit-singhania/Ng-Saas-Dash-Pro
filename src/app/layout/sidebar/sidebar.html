@@ -148,12 +148,11 @@
         severity="danger"
         variant="outlined"
         styleClass="pa-action-btn pa-danger-btn"
-        [disabled]="true"
-        [fluid]="true">
+        [fluid]="true"
+        (onClick)="signOut()">
         <ng-template pTemplate="content">
           <i class="pi pi-sign-out"></i>
           <span>Sign Out</span>
-          <span class="pa-soon pa-soon-danger">Soon</span>
         </ng-template>
       </p-button>
     </div>
