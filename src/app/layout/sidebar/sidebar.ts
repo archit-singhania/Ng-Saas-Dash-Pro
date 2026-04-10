@@ -6,6 +6,7 @@ import { DrawerModule } from 'primeng/drawer';
 import { TagModule } from 'primeng/tag';
 import { DividerModule } from 'primeng/divider';
 import { ButtonModule } from 'primeng/button';
+import { AvatarModule } from 'primeng/avatar';
 import { ThemeService } from '../../core/services/theme.service';
 import { AuthService } from '../../core/services/auth.service';
 
@@ -24,7 +25,7 @@ interface NavItem {
 
 @Component({
   selector: 'app-sidebar',
-  imports: [RouterLink, RouterLinkActive, TooltipModule, DialogModule, DrawerModule, TagModule, DividerModule, ButtonModule],
+  imports: [RouterLink, RouterLinkActive, TooltipModule, DialogModule, DrawerModule, TagModule, DividerModule, ButtonModule, AvatarModule],
   templateUrl: './sidebar.html',
   styleUrl: './sidebar.scss'
 })
@@ -36,28 +37,6 @@ export class Sidebar {
   featuresExpanded = signal(false);
   profileOpen = signal(false);
   settingsOpen = signal(false);
-  activeSettingsTab = signal('profile');
-
-  settingsTabs = [
-    { id: 'profile',       label: 'Profile',       icon: 'pi pi-user'        },
-    { id: 'agent',         label: 'Agent Config',  icon: 'pi pi-microphone'  },
-    { id: 'api',           label: 'API & Keys',    icon: 'pi pi-key'         },
-    { id: 'notifications', label: 'Notifications', icon: 'pi pi-bell'        },
-    { id: 'billing',       label: 'Billing',       icon: 'pi pi-credit-card' },
-  ];
-
-  openSettings(event: Event): void {
-    event.preventDefault();
-    this.settingsOpen.set(true);
-  }
-
-  closeSettings(): void {
-    this.settingsOpen.set(false);
-  }
-
-  setSettingsTab(id: string): void {
-    this.activeSettingsTab.set(id);
-  }
 
   navItems: NavItem[] = [
     { label: 'Overview',  icon: 'pi pi-home',  route: '/dashboard' },
@@ -82,16 +61,21 @@ export class Sidebar {
     this.featuresExpanded.update(v => !v);
   }
 
-  signOut(): void {
-    this.profileOpen.set(false);
-    this.authService.logout();
+  openSettings(event: Event): void {
+    event.preventDefault();
+    this.settingsOpen.set(true);
+  }
+
+  closeSettings(): void {
+    this.settingsOpen.set(false);
   }
 
   openProfile(): void {
     this.profileOpen.set(true);
   }
 
-  closeProfile(): void {
+  signOut(): void {
     this.profileOpen.set(false);
+    this.authService.logout();
   }
 }

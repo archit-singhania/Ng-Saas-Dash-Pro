@@ -13,7 +13,7 @@
         (onClick)="toggleConfig()"
         pTooltip="Customise Theme"
         tooltipPosition="bottom"
-        styleClass="topbar-icon-btn" />
+        class="topbar-icon-btn" />
 
       @if (configOpen) {
         <div class="config-panel">
@@ -26,13 +26,12 @@
                 [class.selected]="themeService.selectedPrimary() === c.name"
                 (click)="themeService.setPrimary(c.name)"
                 [pTooltip]="c.name"
-                tooltipPosition="top">
+                tooltipPosition="top"
+                [attr.aria-label]="c.name">
               </button>
             }
           </div>
-
-          <div class="config-divider"></div>
-
+          <p-divider />
           <div class="config-section-label">Surface</div>
           <div class="color-grid">
             @for (key of surfaceKeys; track key) {
@@ -42,20 +41,19 @@
                 [class.selected]="themeService.selectedSurface() === key"
                 (click)="themeService.setSurface(key)"
                 [pTooltip]="key"
-                tooltipPosition="top">
+                tooltipPosition="top"
+                [attr.aria-label]="key">
               </button>
             }
           </div>
-
-          <div class="config-divider"></div>
-
+          <p-divider />
           <div class="config-section-label">Mode</div>
           <p-selectButton
             [options]="themeModes"
             [(ngModel)]="selectedMode"
             optionLabel="label"
             optionValue="mode"
-            styleClass="theme-mode-select" />
+            class="theme-mode-select" />
         </div>
       }
     </div>
@@ -67,6 +65,6 @@
       size="small"
       pTooltip="Notifications"
       tooltipPosition="bottom"
-      styleClass="topbar-icon-btn" />
+      class="topbar-icon-btn" />
   </div>
 </header>

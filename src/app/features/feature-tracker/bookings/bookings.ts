@@ -4,6 +4,8 @@ import { ButtonModule } from 'primeng/button';
 import { BadgeModule } from 'primeng/badge';
 import { DialogModule } from 'primeng/dialog';
 import { TagModule } from 'primeng/tag';
+import { AvatarModule } from 'primeng/avatar';
+import { ChipModule } from 'primeng/chip';
 
 export interface Appointment {
   id: number;
@@ -25,7 +27,7 @@ export interface CalendarCell {
 
 @Component({
   selector: 'app-bookings',
-  imports: [CardModule, ButtonModule, BadgeModule, DialogModule, TagModule],
+  imports: [CardModule, ButtonModule, BadgeModule, DialogModule, TagModule, AvatarModule, ChipModule],
   templateUrl: './bookings.html',
   styleUrl: './bookings.scss',
 })
@@ -38,122 +40,116 @@ export class Bookings {
   private viewYear = signal(new Date().getFullYear());
   private viewMonth = signal(new Date().getMonth());
 
-  get currentMonthLabel(): string {
-    return new Date(this.viewYear(), this.viewMonth(), 1)
-      .toLocaleString('default', { month: 'long', year: 'numeric' });
+  private appointments: Appointment[] = [
+    { id: 1,  name: 'Priya Sharma',   phone: '+91 98765 43210', time: '10:00 AM', type: 'Booking',  status: 'Confirmed', notes: 'Talk to human agent'       },
+    { id: 2,  name: 'Arjun Mehta',    phone: '+91 87654 32109', time: '11:30 AM', type: 'Follow-up',     status: 'Confirmed', notes: 'Talk to human agent'    },
+    { id: 3,  name: 'Sneha Rao',      phone: '+91 76543 21098', time: '02:00 PM', type: 'Visitation',  status: 'Pending',   notes: 'Talk to human agent' },
+    { id: 4,  name: 'Kiran Nair',     phone: '+91 65432 10987', time: '03:30 PM', type: 'Follow-up',      status: 'Confirmed', notes: 'Talk to human agent'   },
+    { id: 5,  name: 'Ananya Das',     phone: '+91 54321 09876', time: '09:00 AM', type: 'Follow-up',     status: 'Confirmed', notes: 'Talk to human agent'   },
+    { id: 6,  name: 'Rohit Verma',    phone: '+91 43210 98765', time: '10:30 AM', type: 'Booking',  status: 'Cancelled', notes: 'Talk to human agent'     },
+    { id: 7,  name: 'Meera Pillai',   phone: '+91 32109 87654', time: '01:00 PM', type: 'Follow-up',     status: 'Confirmed', notes: 'Talk to human agent'  },
+    { id: 8,  name: 'Suresh Kumar',   phone: '+91 21098 76543', time: '04:00 PM', type: 'Visitation',  status: 'Pending',   notes: 'Talk to human agent'        },
+    { id: 9,  name: 'Deepa Iyer',     phone: '+91 10987 65432', time: '11:00 AM', type: 'Visitation',      status: 'Confirmed', notes:'Talk to human agent'   },
+    { id: 10, name: 'Vikram Singh',   phone: '+91 99887 76655', time: '02:30 PM', type: 'Booking',  status: 'Confirmed', notes: 'Talk to human agent'     },
+    { id: 11, name: 'Pooja Bansal',   phone: '+91 88776 65544', time: '09:30 AM', type: 'Follow-up',     status: 'Confirmed', notes: 'Talk to human agent'  },
+    { id: 12, name: 'Rahul Gupta',    phone: '+91 77665 54433', time: '12:00 PM', type: 'Visitation',     status: 'Confirmed', notes: 'Talk to human agent'    },
+  ];
+
+  private appointmentsByDate: Record<string, Appointment[]> = {};
+
+  constructor() {
+    const today = new Date();
+    const dates = [
+      new Date(today.getFullYear(), today.getMonth(), today.getDate()),
+      new Date(today.getFullYear(), today.getMonth(), today.getDate() + 2),
+      new Date(today.getFullYear(), today.getMonth(), today.getDate() + 2),
+      new Date(today.getFullYear(), today.getMonth(), today.getDate() + 2),
+      new Date(today.getFullYear(), today.getMonth(), today.getDate() + 5),
+      new Date(today.getFullYear(), today.getMonth(), today.getDate() + 5),
+      new Date(today.getFullYear(), today.getMonth(), today.getDate() + 7),
+      new Date(today.getFullYear(), today.getMonth(), today.getDate() + 7),
+      new Date(today.getFullYear(), today.getMonth(), today.getDate() + 10),
+      new Date(today.getFullYear(), today.getMonth(), today.getDate() + 12),
+      new Date(today.getFullYear(), today.getMonth(), today.getDate() + 12),
+      new Date(today.getFullYear(), today.getMonth(), today.getDate() + 15),
+    ];
+    this.appointments.forEach((appt, i) => {
+      const key = this.dateKey(dates[i]);
+      if (!this.appointmentsByDate[key]) this.appointmentsByDate[key] = [];
+      this.appointmentsByDate[key].push(appt);
+    });
   }
 
-  private mockAppointments: Record<string, Appointment[]> = this.generateMockData();
-
-  private generateMockData(): Record<string, Appointment[]> {
-    const today = new Date();
-    const y = today.getFullYear();
-    const m = String(today.getMonth() + 1).padStart(2, '0');
-    const pad = (n: number) => String(n).padStart(2, '0');
-    const data: Record<string, Appointment[]> = {};
-
-    const entries: [number, Appointment[]][] = [
-      [2, [
-        { id: 1, name: 'Priya Sharma',   phone: '+91 98765 43210', time: '10:00 AM', type: 'Booking',   status: 'Confirmed', notes: 'Talk to human agent' },
-        { id: 2, name: 'Rahul Mehta',    phone: '+91 87654 32109', time: '11:30 AM', type: 'Follow-up', status: 'Confirmed', notes: 'Talk to human agent' },
-      ]],
-      [5, [
-        { id: 3, name: 'Anita Patel',    phone: '+91 76543 21098', time: '9:00 AM',  type: 'General',   status: 'Pending',   notes: 'Talk to human agent' },
-      ]],
-      [8, [
-        { id: 4, name: 'Vikram Nair',    phone: '+91 65432 10987', time: '2:00 PM',  type: 'Booking',   status: 'Confirmed', notes: 'Talk to human agent' },
-        { id: 5, name: 'Sunita Rao',     phone: '+91 54321 09876', time: '3:30 PM',  type: 'General',   status: 'Confirmed', notes: 'Talk to human agent' },
-        { id: 6, name: 'Arjun Kapoor',   phone: '+91 43210 98765', time: '4:45 PM',  type: 'Booking',   status: 'Pending',   notes: 'Talk to human agent' },
-      ]],
-      [12, [
-        { id: 7, name: 'Meera Iyer',     phone: '+91 32109 87654', time: '11:00 AM', type: 'Follow-up', status: 'Cancelled', notes: 'Talk to human agent' },
-      ]],
-      [15, [
-        { id: 8, name: 'Deepak Singh',   phone: '+91 21098 76543', time: '9:30 AM',  type: 'General',   status: 'Confirmed', notes: 'Talk to human agent' },
-        { id: 9, name: 'Kavya Reddy',    phone: '+91 10987 65432', time: '10:45 AM', type: 'Booking',   status: 'Confirmed', notes: 'Talk to human agent' },
-      ]],
-      [20, [
-        { id: 10, name: 'Sanjay Gupta',  phone: '+91 99887 76655', time: '3:00 PM',  type: 'General',   status: 'Confirmed', notes: 'Talk to human agent' },
-      ]],
-      [23, [
-        { id: 11, name: 'Pooja Bhatia',  phone: '+91 88776 65544', time: '12:00 PM', type: 'Follow-up', status: 'Pending',   notes: 'Talk to human agent' },
-        { id: 12, name: 'Manish Tiwari', phone: '+91 77665 54433', time: '2:30 PM',  type: 'General',   status: 'Confirmed', notes: 'Talk to human agent' },
-      ]],
-      [27, [
-        { id: 13, name: 'Neha Joshi',    phone: '+91 66554 43322', time: '10:00 AM', type: 'Follow-up', status: 'Confirmed', notes: 'Talk to human agent' },
-      ]],
-    ];
-
-    entries.forEach(([day, appts]) => {
-      data[`${y}-${m}-${pad(day)}`] = appts;
-    });
-
-    return data;
+  get currentMonthLabel(): string {
+    return new Date(this.viewYear(), this.viewMonth(), 1)
+      .toLocaleDateString('en-IN', { month: 'long', year: 'numeric' });
   }
 
   get calendarCells(): CalendarCell[] {
     const year = this.viewYear();
     const month = this.viewMonth();
+    const firstDay = new Date(year, month, 1).getDay();
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+    const prevDays = new Date(year, month, 0).getDate();
     const today = new Date();
-    const firstDay = new Date(year, month, 1);
-    const lastDay = new Date(year, month + 1, 0);
-    const startPad = firstDay.getDay();
     const cells: CalendarCell[] = [];
 
-    for (let i = startPad - 1; i >= 0; i--) {
-      cells.push(this.makeCell(new Date(year, month, -i), false, today));
+    for (let i = firstDay - 1; i >= 0; i--) {
+      const date = new Date(year, month - 1, prevDays - i);
+      cells.push({ key: this.dateKey(date), date, isCurrentMonth: false, isToday: false, appointments: [] });
     }
-    for (let d = 1; d <= lastDay.getDate(); d++) {
-      cells.push(this.makeCell(new Date(year, month, d), true, today));
+    for (let d = 1; d <= daysInMonth; d++) {
+      const date = new Date(year, month, d);
+      const key = this.dateKey(date);
+      cells.push({
+        key,
+        date,
+        isCurrentMonth: true,
+        isToday: date.toDateString() === today.toDateString(),
+        appointments: this.appointmentsByDate[key] ?? []
+      });
     }
-    let next = 1;
-    while (cells.length < 42) {
-      cells.push(this.makeCell(new Date(year, month + 1, next++), false, today));
+    const remaining = 42 - cells.length;
+    for (let i = 1; i <= remaining; i++) {
+      const date = new Date(year, month + 1, i);
+      cells.push({ key: this.dateKey(date), date, isCurrentMonth: false, isToday: false, appointments: [] });
     }
     return cells;
   }
 
-  private makeCell(date: Date, isCurrentMonth: boolean, today: Date): CalendarCell {
-    const key = this.dateKey(date);
-    const isToday =
-      date.getDate() === today.getDate() &&
-      date.getMonth() === today.getMonth() &&
-      date.getFullYear() === today.getFullYear();
-    return {
-      key,
-      date,
-      isCurrentMonth,
-      isToday,
-      appointments: isCurrentMonth ? (this.mockAppointments[key] ?? []) : [],
-    };
-  }
-
-  private dateKey(d: Date): string {
-    return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
-  }
-
   prevMonth(): void {
-    if (this.viewMonth() === 0) { this.viewMonth.set(11); this.viewYear.update(y => y - 1); }
-    else { this.viewMonth.update(m => m - 1); }
+    if (this.viewMonth() === 0) {
+      this.viewMonth.set(11);
+      this.viewYear.update(y => y - 1);
+    } else {
+      this.viewMonth.update(m => m - 1);
+    }
   }
 
   nextMonth(): void {
-    if (this.viewMonth() === 11) { this.viewMonth.set(0); this.viewYear.update(y => y + 1); }
-    else { this.viewMonth.update(m => m + 1); }
+    if (this.viewMonth() === 11) {
+      this.viewMonth.set(0);
+      this.viewYear.update(y => y + 1);
+    } else {
+      this.viewMonth.update(m => m + 1);
+    }
   }
 
   openDayModal(cell: CalendarCell): void {
     this.selectedDayAppointments = cell.appointments;
-    this.modalHeader = cell.date.toLocaleDateString('default', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
+    this.modalHeader = cell.date.toLocaleDateString('en-IN', { weekday: 'long', day: 'numeric', month: 'long' });
     this.showModal = true;
   }
 
-  getApptSeverity(status: string): 'success' | 'warn' | 'danger' | 'secondary' {
+  getApptSeverity(status: string): 'success' | 'warn' | 'danger' {
     switch (status) {
       case 'Confirmed': return 'success';
       case 'Pending':   return 'warn';
-      case 'Cancelled': return 'danger';
-      default:          return 'secondary';
+      default:          return 'danger';
     }
+  }
+
+  private dateKey(date: Date): string {
+    return `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
   }
 }

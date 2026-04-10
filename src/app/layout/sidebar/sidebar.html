@@ -78,7 +78,7 @@
   [closable]="true"
   [draggable]="false"
   [resizable]="false"
-  styleClass="profile-dialog"
+  class="profile-dialog"
   [style]="{ width: '420px' }">
 
   <ng-template pTemplate="header">
@@ -86,9 +86,7 @@
   </ng-template>
 
   <div class="profile-body">
-    <div class="profile-avatar-lg">
-      <span>A</span>
-    </div>
+    <p-avatar label="A" size="xlarge" shape="circle" class="profile-avatar-lg" />
     <div class="profile-name">Admin Operator</div>
     <div class="profile-email">admin&#64;operationsconsole.io</div>
     <div class="profile-badge">
@@ -96,7 +94,7 @@
       <p-tag value="Coming Soon: SSO" severity="secondary" />
     </div>
 
-    <div class="profile-divider"></div>
+    <p-divider />
 
     <div class="profile-stats">
       <div class="ps-item">
@@ -117,15 +115,15 @@
       </div>
     </div>
 
-    <div class="profile-divider"></div>
+    <p-divider />
 
     <div class="profile-actions">
       <p-button
         severity="secondary"
         variant="outlined"
-        styleClass="pa-action-btn"
+        class="pa-action-btn"
         [disabled]="true"
-        [fluid]="true">
+        fluid>
         <ng-template pTemplate="content">
           <i class="pi pi-user-edit"></i>
           <span>Edit Profile</span>
@@ -135,9 +133,9 @@
       <p-button
         severity="secondary"
         variant="outlined"
-        styleClass="pa-action-btn"
+        class="pa-action-btn"
         [disabled]="true"
-        [fluid]="true">
+        fluid>
         <ng-template pTemplate="content">
           <i class="pi pi-key"></i>
           <span>Change Password</span>
@@ -147,8 +145,8 @@
       <p-button
         severity="danger"
         variant="outlined"
-        styleClass="pa-action-btn pa-danger-btn"
-        [fluid]="true"
+        class="pa-action-btn pa-danger-btn"
+        fluid
         (onClick)="signOut()">
         <ng-template pTemplate="content">
           <i class="pi pi-sign-out"></i>
@@ -163,7 +161,7 @@
 <p-drawer
   [(visible)]="settingsOpen"
   position="right"
-  styleClass="settings-drawer"
+  class="settings-drawer"
   [style]="{ width: '420px' }"
   [modal]="true"
   [showCloseIcon]="false">
@@ -178,7 +176,7 @@
         size="small"
         (onClick)="closeSettings()"
         aria-label="Close"
-        styleClass="sd-close-btn" />
+        class="sd-close-btn" />
     </div>
   </ng-template>
 

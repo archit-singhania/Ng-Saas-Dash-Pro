@@ -1,6 +1,5 @@
 import { Component, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { TextareaModule } from 'primeng/textarea';
@@ -11,7 +10,6 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { SelectModule } from 'primeng/select';
 import { FileUploadModule } from 'primeng/fileupload';
-import { DividerModule } from 'primeng/divider';
 import { ToastModule } from 'primeng/toast';
 import { TagModule } from 'primeng/tag';
 import { MessageService } from 'primeng/api';
@@ -20,9 +18,9 @@ import { MessageService } from 'primeng/api';
   selector: 'app-prompt-settings',
   imports: [
     FormsModule,
-    CardModule, ButtonModule, InputTextModule, TextareaModule,
+    ButtonModule, InputTextModule, TextareaModule,
     SliderModule, SelectButtonModule, ToggleSwitchModule, InputNumberModule,
-    AutoCompleteModule, SelectModule, FileUploadModule, DividerModule, ToastModule, TagModule
+    AutoCompleteModule, SelectModule, FileUploadModule, ToastModule, TagModule
   ],
   providers: [MessageService],
   templateUrl: './prompt-settings.html',

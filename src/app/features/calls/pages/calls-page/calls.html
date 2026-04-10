@@ -15,9 +15,8 @@
       [paginator]="calls.length > 0"
       [rows]="15"
       [rowsPerPageOptions]="[10, 15, 25, 50]"
-      styleClass="p-datatable-sm"
+      size="small"
       [tableStyle]="{ 'min-width': '50rem' }">
-
       <ng-template pTemplate="header">
         <tr>
           <th pSortableColumn="date">Date &amp; Time <p-sortIcon field="date" /></th>
@@ -26,7 +25,6 @@
           <th pSortableColumn="status">Status <p-sortIcon field="status" /></th>
         </tr>
       </ng-template>
-
       <ng-template pTemplate="body" let-call>
         <tr>
           <td>{{ call.date }}</td>
@@ -35,7 +33,6 @@
           <td><p-tag [value]="call.status" [severity]="getStatusSeverity(call.status)" /></td>
         </tr>
       </ng-template>
-
       <ng-template pTemplate="emptymessage">
         <tr>
           <td colspan="4" class="empty-state">

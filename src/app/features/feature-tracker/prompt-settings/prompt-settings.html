@@ -8,228 +8,230 @@
     </div>
   </div>
 
-  <p-card styleClass="prompt-section">
-    <ng-template pTemplate="header">
-      <div class="section-header">
-        <div class="section-icon"><i class="pi pi-comments"></i></div>
-        <div>
-          <div class="section-title">Opening Greeting</div>
-          <div class="section-sub">The first message your AI agent says when a call connects</div>
+  <div class="prompt-section">
+    <div class="section-header">
+      <div class="section-icon"><i class="pi pi-comments"></i></div>
+      <div class="section-titles">
+        <span class="section-title">Opening Greeting</span>
+        <span class="section-sub">The first message your AI agent says when a call connects</span>
+      </div>
+      <p-tag value="Active" severity="success" />
+    </div>
+    <div class="section-body">
+      <div class="field-row">
+        <div class="field">
+          <label for="agent-name">Agent Name</label>
+          <input pInputText id="agent-name" [ngModel]="agentName()" (ngModelChange)="agentName.set($event)" placeholder="e.g. Aria" style="width:100%" />
         </div>
-        <p-tag value="Active" severity="success" styleClass="ml-auto" />
+        <div class="field toggle-field">
+          <label for="greeting-toggle">Enable Greeting</label>
+          <p-toggleSwitch inputId="greeting-toggle" [ngModel]="greetingEnabled()" (ngModelChange)="greetingEnabled.set($event)" />
+        </div>
       </div>
-    </ng-template>
-    <div class="field-row">
-      <div class="field">
-        <label for="agent-name">Agent Name</label>
-        <p-inputtext inputId="agent-name" [ngModel]="agentName()" (ngModelChange)="agentName.set($event)" placeholder="e.g. Aria" />
-      </div>
-      <div class="field toggle-field">
-        <label for="greeting-toggle">Enable Greeting</label>
-        <p-toggleSwitch inputId="greeting-toggle" [ngModel]="greetingEnabled()" (ngModelChange)="greetingEnabled.set($event)" />
+      <div class="field full">
+        <label for="greeting-script">Greeting Script</label>
+        <p-textarea inputId="greeting-script" [ngModel]="greetingText()" (ngModelChange)="greetingText.set($event)" rows="3" placeholder="What the agent says first..." class="w-full" />
       </div>
     </div>
-    <div class="field full">
-      <label for="greeting-script">Greeting Script</label>
-      <p-textarea inputId="greeting-script" [ngModel]="greetingText()" (ngModelChange)="greetingText.set($event)" rows="3" placeholder="What the agent says first..." />
-    </div>
-  </p-card>
+  </div>
 
-  <p-card styleClass="prompt-section">
-    <ng-template pTemplate="header">
-      <div class="section-header">
-        <div class="section-icon"><i class="pi pi-code"></i></div>
-        <div>
-          <div class="section-title">System Prompt</div>
-          <div class="section-sub">Base instructions that define your agent's role, tone, and scope</div>
-        </div>
-        <span class="char-counter">{{ charCount }} / 4000 chars</span>
+  <div class="prompt-section">
+    <div class="section-header">
+      <div class="section-icon"><i class="pi pi-code"></i></div>
+      <div class="section-titles">
+        <span class="section-title">System Prompt</span>
+        <span class="section-sub">Base instructions that define your agent's role, tone, and scope</span>
       </div>
-    </ng-template>
-    <div class="field full">
-      <p-textarea inputId="system-prompt" [ngModel]="systemPrompt()" (ngModelChange)="systemPrompt.set($event)" rows="8" [maxlength]="4000" placeholder="You are a helpful AI voice agent..." />
+      <span class="char-counter">{{ charCount }} / 4000 chars</span>
     </div>
-  </p-card>
+    <div class="section-body">
+      <div class="field full" style="margin-top:0">
+        <p-textarea inputId="system-prompt" [ngModel]="systemPrompt()" (ngModelChange)="systemPrompt.set($event)" rows="8" [maxlength]="4000" placeholder="You are a helpful AI voice agent..." class="w-full" />
+      </div>
+    </div>
+  </div>
 
-  <p-card styleClass="prompt-section">
-    <ng-template pTemplate="header">
-      <div class="section-header">
-        <div class="section-icon"><i class="pi pi-volume-up"></i></div>
-        <div>
-          <div class="section-title">Listening Sensitivity</div>
-          <div class="section-sub">How aggressively the agent detects speech and end-of-turn signals</div>
+  <div class="prompt-section">
+    <div class="section-header">
+      <div class="section-icon"><i class="pi pi-volume-up"></i></div>
+      <div class="section-titles">
+        <span class="section-title">Listening Sensitivity</span>
+        <span class="section-sub">How aggressively the agent detects speech and end-of-turn signals</span>
+      </div>
+    </div>
+    <div class="section-body">
+      <div class="field full" style="margin-top:0">
+        <span class="field-label">Sensitivity Level — <strong>{{ listeningLabel }}</strong> ({{ listeningScore() }})</span>
+        <div class="slider-row">
+          <span class="slider-label">Low</span>
+          <p-slider [ngModel]="listeningScore()" (ngModelChange)="listeningScore.set($event)" [min]="0" [max]="100" class="flex-1" />
+          <span class="slider-label">High</span>
         </div>
       </div>
-    </ng-template>
-    <div class="field full">
-      <label for="sensitivity-slider">Sensitivity Level — <strong>{{ listeningLabel }}</strong> ({{ listeningScore() }})</label>
-      <div class="slider-row">
-        <span class="slider-label">Low</span>
-        <p-slider inputId="sensitivity-slider" [ngModel]="listeningScore()" (ngModelChange)="listeningScore.set($event)" [min]="0" [max]="100" styleClass="flex-1" />
-        <span class="slider-label">High</span>
+      <div class="field" style="margin-top:0.875rem">
+        <span class="field-label">Voice Activity Detection (VAD) Mode</span>
+        <p-selectButton [options]="vadOptions" [ngModel]="vadMode()" (ngModelChange)="vadMode.set($event)" optionLabel="label" optionValue="value" />
       </div>
     </div>
-    <div class="field">
-      <label for="vad-mode">Voice Activity Detection (VAD) Mode</label>
-      <p-selectButton inputId="vad-mode" [options]="vadOptions" [ngModel]="vadMode()" (ngModelChange)="vadMode.set($event)" optionLabel="label" optionValue="value" />
-    </div>
-  </p-card>
+  </div>
 
-  <p-card styleClass="prompt-section">
-    <ng-template pTemplate="header">
-      <div class="section-header">
-        <div class="section-icon"><i class="pi pi-exclamation-circle"></i></div>
-        <div>
-          <div class="section-title">Interruption Handling</div>
-          <div class="section-sub">Control how the agent responds when the caller speaks over it</div>
-        </div>
-      </div>
-    </ng-template>
-    <div class="field-row">
-      <div class="field toggle-field">
-        <label for="allow-interruptions">Allow Caller Interruptions</label>
-        <p-toggleSwitch inputId="allow-interruptions" [ngModel]="allowInterruptions()" (ngModelChange)="allowInterruptions.set($event)" />
-      </div>
-      <div class="field">
-        <label for="silence-threshold">Silence Threshold (ms)</label>
-        <p-inputNumber inputId="silence-threshold" [ngModel]="silenceThreshold()" (ngModelChange)="silenceThreshold.set($event ?? 0)" [min]="300" [max]="5000" [step]="100" suffix=" ms" />
+  <div class="prompt-section">
+    <div class="section-header">
+      <div class="section-icon"><i class="pi pi-exclamation-circle"></i></div>
+      <div class="section-titles">
+        <span class="section-title">Interruption Handling</span>
+        <span class="section-sub">Control how the agent responds when the caller speaks over it</span>
       </div>
     </div>
-  </p-card>
+    <div class="section-body">
+      <div class="field-row">
+        <div class="field toggle-field">
+          <label for="allow-interruptions">Allow Caller Interruptions</label>
+          <p-toggleSwitch inputId="allow-interruptions" [ngModel]="allowInterruptions()" (ngModelChange)="allowInterruptions.set($event)" />
+        </div>
+        <div class="field">
+          <label for="silence-threshold">Silence Threshold (ms)</label>
+          <p-inputNumber inputId="silence-threshold" [ngModel]="silenceThreshold()" (ngModelChange)="silenceThreshold.set($event ?? 0)" [min]="300" [max]="5000" [step]="100" suffix=" ms" />
+        </div>
+      </div>
+    </div>
+  </div>
 
-  <p-card styleClass="prompt-section">
-    <ng-template pTemplate="header">
-      <div class="section-header">
-        <div class="section-icon"><i class="pi pi-question-circle"></i></div>
-        <div>
-          <div class="section-title">Fallback Responses</div>
-          <div class="section-sub">What the agent says when it cannot understand the caller</div>
-        </div>
+  <div class="prompt-section">
+    <div class="section-header">
+      <div class="section-icon"><i class="pi pi-question-circle"></i></div>
+      <div class="section-titles">
+        <span class="section-title">Fallback Responses</span>
+        <span class="section-sub">What the agent says when it cannot understand the caller</span>
       </div>
-    </ng-template>
-    <div class="field full">
-      <label for="fallback-message">Fallback Message</label>
-      <p-textarea inputId="fallback-message" [ngModel]="fallbackMessage()" (ngModelChange)="fallbackMessage.set($event)" rows="2" placeholder="What to say when confused..." />
     </div>
-    <div class="field full">
-      <label for="fallback-triggers">Trigger Keywords (press Enter to add)</label>
-      <p-autocomplete
-        inputId="fallback-triggers"
-        [ngModel]="fallbackTriggers()"
-        (ngModelChange)="fallbackTriggers.set($event)"
+    <div class="section-body">
+      <div class="field full" style="margin-top:0">
+        <label for="fallback-message">Fallback Message</label>
+        <p-textarea inputId="fallback-message" [ngModel]="fallbackMessage()" (ngModelChange)="fallbackMessage.set($event)" rows="2" placeholder="What to say when confused..." class="w-full" />
+      </div>
+      <div class="field full">
+        <label for="fallback-triggers">Trigger Keywords (press Enter to add)</label>
+        <p-autocomplete
+          inputId="fallback-triggers"
+          [ngModel]="fallbackTriggers()"
+          (ngModelChange)="fallbackTriggers.set($event)"
+          [multiple]="true"
+          [dropdown]="false"
+          placeholder="Add keyword..."
+          class="w-full" />
+      </div>
+    </div>
+  </div>
+
+  <div class="prompt-section">
+    <div class="section-header">
+      <div class="section-icon"><i class="pi pi-book"></i></div>
+      <div class="section-titles">
+        <span class="section-title">Knowledge Base Documents</span>
+        <span class="section-sub">PDFs and docs the agent can reference during calls</span>
+      </div>
+      <p-tag value="Coming Soon" severity="secondary" />
+    </div>
+    <div class="section-body">
+      <p-fileUpload
+        mode="advanced"
         [multiple]="true"
-        [dropdown]="false"
-        placeholder="Add keyword..." />
-    </div>
-  </p-card>
-
-  <p-card styleClass="prompt-section">
-    <ng-template pTemplate="header">
-      <div class="section-header">
-        <div class="section-icon"><i class="pi pi-book"></i></div>
-        <div>
-          <div class="section-title">Knowledge Base Documents</div>
-          <div class="section-sub">PDFs and docs the agent can reference during calls</div>
-        </div>
-        <p-tag value="Coming Soon" severity="secondary" styleClass="ml-auto" />
-      </div>
-    </ng-template>
-    <p-fileUpload
-      mode="advanced"
-      [multiple]="true"
-      accept=".pdf,.docx,.txt"
-      [maxFileSize]="10000000"
-      chooseLabel="Upload Document"
-      [auto]="false"
-      styleClass="kb-upload"
-      [disabled]="true" />
-    <div class="doc-list">
-      @for (doc of uploadedDocs(); track doc.name; let i = $index) {
-        <div class="doc-row">
-          <i class="pi pi-file-pdf doc-icon"></i>
-          <div class="doc-info">
-            <span class="doc-name">{{ doc.name }}</span>
-            <span class="doc-meta">{{ doc.size }} · Uploaded {{ doc.uploadedAt }}</span>
+        accept=".pdf,.docx,.txt"
+        [maxFileSize]="10000000"
+        chooseLabel="Upload Document"
+        [auto]="false"
+        class="kb-upload"
+        [disabled]="true" />
+      <div class="doc-list">
+        @for (doc of uploadedDocs(); track doc.name; let i = $index) {
+          <div class="doc-row">
+            <i class="pi pi-file-pdf doc-icon"></i>
+            <div class="doc-info">
+              <span class="doc-name">{{ doc.name }}</span>
+              <span class="doc-meta">{{ doc.size }} · Uploaded {{ doc.uploadedAt }}</span>
+            </div>
+            <p-button icon="pi pi-trash" severity="danger" variant="text" size="small" (onClick)="removeDoc(i)" />
           </div>
-          <p-button icon="pi pi-trash" severity="danger" variant="text" size="small" (onClick)="removeDoc(i)" />
-        </div>
-      }
+        }
+      </div>
     </div>
-  </p-card>
+  </div>
 
-  <p-card styleClass="prompt-section">
-    <ng-template pTemplate="header">
-      <div class="section-header">
-        <div class="section-icon"><i class="pi pi-check-circle"></i></div>
-        <div>
-          <div class="section-title">Call Wrap-up Behaviour</div>
-          <div class="section-sub">What happens automatically after a call ends</div>
-        </div>
+  <div class="prompt-section">
+    <div class="section-header">
+      <div class="section-icon"><i class="pi pi-check-circle"></i></div>
+      <div class="section-titles">
+        <span class="section-title">Call Wrap-up Behaviour</span>
+        <span class="section-sub">What happens automatically after a call ends</span>
       </div>
-    </ng-template>
-    <div class="field">
-      <label for="post-call-action">Post-Call Action</label>
-      <p-select inputId="post-call-action" [options]="postCallActions" [ngModel]="selectedPostCallAction()" (ngModelChange)="selectedPostCallAction.set($event)" optionLabel="label" optionValue="value" styleClass="w-full" />
     </div>
-    <div class="field full">
-      <label for="wrapup-note">Wrap-up Note Template</label>
-      <p-textarea inputId="wrapup-note" [ngModel]="wrapUpNote()" (ngModelChange)="wrapUpNote.set($event)" rows="2" placeholder="Message sent to caller after the call..." />
+    <div class="section-body">
+      <div class="field">
+        <label for="post-call-action">Post-Call Action</label>
+        <p-select inputId="post-call-action" [options]="postCallActions" [ngModel]="selectedPostCallAction()" (ngModelChange)="selectedPostCallAction.set($event)" optionLabel="label" optionValue="value" class="w-full" />
+      </div>
+      <div class="field full">
+        <label for="wrapup-note">Wrap-up Note Template</label>
+        <p-textarea inputId="wrapup-note" [ngModel]="wrapUpNote()" (ngModelChange)="wrapUpNote.set($event)" rows="2" placeholder="Message sent to caller after the call..." class="w-full" />
+      </div>
     </div>
-  </p-card>
+  </div>
 
-  <p-card styleClass="prompt-section">
-    <ng-template pTemplate="header">
-      <div class="section-header">
-        <div class="section-icon"><i class="pi pi-globe"></i></div>
-        <div>
-          <div class="section-title">Language &amp; Voice Profile</div>
-          <div class="section-sub">Language locale and the voice persona used for speech synthesis</div>
-        </div>
-      </div>
-    </ng-template>
-    <div class="field-row">
-      <div class="field">
-        <label for="language-select">Language</label>
-        <p-select inputId="language-select" [options]="languages" [ngModel]="selectedLanguage()" (ngModelChange)="selectedLanguage.set($event)" optionLabel="label" optionValue="value" styleClass="w-full" />
-      </div>
-      <div class="field">
-        <label for="voice-select">Voice &amp; Accent</label>
-        <p-select inputId="voice-select" [options]="voices" [ngModel]="selectedVoice()" (ngModelChange)="selectedVoice.set($event)" optionLabel="label" optionValue="value" styleClass="w-full" />
+  <div class="prompt-section">
+    <div class="section-header">
+      <div class="section-icon"><i class="pi pi-globe"></i></div>
+      <div class="section-titles">
+        <span class="section-title">Language &amp; Voice Profile</span>
+        <span class="section-sub">Language locale and the voice persona used for speech synthesis</span>
       </div>
     </div>
-  </p-card>
+    <div class="section-body">
+      <div class="field-row">
+        <div class="field">
+          <label for="language-select">Language</label>
+          <p-select inputId="language-select" [options]="languages" [ngModel]="selectedLanguage()" (ngModelChange)="selectedLanguage.set($event)" optionLabel="label" optionValue="value" class="w-full" />
+        </div>
+        <div class="field">
+          <label for="voice-select">Voice &amp; Accent</label>
+          <p-select inputId="voice-select" [options]="voices" [ngModel]="selectedVoice()" (ngModelChange)="selectedVoice.set($event)" optionLabel="label" optionValue="value" class="w-full" />
+        </div>
+      </div>
+    </div>
+  </div>
 
-  <p-card styleClass="prompt-section">
-    <ng-template pTemplate="header">
-      <div class="section-header">
-        <div class="section-icon"><i class="pi pi-arrow-up-right"></i></div>
-        <div>
-          <div class="section-title">Escalation Rules</div>
-          <div class="section-sub">When and where to hand off the call to a human agent</div>
+  <div class="prompt-section">
+    <div class="section-header">
+      <div class="section-icon"><i class="pi pi-arrow-up-right"></i></div>
+      <div class="section-titles">
+        <span class="section-title">Escalation Rules</span>
+        <span class="section-sub">When and where to hand off the call to a human agent</span>
+      </div>
+    </div>
+    <div class="section-body">
+      <div class="field full" style="margin-top:0">
+        <label for="escalation-phrases">Escalation Trigger Phrases (press Enter to add)</label>
+        <p-autocomplete
+          inputId="escalation-phrases"
+          [ngModel]="escalationPhrases()"
+          (ngModelChange)="escalationPhrases.set($event)"
+          [multiple]="true"
+          [dropdown]="false"
+          placeholder="Add phrase..."
+          class="w-full" />
+      </div>
+      <div class="field-row" style="margin-top:0.875rem">
+        <div class="field">
+          <label for="escalation-phone">Escalation Phone</label>
+          <input pInputText id="escalation-phone" [ngModel]="escalationPhone()" (ngModelChange)="escalationPhone.set($event)" placeholder="+91 99000 00000" style="width:100%" />
+        </div>
+        <div class="field">
+          <label for="escalation-email">Escalation Email</label>
+          <input pInputText id="escalation-email" [ngModel]="escalationEmail()" (ngModelChange)="escalationEmail.set($event)" placeholder="support@yourbusiness.com" style="width:100%" />
         </div>
       </div>
-    </ng-template>
-    <div class="field full">
-      <label for="escalation-phrases">Escalation Trigger Phrases (press Enter to add)</label>
-      <p-autocomplete
-        inputId="escalation-phrases"
-        [ngModel]="escalationPhrases()"
-        (ngModelChange)="escalationPhrases.set($event)"
-        [multiple]="true"
-        [dropdown]="false"
-        placeholder="Add phrase..." />
     </div>
-    <div class="field-row">
-      <div class="field">
-        <label for="escalation-phone">Escalation Phone</label>
-        <p-inputtext inputId="escalation-phone" [ngModel]="escalationPhone()" (ngModelChange)="escalationPhone.set($event)" placeholder="+91 99000 00000" />
-      </div>
-      <div class="field">
-        <label for="escalation-email">Escalation Email</label>
-        <p-inputtext inputId="escalation-email" [ngModel]="escalationEmail()" (ngModelChange)="escalationEmail.set($event)" placeholder="support@yourbusiness.com" />
-      </div>
-    </div>
-  </p-card>
+  </div>
 
   <div class="save-bar">
     <p-button label="Reset to Defaults" icon="pi pi-refresh" severity="secondary" variant="outlined" (onClick)="resetAll()" />

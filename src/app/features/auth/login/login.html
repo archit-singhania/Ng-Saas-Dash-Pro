@@ -1,23 +1,19 @@
 <div class="auth-page">
-
   <div class="auth-left">
     <div class="auth-left-inner">
       <div class="auth-brand">
         <div class="auth-logo-mark">
           <svg width="24" height="24" viewBox="0 0 22 22" fill="none">
-            <path d="M11 2L3 6.5V11C3 15.14 6.41 19.02 11 20C15.59 19.02 19 15.14 19 11V6.5L11 2Z"
-              fill="white" fill-opacity="0.2" stroke="white" stroke-width="1.5" stroke-linejoin="round"/>
+            <path d="M11 2L3 6.5V11C3 15.14 6.41 19.02 11 20C15.59 19.02 19 15.14 19 11V6.5L11 2Z" fill="white" fill-opacity="0.2" stroke="white" stroke-width="1.5" stroke-linejoin="round"/>
             <path d="M8 11L10 13L14 9" stroke="white" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </div>
         <span class="auth-brand-name">Operations Console</span>
       </div>
-
       <div class="auth-left-copy">
         <h2 class="auth-tagline">Operations Console<br />Coming soon.</h2>
         <p class="auth-tagline-sub">More details coming soon — create an account to get early access.</p>
       </div>
-
       <div class="auth-feature-list">
         <div class="af-item"><i class="pi pi-clock"></i> Platform details coming soon</div>
         <div class="af-item"><i class="pi pi-clock"></i> Currently under active development</div>
@@ -30,7 +26,7 @@
     <div class="auth-top-actions">
       <div class="config-wrap">
         <p-button icon="pi pi-palette" severity="secondary" variant="text"
-          styleClass="topbar-icon-btn" (onClick)="toggleConfig($event)"
+          class="topbar-icon-btn" (onClick)="toggleConfig($event)"
           pTooltip="Customise Theme" tooltipPosition="bottom" />
         @if (configOpen) {
           <div class="config-panel">
@@ -44,7 +40,7 @@
                   [attr.aria-label]="c.name"></button>
               }
             </div>
-            <div class="config-divider"></div>
+            <p-divider />
             <div class="config-section-label">Surface</div>
             <div class="color-grid">
               @for (key of surfaceKeys; track key) {
@@ -55,16 +51,16 @@
                   [attr.aria-label]="key"></button>
               }
             </div>
-            <div class="config-divider"></div>
+            <p-divider />
             <div class="config-section-label">Mode</div>
             <p-selectButton [options]="themeModes" [(ngModel)]="selectedMode"
-              optionLabel="label" optionValue="mode" styleClass="theme-mode-select" />
+              optionLabel="label" optionValue="mode" class="theme-mode-select" />
           </div>
         }
       </div>
     </div>
-    <div class="auth-card">
 
+    <div class="auth-card">
       <div class="auth-card-header">
         <h1 class="auth-title">Welcome back</h1>
         <p class="auth-subtitle">Sign in to your Operations Console account</p>
@@ -73,14 +69,8 @@
       <div class="auth-form">
         <div class="form-field">
           <label for="login-email" class="form-label">Email address</label>
-          <input pInputText
-            id="login-email"
-            [ngModel]="email()"
-            (ngModelChange)="email.set($event)"
-            placeholder="you@company.com"
-            type="email"
-            style="width:100%"
-            class="auth-input"
+          <input pInputText id="login-email" [ngModel]="email()" (ngModelChange)="email.set($event)"
+            placeholder="you@company.com" type="email" style="width:100%" class="auth-input"
             (keyup.enter)="onSubmit()" />
         </div>
 
@@ -89,47 +79,23 @@
             <label for="login-password" class="form-label">Password</label>
             <a class="form-link" routerLink="/login">Forgot password?</a>
           </div>
-          <p-password
-            inputId="login-password"
-            [ngModel]="password()"
-            (ngModelChange)="password.set($event)"
-            placeholder="Enter your password"
-            [feedback]="false"
-            [toggleMask]="true"
-            styleClass="auth-password"
-            (keyup.enter)="onSubmit()" />
+          <p-password inputId="login-password" [ngModel]="password()" (ngModelChange)="password.set($event)"
+            placeholder="Enter your password" [feedback]="false" [toggleMask]="true"
+            class="auth-password" fluid (keyup.enter)="onSubmit()" />
         </div>
 
         <div class="form-check-row">
-          <p-checkbox
-            [ngModel]="rememberMe()"
-            (ngModelChange)="rememberMe.set($event)"
-            [binary]="true"
-            inputId="remember" />
+          <p-checkbox [ngModel]="rememberMe()" (ngModelChange)="rememberMe.set($event)"
+            [binary]="true" inputId="remember" />
           <label for="remember" class="check-label">Remember me for 30 days</label>
         </div>
 
-        <p-button
-          label="Sign In"
-          icon="pi pi-sign-in"
-          [loading]="loading()"
-          [fluid]="true"
-          size="large"
-          styleClass="auth-submit-btn"
-          (onClick)="onSubmit()" />
+        <p-button label="Sign In" icon="pi pi-sign-in" [loading]="loading()"
+          fluid size="large" class="auth-submit-btn" (onClick)="onSubmit()" />
 
-        <p-divider>
-          <span class="divider-text">or</span>
-        </p-divider>
+        <p-divider><span class="divider-text">or</span></p-divider>
 
-        <p-button
-          label="Continue with Google"
-          icon="pi pi-google"
-          severity="secondary"
-          variant="outlined"
-          [fluid]="true"
-          [disabled]="true"
-          styleClass="auth-sso-btn">
+        <p-button severity="secondary" variant="outlined" fluid [disabled]="true" class="auth-sso-btn">
           <ng-template pTemplate="content">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" style="flex-shrink:0">
               <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
@@ -144,19 +110,14 @@
       </div>
 
       <p class="auth-switch">
-        Don't have an account?
-        <a class="form-link" routerLink="/register">Create one free</a>
+        Don't have an account? <a class="form-link" routerLink="/register">Create one free</a>
       </p>
-
     </div>
 
     <p class="auth-back-link">
-      <a routerLink="/" class="form-link">
-        <i class="pi pi-arrow-left"></i> Back to home
-      </a>
+      <a routerLink="/" class="form-link"><i class="pi pi-arrow-left"></i> Back to home</a>
     </p>
   </div>
-
 </div>
 
 <p-toast />

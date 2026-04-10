@@ -19,7 +19,6 @@
         <div class="cal-day-name">{{ day }}</div>
       }
     </div>
-
     <div class="cal-grid cal-body">
       @for (cell of calendarCells; track cell.key) {
         <div
@@ -52,24 +51,31 @@
   [style]="{ width: '560px' }"
   [draggable]="false"
   [resizable]="false">
-
   <div class="appt-list">
     @for (appt of selectedDayAppointments; track appt.id) {
-      <div class="appt-card">
-        <div class="appt-card-top">
-          <div class="appt-avatar">{{ appt.name.charAt(0) }}</div>
-          <div class="appt-info">
-            <div class="appt-name">{{ appt.name }}</div>
-            <div class="appt-meta">{{ appt.phone }}</div>
+      <p-card class="appt-card">
+        <ng-template pTemplate="header">
+          <div class="appt-card-top">
+            <p-avatar [label]="appt.name.charAt(0)" shape="circle" class="appt-avatar" />
+            <div class="appt-info">
+              <div class="appt-name">{{ appt.name }}</div>
+              <div class="appt-meta">{{ appt.phone }}</div>
+            </div>
+            <p-tag [value]="appt.status" [severity]="getApptSeverity(appt.status)" />
           </div>
-          <p-tag [value]="appt.status" [severity]="getApptSeverity(appt.status)" />
-        </div>
+        </ng-template>
         <div class="appt-card-details">
-          <span class="appt-detail"><i class="pi pi-clock"></i> {{ appt.time }}</span>
-          <span class="appt-detail"><i class="pi pi-tag"></i> {{ appt.type }}</span>
-          <span class="appt-detail"><i class="pi pi-comment"></i> {{ appt.notes }}</span>
+          <p-chip>
+            <i class="pi pi-clock" style="margin-right:.375rem"></i>{{ appt.time }}
+          </p-chip>
+          <p-chip>
+            <i class="pi pi-tag" style="margin-right:.375rem"></i>{{ appt.type }}
+          </p-chip>
+          <p-chip>
+            <i class="pi pi-comment" style="margin-right:.375rem"></i>{{ appt.notes }}
+          </p-chip>
         </div>
-      </div>
+      </p-card>
     }
   </div>
 </p-dialog>

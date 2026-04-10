@@ -1,14 +1,14 @@
 import { Component, inject, HostListener, ElementRef } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { TooltipModule } from 'primeng/tooltip';
 import { ButtonModule } from 'primeng/button';
 import { SelectButtonModule } from 'primeng/selectbutton';
+import { DividerModule } from 'primeng/divider';
 import { FormsModule } from '@angular/forms';
 import { ThemeService, ThemeMode, SurfaceKey, PRIMARY_PALETTES, SURFACE_PALETTES } from '../../core/services/theme.service';
 
 @Component({
   selector: 'app-topbar',
-  imports: [CommonModule, TooltipModule, ButtonModule, SelectButtonModule, FormsModule],
+  imports: [TooltipModule, ButtonModule, SelectButtonModule, DividerModule, FormsModule],
   templateUrl: './topbar.html',
   styleUrl: './topbar.scss'
 })
@@ -36,7 +36,6 @@ export class Topbar {
   ];
 
   get selectedMode(): ThemeMode { return this.themeService.mode(); }
-
   set selectedMode(val: ThemeMode) { this.themeService.setMode(val); }
 
   toggleConfig(): void { this.configOpen = !this.configOpen; }

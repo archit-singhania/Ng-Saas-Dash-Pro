@@ -5,6 +5,7 @@ import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { DialogModule } from 'primeng/dialog';
 import { DividerModule } from 'primeng/divider';
+import { ChipModule } from 'primeng/chip';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 
@@ -25,7 +26,7 @@ export interface TranscriptRecord {
 
 @Component({
   selector: 'app-transcripts',
-  imports: [TableModule, TagModule, ButtonModule, CardModule, DialogModule, DividerModule, ToastModule],
+  imports: [TableModule, TagModule, ButtonModule, CardModule, DialogModule, DividerModule, ChipModule, ToastModule],
   providers: [MessageService],
   templateUrl: './transcripts.html',
   styleUrl: './transcripts.scss',

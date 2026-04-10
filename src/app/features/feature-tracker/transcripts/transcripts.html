@@ -15,9 +15,8 @@
       [paginator]="records.length > 0"
       [rows]="15"
       [rowsPerPageOptions]="[10, 15, 25, 50]"
-      styleClass="p-datatable-sm"
+      size="small"
       [tableStyle]="{ 'min-width': '62rem' }">
-
       <ng-template pTemplate="header">
         <tr>
           <th pSortableColumn="date">Date &amp; Time <p-sortIcon field="date" /></th>
@@ -28,7 +27,6 @@
           <th>Recording</th>
         </tr>
       </ng-template>
-
       <ng-template pTemplate="body" let-rec>
         <tr>
           <td>{{ rec.date }}</td>
@@ -36,26 +34,17 @@
           <td>{{ rec.duration }}</td>
           <td><p-tag [value]="rec.status" [severity]="getStatusSeverity(rec.status)" /></td>
           <td>
-            <p-button
-              label="View Transcript"
-              icon="pi pi-file-edit"
-              severity="secondary"
-              variant="text"
-              size="small"
+            <p-button label="View Transcript" icon="pi pi-file-edit"
+              severity="secondary" variant="text" size="small"
               (onClick)="openTranscript(rec)" />
           </td>
           <td>
-            <p-button
-              label="Download"
-              icon="pi pi-headphones"
-              severity="secondary"
-              variant="text"
-              size="small"
+            <p-button label="Download" icon="pi pi-headphones"
+              severity="secondary" variant="text" size="small"
               (onClick)="downloadRecording(rec)" />
           </td>
         </tr>
       </ng-template>
-
       <ng-template pTemplate="emptymessage">
         <tr>
           <td colspan="6" class="empty-state">
@@ -75,12 +64,11 @@
   [style]="{ width: '620px' }"
   [draggable]="false"
   [resizable]="false">
-
   @if (selectedRecord) {
     <div class="transcript-meta">
-      <span><i class="pi pi-calendar"></i> {{ selectedRecord.date }}</span>
-      <span><i class="pi pi-phone"></i> {{ selectedRecord.phone }}</span>
-      <span><i class="pi pi-clock"></i> {{ selectedRecord.duration }}</span>
+      <p-chip><i class="pi pi-calendar" style="margin-right:.375rem"></i>{{ selectedRecord.date }}</p-chip>
+      <p-chip><i class="pi pi-phone" style="margin-right:.375rem"></i>{{ selectedRecord.phone }}</p-chip>
+      <p-chip><i class="pi pi-clock" style="margin-right:.375rem"></i>{{ selectedRecord.duration }}</p-chip>
       <p-tag [value]="selectedRecord.status" [severity]="getStatusSeverity(selectedRecord.status)" />
     </div>
     <p-divider />
