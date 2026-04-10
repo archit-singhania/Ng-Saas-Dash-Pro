@@ -1,14 +1,16 @@
-import { Component, inject, HostListener, ElementRef } from '@angular/core';
+import { Component, inject, HostListener, ElementRef, signal } from '@angular/core';
 import { TooltipModule } from 'primeng/tooltip';
 import { ButtonModule } from 'primeng/button';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { DividerModule } from 'primeng/divider';
+import { DialogModule } from 'primeng/dialog';
+import { TagModule } from 'primeng/tag';
 import { FormsModule } from '@angular/forms';
 import { ThemeService, ThemeMode, SurfaceKey, PRIMARY_PALETTES, SURFACE_PALETTES } from '../../core/services/theme.service';
 
 @Component({
   selector: 'app-topbar',
-  imports: [TooltipModule, ButtonModule, SelectButtonModule, DividerModule, FormsModule],
+  imports: [TooltipModule, ButtonModule, SelectButtonModule, DividerModule, DialogModule, TagModule, FormsModule],
   templateUrl: './topbar.html',
   styleUrl: './topbar.scss'
 })
@@ -17,6 +19,10 @@ export class Topbar {
   private elRef = inject(ElementRef<HTMLElement>);
 
   configOpen = false;
+  notificationsOpen = signal(false);
+
+  openNotifications(): void { this.notificationsOpen.set(true); }
+  closeNotifications(): void { this.notificationsOpen.set(false); }
 
   primaryColors = Object.entries(PRIMARY_PALETTES).map(([name, palette]) => ({
     name,
