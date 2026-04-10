@@ -34,7 +34,7 @@
     <div class="auth-top-actions">
       <div class="config-wrap">
         <p-button icon="pi pi-palette" severity="secondary" variant="text"
-          styleClass="topbar-icon-btn" (onClick)="toggleConfig($event)"
+          class="topbar-icon-btn" (onClick)="toggleConfig($event)"
           pTooltip="Customise Theme" tooltipPosition="bottom" />
         @if (configOpen) {
           <div class="config-panel">
@@ -62,7 +62,7 @@
             <div class="config-divider"></div>
             <div class="config-section-label">Mode</div>
             <p-selectButton [options]="themeModes" [(ngModel)]="selectedMode"
-              optionLabel="label" optionValue="mode" styleClass="theme-mode-select" />
+              optionLabel="label" optionValue="mode" class="theme-mode-select" />
           </div>
         }
       </div>
@@ -107,8 +107,8 @@
               (ngModelChange)="password.set($event)"
               placeholder="Min. 8 characters"
               [toggleMask]="true"
-              [fluid]="true"
-              styleClass="auth-password" />
+              fluid
+              class="auth-password" />
           </div>
           <div class="form-field">
             <label for="reg-confirm" class="form-label">Confirm Password <span class="required">*</span></label>
@@ -119,8 +119,8 @@
               placeholder="Repeat password"
               [feedback]="false"
               [toggleMask]="true"
-              [fluid]="true"
-              styleClass="auth-password" />
+              fluid
+              class="auth-password" />
           </div>
         </div>
 
@@ -128,9 +128,9 @@
           label="Create Account"
           icon="pi pi-user-plus"
           [loading]="loading()"
-          [fluid]="true"
+          fluid
           size="large"
-          styleClass="auth-submit-btn"
+          class="auth-submit-btn"
           (onClick)="onSubmit()" />
 
         <p-divider>
@@ -140,9 +140,9 @@
         <p-button
           severity="secondary"
           variant="outlined"
-          [fluid]="true"
+          fluid
           [disabled]="true"
-          styleClass="auth-sso-btn">
+          class="auth-sso-btn">
           <ng-template pTemplate="content">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" style="flex-shrink:0">
               <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>

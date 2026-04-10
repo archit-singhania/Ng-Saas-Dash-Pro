@@ -1,6 +1,5 @@
 <div class="landing-page">
 
-  <!-- NAV -->
   <header class="landing-nav">
     <div class="nav-logo">
       <div class="nav-logo-mark">
@@ -15,7 +14,7 @@
     <div class="nav-actions">
       <div class="config-wrap">
         <p-button icon="pi pi-palette" severity="secondary" variant="text"
-          styleClass="topbar-icon-btn" (onClick)="toggleConfig()"
+          class="topbar-icon-btn" (onClick)="toggleConfig()"
           pTooltip="Customise Theme" tooltipPosition="bottom" />
         @if (configOpen) {
           <div class="config-panel">
@@ -43,7 +42,7 @@
             <div class="config-divider"></div>
             <div class="config-section-label">Mode</div>
             <p-selectButton [options]="themeModes" [(ngModel)]="selectedMode"
-              optionLabel="label" optionValue="mode" styleClass="theme-mode-select" />
+              optionLabel="label" optionValue="mode" class="theme-mode-select" />
           </div>
         }
       </div>
@@ -52,7 +51,6 @@
     </div>
   </header>
 
-  <!-- HERO -->
   <section class="hero-section">
     <div class="hero-badge">
       <p-tag value="AI-Powered Voice Operations" severity="info" />
@@ -68,10 +66,8 @@
       <p-button label="Create Account" icon="pi pi-user-plus" iconPos="right" size="large" routerLink="/register" />
       <p-button label="Sign In" severity="secondary" variant="outlined" size="large" routerLink="/login" />
     </div>
-
   </section>
 
-  <!-- FEATURES -->
   <section class="features-section">
     <div class="section-label">Features</div>
     <h2 class="section-heading">Everything your voice operations need</h2>
@@ -98,7 +94,6 @@
     </div>
   </section>
 
-  <!-- HOW IT WORKS -->
   <section class="how-section">
     <div class="section-label">How It Works</div>
     <h2 class="section-heading">How it works — coming soon</h2>
@@ -114,8 +109,6 @@
     </div>
   </section>
 
-
-  <!-- FOOTER -->
   <footer class="landing-footer">
     <div class="footer-logo">
       <div class="nav-logo-mark small">
