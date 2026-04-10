@@ -14,24 +14,59 @@
       </div>
 
       <div class="auth-left-copy">
-        <h2 class="auth-tagline">Start automating<br />your calls today.</h2>
-        <p class="auth-tagline-sub">Join businesses that never miss a call. Set up your AI voice agent in minutes — no code required.</p>
+        <h2 class="auth-tagline">Operations Console<br />Coming soon.</h2>
+        <p class="auth-tagline-sub">Create your account now and get early access when the platform goes live.</p>
       </div>
 
       <div class="plan-card">
-        <div class="plan-badge"><i class="pi pi-star"></i> Free Plan Included</div>
+        <div class="plan-badge"><i class="pi pi-clock"></i> Platform Coming Soon</div>
         <ul class="plan-list">
-          <li><i class="pi pi-check"></i> 50 AI calls / month</li>
-          <li><i class="pi pi-check"></i> Full dashboard access</li>
-          <li><i class="pi pi-check"></i> Transcripts & recordings</li>
-          <li><i class="pi pi-check"></i> Prompt & knowledge base editor</li>
-          <li><i class="pi pi-check"></i> Upgrade anytime</li>
+          <li><i class="pi pi-clock"></i> Feature details coming soon</li>
+          <li><i class="pi pi-clock"></i> Pricing plans being finalised</li>
+          <li><i class="pi pi-clock"></i> Early access for registered users</li>
+          <li><i class="pi pi-clock"></i> More details will be announced</li>
         </ul>
       </div>
     </div>
   </div>
 
   <div class="auth-right">
+    <div class="auth-top-actions">
+      <div class="config-wrap">
+        <p-button icon="pi pi-palette" severity="secondary" variant="text"
+          styleClass="topbar-icon-btn" (onClick)="toggleConfig($event)"
+          pTooltip="Customise Theme" tooltipPosition="bottom" />
+        @if (configOpen) {
+          <div class="config-panel">
+            <div class="config-section-label">Primary</div>
+            <div class="color-grid">
+              @for (c of primaryColors; track c.name) {
+                <button class="color-dot" [style.background]="c.hex"
+                  [class.selected]="themeService.selectedPrimary() === c.name"
+                  (click)="themeService.setPrimary(c.name)"
+                  [pTooltip]="c.name" tooltipPosition="top"
+                  [attr.aria-label]="c.name"></button>
+              }
+            </div>
+            <div class="config-divider"></div>
+            <div class="config-section-label">Surface</div>
+            <div class="color-grid">
+              @for (key of surfaceKeys; track key) {
+                <button class="color-dot" [style.background]="surfaceHex(key)"
+                  [class.selected]="themeService.selectedSurface() === key"
+                  (click)="themeService.setSurface(key)"
+                  [pTooltip]="key" tooltipPosition="top"
+                  [attr.aria-label]="key"></button>
+              }
+            </div>
+            <div class="config-divider"></div>
+            <div class="config-section-label">Mode</div>
+            <p-selectButton [options]="themeModes" [(ngModel)]="selectedMode"
+              optionLabel="label" optionValue="mode" styleClass="theme-mode-select" />
+          </div>
+        }
+      </div>
+    </div>
     <div class="auth-card">
 
       <div class="auth-card-header">
@@ -40,48 +75,27 @@
       </div>
 
       <div class="auth-form">
-        <div class="form-row-2">
-          <div class="form-field">
-            <label for="reg-fullname" class="form-label">Full Name <span class="required">*</span></label>
-            <p-inputtext
-              inputId="reg-fullname"
-              [ngModel]="fullName()"
-              (ngModelChange)="fullName.set($event)"
-              placeholder="Priya Sharma"
-              styleClass="auth-input" />
-          </div>
-          <div class="form-field">
-            <label for="reg-bizname" class="form-label">Business Name</label>
-            <p-inputtext
-              inputId="reg-bizname"
-              [ngModel]="businessName()"
-              (ngModelChange)="businessName.set($event)"
-              placeholder="Acme Clinic"
-              styleClass="auth-input" />
-          </div>
+        <div class="form-field">
+          <label for="reg-fullname" class="form-label">Full Name <span class="required">*</span></label>
+          <input pInputText
+            id="reg-fullname"
+            [ngModel]="fullName()"
+            (ngModelChange)="fullName.set($event)"
+            placeholder="Your full name"
+            style="width:100%"
+            class="auth-input" />
         </div>
 
         <div class="form-field">
           <label for="reg-email" class="form-label">Email address <span class="required">*</span></label>
-          <p-inputtext
-            inputId="reg-email"
+          <input pInputText
+            id="reg-email"
             [ngModel]="email()"
             (ngModelChange)="email.set($event)"
             placeholder="you@company.com"
             type="email"
-            styleClass="auth-input" />
-        </div>
-
-        <div class="form-field">
-          <label for="reg-bizsize" class="form-label">Team Size</label>
-          <p-select
-            inputId="reg-bizsize"
-            [options]="businessSizes"
-            [ngModel]="businessSize()"
-            (ngModelChange)="businessSize.set($event)"
-            optionLabel="label"
-            optionValue="value"
-            styleClass="w-full auth-select" />
+            style="width:100%"
+            class="auth-input" />
         </div>
 
         <div class="form-row-2">
@@ -93,6 +107,7 @@
               (ngModelChange)="password.set($event)"
               placeholder="Min. 8 characters"
               [toggleMask]="true"
+              [fluid]="true"
               styleClass="auth-password" />
           </div>
           <div class="form-field">
@@ -104,19 +119,9 @@
               placeholder="Repeat password"
               [feedback]="false"
               [toggleMask]="true"
+              [fluid]="true"
               styleClass="auth-password" />
           </div>
-        </div>
-
-        <div class="form-check-row">
-          <p-checkbox
-            [ngModel]="agreedToTerms()"
-            (ngModelChange)="agreedToTerms.set($event)"
-            [binary]="true"
-            inputId="terms" />
-          <label for="terms" class="check-label">
-            I agree to the <a class="form-link" routerLink="/register">Terms of Service</a> and <a class="form-link" routerLink="/register">Privacy Policy</a>
-          </label>
         </div>
 
         <p-button

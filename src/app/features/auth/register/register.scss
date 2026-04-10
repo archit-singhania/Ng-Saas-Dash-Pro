@@ -134,6 +134,73 @@
   gap: 1.25rem;
   background: var(--bg-app);
   overflow-y: auto;
+  position: relative;
+}
+
+.auth-top-actions {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+}
+
+.config-wrap { position: relative; }
+
+.config-panel {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  width: 240px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 8px 32px rgba(0,0,0,.14);
+  padding: 1rem;
+  z-index: 500;
+  animation: fadeSlide .15s ease;
+}
+
+@keyframes fadeSlide {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.config-section-label {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: var(--text-muted);
+  margin-bottom: .625rem;
+}
+
+.color-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: .25rem;
+}
+
+.color-dot {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: transform .15s, border-color .15s;
+  padding: 0;
+  &:hover { transform: scale(1.2); }
+  &.selected {
+    border-color: var(--text-primary);
+    transform: scale(1.15);
+    outline: 2px solid var(--bg-card);
+    outline-offset: -4px;
+  }
+}
+
+.config-divider {
+  height: 1px;
+  background: var(--border-color);
+  margin: .875rem 0;
 }
 
 .auth-card {
@@ -208,11 +275,12 @@
 }
 
 :host ::ng-deep {
-  .auth-input.p-inputtext {
+  input.auth-input {
     width: 100%;
     border-radius: var(--radius-md);
     font-size: .875rem;
     padding: .5625rem .875rem;
+    display: block;
   }
 
   .auth-password {
@@ -261,6 +329,38 @@
   .p-divider .p-divider-content {
     background: var(--bg-card);
     padding: 0 .75rem;
+  }
+
+  .p-divider.p-divider-horizontal::before {
+    border-top: 1px solid var(--border-color) !important;
+  }
+
+  .topbar-icon-btn.p-button {
+    width: 32px;
+    height: 32px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border-color) !important;
+    color: var(--text-secondary) !important;
+    padding: 0;
+    &:hover {
+      background: var(--bg-card-hover, rgba(0,0,0,.06)) !important;
+      color: var(--text-primary) !important;
+      border-color: transparent !important;
+    }
+    .p-button-icon { font-size: 14px; }
+  }
+
+  .theme-mode-select {
+    width: 100%;
+    .p-selectbutton { width: 100%; display: flex; }
+    .p-togglebutton {
+      flex: 1;
+      font-size: .75rem;
+      font-weight: 500;
+      padding: .375rem .5rem;
+      gap: 4px;
+      .p-togglebutton-icon { font-size: 12px; }
+    }
   }
 }
 

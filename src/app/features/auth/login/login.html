@@ -14,20 +14,55 @@
       </div>
 
       <div class="auth-left-copy">
-        <h2 class="auth-tagline">Your AI voice agent,<br />always on duty.</h2>
-        <p class="auth-tagline-sub">Handle every inbound call, book appointments, and monitor your AI agent — all from one powerful dashboard.</p>
+        <h2 class="auth-tagline">Operations Console<br />Coming soon.</h2>
+        <p class="auth-tagline-sub">More details coming soon — create an account to get early access.</p>
       </div>
 
       <div class="auth-feature-list">
-        <div class="af-item"><i class="pi pi-check-circle"></i> Inbound call answering 24/7</div>
-        <div class="af-item"><i class="pi pi-check-circle"></i> AI-powered bookings & transcripts</div>
-        <div class="af-item"><i class="pi pi-check-circle"></i> Full prompt & knowledge base control</div>
-        <div class="af-item"><i class="pi pi-check-circle"></i> Real-time dashboard & analytics</div>
+        <div class="af-item"><i class="pi pi-clock"></i> Platform details coming soon</div>
+        <div class="af-item"><i class="pi pi-clock"></i> Currently under active development</div>
+        <div class="af-item"><i class="pi pi-clock"></i> Early access for registered users</div>
       </div>
     </div>
   </div>
 
   <div class="auth-right">
+    <div class="auth-top-actions">
+      <div class="config-wrap">
+        <p-button icon="pi pi-palette" severity="secondary" variant="text"
+          styleClass="topbar-icon-btn" (onClick)="toggleConfig($event)"
+          pTooltip="Customise Theme" tooltipPosition="bottom" />
+        @if (configOpen) {
+          <div class="config-panel">
+            <div class="config-section-label">Primary</div>
+            <div class="color-grid">
+              @for (c of primaryColors; track c.name) {
+                <button class="color-dot" [style.background]="c.hex"
+                  [class.selected]="themeService.selectedPrimary() === c.name"
+                  (click)="themeService.setPrimary(c.name)"
+                  [pTooltip]="c.name" tooltipPosition="top"
+                  [attr.aria-label]="c.name"></button>
+              }
+            </div>
+            <div class="config-divider"></div>
+            <div class="config-section-label">Surface</div>
+            <div class="color-grid">
+              @for (key of surfaceKeys; track key) {
+                <button class="color-dot" [style.background]="surfaceHex(key)"
+                  [class.selected]="themeService.selectedSurface() === key"
+                  (click)="themeService.setSurface(key)"
+                  [pTooltip]="key" tooltipPosition="top"
+                  [attr.aria-label]="key"></button>
+              }
+            </div>
+            <div class="config-divider"></div>
+            <div class="config-section-label">Mode</div>
+            <p-selectButton [options]="themeModes" [(ngModel)]="selectedMode"
+              optionLabel="label" optionValue="mode" styleClass="theme-mode-select" />
+          </div>
+        }
+      </div>
+    </div>
     <div class="auth-card">
 
       <div class="auth-card-header">
@@ -38,13 +73,14 @@
       <div class="auth-form">
         <div class="form-field">
           <label for="login-email" class="form-label">Email address</label>
-          <p-inputtext
-            inputId="login-email"
+          <input pInputText
+            id="login-email"
             [ngModel]="email()"
             (ngModelChange)="email.set($event)"
             placeholder="you@company.com"
             type="email"
-            styleClass="auth-input"
+            style="width:100%"
+            class="auth-input"
             (keyup.enter)="onSubmit()" />
         </div>
 
