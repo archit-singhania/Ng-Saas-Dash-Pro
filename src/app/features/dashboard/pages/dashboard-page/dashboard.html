@@ -10,24 +10,21 @@
       [value]="summary()?.totalCalls ?? '—'"
       subtitle="All time"
       icon="pi pi-phone"
-      trend="neutral"
-      trendLabel="Live from DB" />
+      trend="neutral" />
 
     <app-stat-tile
       label="Bookings Made"
       value="—"
       subtitle="Coming soon"
       icon="pi pi-calendar-plus"
-      trend="neutral"
-      trendLabel="Coming soon" />
+      trend="neutral" />
 
     <app-stat-tile
       label="Avg Duration"
       [value]="summary()?.avgDuration ?? '—'"
       subtitle="Per call"
       icon="pi pi-clock"
-      trend="neutral"
-      trendLabel="Live from DB" />
+      trend="neutral" />
   </div>
 
   <p-card>
@@ -46,7 +43,7 @@
       <ng-template pTemplate="header">
         <tr>
           <th>Date &amp; Time</th>
-          <th>Phone</th>
+          <th>Phone Number</th>
           <th>Caller Name</th>
           <th>Duration</th>
         </tr>
