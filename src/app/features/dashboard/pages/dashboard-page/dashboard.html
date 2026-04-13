@@ -5,15 +5,29 @@
   </div>
 
   <div class="kpi-grid">
-    @for (kpi of kpis; track kpi.label) {
-      <app-stat-tile
-        [label]="kpi.label"
-        [value]="kpi.value"
-        [subtitle]="kpi.subtitle"
-        [icon]="kpi.icon"
-        [trend]="kpi.trend"
-        [trendLabel]="kpi.trendLabel" />
-    }
+    <app-stat-tile
+      label="Total Calls"
+      [value]="summary()?.totalCalls ?? '—'"
+      subtitle="All time"
+      icon="pi pi-phone"
+      trend="neutral"
+      trendLabel="Live from DB" />
+
+    <app-stat-tile
+      label="Bookings Made"
+      value="—"
+      subtitle="Coming soon"
+      icon="pi pi-calendar-plus"
+      trend="neutral"
+      trendLabel="Coming soon" />
+
+    <app-stat-tile
+      label="Avg Duration"
+      [value]="summary()?.avgDuration ?? '—'"
+      subtitle="Per call"
+      icon="pi pi-clock"
+      trend="neutral"
+      trendLabel="Live from DB" />
   </div>
 
   <p-card>
@@ -21,34 +35,40 @@
       <div class="card-header-row">
         <div>
           <h3 class="card-title">Recent Calls</h3>
-          <p class="card-sub">Latest inbound call activity</p>
+          <p class="card-sub">Latest 10 inbound calls</p>
         </div>
         <p-button label="View All" icon="pi pi-arrow-right" iconPos="right"
           severity="secondary" size="small" routerLink="/calls" />
       </div>
     </ng-template>
-    <p-table [value]="recentCalls" size="small">
+
+    <p-table [value]="recent()" size="small">
       <ng-template pTemplate="header">
         <tr>
           <th>Date &amp; Time</th>
           <th>Phone</th>
+          <th>Caller Name</th>
           <th>Duration</th>
-          <th>Status</th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-call>
         <tr>
           <td>{{ call.date }}</td>
           <td><span class="phone-mono">{{ call.phone }}</span></td>
+          <td>{{ call.callerName }}</td>
           <td>{{ call.duration }}</td>
-          <td><p-tag [value]="call.status" [severity]="getStatusSeverity(call.status)" /></td>
         </tr>
       </ng-template>
       <ng-template pTemplate="emptymessage">
         <tr>
           <td colspan="4" class="empty-state">
-            <i class="pi pi-phone"></i>
-            <p>No calls yet — data will appear here once calls come in</p>
+            @if (loading()) {
+              <i class="pi pi-spin pi-spinner"></i>
+              <p>Loading calls…</p>
+            } @else {
+              <i class="pi pi-phone"></i>
+              <p>No calls yet — data will appear here once calls come in</p>
+            }
           </td>
         </tr>
       </ng-template>

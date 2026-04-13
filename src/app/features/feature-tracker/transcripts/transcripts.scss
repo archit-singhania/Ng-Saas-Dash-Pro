@@ -89,3 +89,34 @@
   font-family: 'SF Mono', 'Fira Code', monospace;
   white-space: nowrap;
 }
+
+.transcript-line {
+  grid-template-columns: 70px 1fr;
+}
+
+.no-data {
+  color: var(--text-muted);
+  font-size: .875rem;
+}
+
+.dialog-footer {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: .25rem;
+}
+
+.recording-meta {
+  display: flex;
+  gap: .75rem;
+  flex-wrap: wrap;
+  margin-bottom: .25rem;
+}
+
+.recording-player {
+  padding: .5rem 0;
+
+  audio {
+    border-radius: var(--radius-md);
+    background: var(--bg-app);
+  }
+}

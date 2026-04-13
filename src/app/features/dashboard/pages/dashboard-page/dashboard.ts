@@ -1,30 +1,34 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { StatTile } from '../../../../shared/components/stat-tile/stat-tile';
-import { StatsService } from '../../../../core/services/stats';
+import { CallApiService, CallRow, CallSummary } from '../../../../core/services/call-api.service';
 import { TableModule } from 'primeng/table';
-import { TagModule } from 'primeng/tag';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
+import { SkeletonModule } from 'primeng/skeleton';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [RouterLink, StatTile, TableModule, TagModule, ButtonModule, CardModule],
+  imports: [RouterLink, StatTile, TableModule, ButtonModule, CardModule, SkeletonModule],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.scss'
 })
-export class Dashboard {
-  private statsService = inject(StatsService);
+export class Dashboard implements OnInit {
+  private callApi = inject(CallApiService);
 
-  kpis = this.statsService.getKpis();
-  recentCalls = this.statsService.getRecentCalls();
+  summary  = signal<CallSummary | null>(null);
+  recent   = signal<CallRow[]>([]);
+  loading  = signal(true);
 
-  getStatusSeverity(status: string): 'success' | 'warn' | 'danger' | 'secondary' {
-    switch (status) {
-      case 'Completed':   return 'success';
-      case 'Missed':      return 'danger';
-      case 'In Progress': return 'warn';
-      default:            return 'secondary';
-    }
+  ngOnInit(): void {
+    this.callApi.getSummary().subscribe({
+      next:  s  => this.summary.set(s),
+      error: () => this.summary.set({ totalCalls: 0, avgDuration: '—' })
+    });
+
+    this.callApi.getRecent().subscribe({
+      next:  rows => { this.recent.set(rows); this.loading.set(false); },
+      error: ()   => this.loading.set(false)
+    });
   }
 }

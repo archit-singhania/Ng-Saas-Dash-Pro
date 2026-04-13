@@ -1,26 +1,43 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { TableModule } from 'primeng/table';
-import { TagModule } from 'primeng/tag';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
-import { StatsService, CallRecord } from '../../../../core/services/stats';
+import { CallApiService, CallRow } from '../../../../core/services/call-api.service';
 
 @Component({
   selector: 'app-calls',
-  imports: [TableModule, TagModule, ButtonModule, CardModule],
+  imports: [TableModule, ButtonModule, CardModule],
   templateUrl: './calls.html',
   styleUrl: './calls.scss'
 })
-export class Calls {
-  private statsService = inject(StatsService);
-  calls: CallRecord[] = this.statsService.getRecentCalls();
+export class Calls implements OnInit {
+  private callApi = inject(CallApiService);
 
-  getStatusSeverity(status: string): 'success' | 'warn' | 'danger' | 'secondary' {
-    switch (status) {
-      case 'Completed':   return 'success';
-      case 'Missed':      return 'danger';
-      case 'In Progress': return 'warn';
-      default:            return 'secondary';
-    }
+  calls   = signal<CallRow[]>([]);
+  total   = signal(0);
+  page    = signal(1);
+  limit   = signal(15);
+  loading = signal(true);
+
+  ngOnInit(): void {
+    this.loadPage();
+  }
+
+  loadPage(): void {
+    this.loading.set(true);
+    this.callApi.getCalls(this.page(), this.limit()).subscribe({
+      next: res => {
+        this.calls.set(res.data);
+        this.total.set(res.total);
+        this.loading.set(false);
+      },
+      error: () => this.loading.set(false)
+    });
+  }
+
+  onPageChange(event: { first: number; rows: number }): void {
+    this.limit.set(event.rows);
+    this.page.set(Math.floor(event.first / event.rows) + 1);
+    this.loadPage();
   }
 }

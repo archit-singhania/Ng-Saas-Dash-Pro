@@ -5,39 +5,46 @@
         <h1>Call Logs</h1>
         <p>Full history of inbound AI voice agent calls</p>
       </div>
-      <p-button label="Download Report" icon="pi pi-download" severity="secondary" />
     </div>
   </div>
 
   <p-card>
     <p-table
-      [value]="calls"
-      [paginator]="calls.length > 0"
-      [rows]="15"
+      [value]="calls()"
+      [lazy]="true"
+      [paginator]="true"
+      [rows]="limit()"
+      [totalRecords]="total()"
       [rowsPerPageOptions]="[10, 15, 25, 50]"
+      (onPage)="onPageChange($event)"
       size="small"
       [tableStyle]="{ 'min-width': '50rem' }">
       <ng-template pTemplate="header">
         <tr>
-          <th pSortableColumn="date">Date &amp; Time <p-sortIcon field="date" /></th>
-          <th pSortableColumn="phone">Phone <p-sortIcon field="phone" /></th>
-          <th pSortableColumn="duration">Duration <p-sortIcon field="duration" /></th>
-          <th pSortableColumn="status">Status <p-sortIcon field="status" /></th>
+          <th>Date &amp; Time</th>
+          <th>Phone</th>
+          <th>Caller Name</th>
+          <th>Duration</th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-call>
         <tr>
           <td>{{ call.date }}</td>
           <td><span class="phone-mono">{{ call.phone }}</span></td>
+          <td>{{ call.callerName }}</td>
           <td>{{ call.duration }}</td>
-          <td><p-tag [value]="call.status" [severity]="getStatusSeverity(call.status)" /></td>
         </tr>
       </ng-template>
       <ng-template pTemplate="emptymessage">
         <tr>
           <td colspan="4" class="empty-state">
-            <i class="pi pi-phone"></i>
-            <p>No call records yet — they will appear here once calls come in</p>
+            @if (loading()) {
+              <i class="pi pi-spin pi-spinner"></i>
+              <p>Loading…</p>
+            } @else {
+              <i class="pi pi-phone"></i>
+              <p>No call records yet</p>
+            }
           </td>
         </tr>
       </ng-template>

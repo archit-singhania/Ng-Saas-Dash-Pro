@@ -5,25 +5,27 @@
         <h1>Transcripts &amp; Recordings</h1>
         <p>Full call transcripts and audio recordings from every AI voice agent session</p>
       </div>
-      <p-button label="Export All" icon="pi pi-download" severity="secondary" variant="outlined" />
     </div>
   </div>
 
   <p-card>
     <p-table
-      [value]="records"
-      [paginator]="records.length > 0"
-      [rows]="15"
+      [value]="records()"
+      [lazy]="true"
+      [paginator]="true"
+      [rows]="limit()"
+      [totalRecords]="total()"
       [rowsPerPageOptions]="[10, 15, 25, 50]"
+      (onPage)="onPageChange($event)"
       size="small"
       [tableStyle]="{ 'min-width': '62rem' }">
       <ng-template pTemplate="header">
         <tr>
-          <th pSortableColumn="date">Date &amp; Time <p-sortIcon field="date" /></th>
-          <th pSortableColumn="phone">Phone <p-sortIcon field="phone" /></th>
-          <th pSortableColumn="duration">Duration <p-sortIcon field="duration" /></th>
-          <th pSortableColumn="status">Status <p-sortIcon field="status" /></th>
-          <th>Transcript Record</th>
+          <th>Date &amp; Time</th>
+          <th>Phone</th>
+          <th>Caller Name</th>
+          <th>Duration</th>
+          <th>Transcript</th>
           <th>Recording</th>
         </tr>
       </ng-template>
@@ -31,25 +33,38 @@
         <tr>
           <td>{{ rec.date }}</td>
           <td><span class="phone-mono">{{ rec.phone }}</span></td>
+          <td>{{ rec.callerName }}</td>
           <td>{{ rec.duration }}</td>
-          <td><p-tag [value]="rec.status" [severity]="getStatusSeverity(rec.status)" /></td>
           <td>
-            <p-button label="View Transcript" icon="pi pi-file-edit"
-              severity="secondary" variant="text" size="small"
-              (onClick)="openTranscript(rec)" />
+            @if (rec.transcript) {
+              <p-button label="View" icon="pi pi-file-edit"
+                severity="secondary" variant="text" size="small"
+                (onClick)="openTranscript(rec)" />
+            } @else {
+              <span class="no-data">—</span>
+            }
           </td>
           <td>
-            <p-button label="Download" icon="pi pi-headphones"
-              severity="secondary" variant="text" size="small"
-              (onClick)="downloadRecording(rec)" />
+            @if (rec.recordingUrl) {
+              <p-button label="Play" icon="pi pi-headphones"
+                severity="secondary" variant="text" size="small"
+                (onClick)="openRecording(rec)" />
+            } @else {
+              <span class="no-data">—</span>
+            }
           </td>
         </tr>
       </ng-template>
       <ng-template pTemplate="emptymessage">
         <tr>
           <td colspan="6" class="empty-state">
-            <i class="pi pi-file-edit"></i>
-            <p>No transcripts yet — they will appear here once calls come in</p>
+            @if (loading()) {
+              <i class="pi pi-spin pi-spinner"></i>
+              <p>Loading…</p>
+            } @else {
+              <i class="pi pi-file-edit"></i>
+              <p>No transcripts yet</p>
+            }
           </td>
         </tr>
       </ng-template>
@@ -58,28 +73,60 @@
 </div>
 
 <p-dialog
-  [(visible)]="showTranscript"
+  [(visible)]="showTranscriptDialog"
   header="Call Transcript"
   [modal]="true"
-  [style]="{ width: '620px' }"
+  [style]="{ width: '640px', maxHeight: '80vh' }"
   [draggable]="false"
   [resizable]="false">
+
   @if (selectedRecord) {
     <div class="transcript-meta">
       <p-chip><i class="pi pi-calendar" style="margin-right:.375rem"></i>{{ selectedRecord.date }}</p-chip>
       <p-chip><i class="pi pi-phone" style="margin-right:.375rem"></i>{{ selectedRecord.phone }}</p-chip>
       <p-chip><i class="pi pi-clock" style="margin-right:.375rem"></i>{{ selectedRecord.duration }}</p-chip>
-      <p-tag [value]="selectedRecord.status" [severity]="getStatusSeverity(selectedRecord.status)" />
     </div>
     <p-divider />
     <div class="transcript-body">
-      @for (line of selectedRecord.transcript; track $index) {
+      @for (line of formatTranscriptLines(selectedRecord.transcript ?? ''); track $index) {
         <div class="transcript-line" [class.agent]="line.speaker === 'Agent'" [class.caller]="line.speaker === 'Caller'">
           <span class="speaker-label">{{ line.speaker }}</span>
           <span class="speaker-text">{{ line.text }}</span>
-          <span class="speaker-time">{{ line.timestamp }}</span>
         </div>
       }
+    </div>
+    <p-divider />
+    <div class="dialog-footer">
+      <p-button label="Download Transcript" icon="pi pi-download"
+        severity="secondary" variant="outlined" (onClick)="downloadTranscript()" />
+    </div>
+  }
+</p-dialog>
+
+<p-dialog
+  [(visible)]="showRecordingDialog"
+  header="Call Recording"
+  [modal]="true"
+  [style]="{ width: '500px' }"
+  [draggable]="false"
+  [resizable]="false">
+
+  @if (selectedRecord) {
+    <div class="recording-meta">
+      <p-chip><i class="pi pi-phone" style="margin-right:.375rem"></i>{{ selectedRecord.phone }}</p-chip>
+      <p-chip><i class="pi pi-clock" style="margin-right:.375rem"></i>{{ selectedRecord.duration }}</p-chip>
+    </div>
+    <p-divider />
+    <div class="recording-player">
+      <audio controls style="width:100%">
+        <source [src]="selectedRecord.recordingUrl!" type="audio/ogg">
+        Your browser does not support the audio element.
+      </audio>
+    </div>
+    <p-divider />
+    <div class="dialog-footer">
+      <p-button label="Download Recording" icon="pi pi-download"
+        severity="secondary" variant="outlined" (onClick)="downloadRecording()" />
     </div>
   }
 </p-dialog>
