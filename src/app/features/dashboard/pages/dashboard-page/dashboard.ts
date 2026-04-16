@@ -31,4 +31,10 @@ export class Dashboard implements OnInit {
       error: ()   => this.loading.set(false)
     });
   }
+
+  getRatePillClass(rate: number): string {
+    if (rate >= 70) return 'rate-green';
+    if (rate >= 40) return 'rate-yellow';
+    return 'rate-red';
+  }
 }

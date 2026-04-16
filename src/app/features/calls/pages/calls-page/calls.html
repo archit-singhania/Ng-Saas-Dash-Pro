@@ -18,13 +18,17 @@
       [rowsPerPageOptions]="[10, 15, 25, 50]"
       (onPage)="onPageChange($event)"
       size="small"
-      [tableStyle]="{ 'min-width': '50rem' }">
+      [tableStyle]="{ 'min-width': '70rem' }">
       <ng-template pTemplate="header">
         <tr>
           <th>Date &amp; Time</th>
           <th>Phone Number</th>
           <th>Caller Name</th>
           <th>Duration</th>
+          <th>AI Summary</th>
+          <th>Result</th>
+          <th>Success Rate</th>
+          <th>Lead</th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-call>
@@ -33,11 +37,51 @@
           <td><span class="phone-mono">{{ call.phone }}</span></td>
           <td>{{ call.callerName }}</td>
           <td>{{ call.duration }}</td>
+
+          <td>
+            @if (call.aiSummary) {
+              <span class="summary-cell" [title]="call.aiSummary">
+                {{ call.aiSummary | slice:0:60 }}{{ call.aiSummary.length > 60 ? '…' : '' }}
+              </span>
+            } @else {
+              <span class="text-muted">—</span>
+            }
+          </td>
+
+          <td>
+            @if (call.successEvaluation === true) {
+              <span class="badge badge-success">Success</span>
+            } @else if (call.successEvaluation === false) {
+              <span class="badge badge-fail">Failed</span>
+            } @else {
+              <span class="badge badge-neutral">—</span>
+            }
+          </td>
+
+          <td>
+            @if (call.successRate !== null) {
+              <span [class]="'rate-pill ' + getRatePillClass(call.successRate)">
+                {{ call.successRate }}%
+              </span>
+            } @else {
+              <span class="text-muted">—</span>
+            }
+          </td>
+
+          <td>
+            @if (call.leadClassification) {
+              <span [class]="'lead-tag lead-' + call.leadClassification.toLowerCase()">
+                {{ call.leadClassification }}
+              </span>
+            } @else {
+              <span class="text-muted">—</span>
+            }
+          </td>
         </tr>
       </ng-template>
       <ng-template pTemplate="emptymessage">
         <tr>
-          <td colspan="4" class="empty-state">
+          <td colspan="8" class="empty-state">
             @if (loading()) {
               <i class="pi pi-spin pi-spinner"></i>
               <p>Loading…</p>

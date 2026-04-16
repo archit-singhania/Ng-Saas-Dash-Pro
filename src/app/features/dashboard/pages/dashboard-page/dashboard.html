@@ -46,6 +46,8 @@
           <th>Phone Number</th>
           <th>Caller Name</th>
           <th>Duration</th>
+          <th>Result</th>
+          <th>Success Rate</th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-call>
@@ -54,11 +56,29 @@
           <td><span class="phone-mono">{{ call.phone }}</span></td>
           <td>{{ call.callerName }}</td>
           <td>{{ call.duration }}</td>
+          <td>
+            @if (call.successEvaluation === true) {
+              <span class="badge badge-success">Success</span>
+            } @else if (call.successEvaluation === false) {
+              <span class="badge badge-fail">Failed</span>
+            } @else {
+              <span class="badge badge-neutral">—</span>
+            }
+          </td>
+          <td>
+            @if (call.successRate !== null) {
+              <span [class]="'rate-pill ' + getRatePillClass(call.successRate)">
+                {{ call.successRate }}%
+              </span>
+            } @else {
+              <span class="badge badge-neutral">—</span>
+            }
+          </td>
         </tr>
       </ng-template>
       <ng-template pTemplate="emptymessage">
         <tr>
-          <td colspan="4" class="empty-state">
+          <td colspan="6" class="empty-state">
             @if (loading()) {
               <i class="pi pi-spin pi-spinner"></i>
               <p>Loading calls…</p>

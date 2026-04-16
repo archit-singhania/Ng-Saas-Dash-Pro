@@ -5,6 +5,50 @@
   gap: 1rem;
 }
 
+.badge {
+  display: inline-block;
+  padding: .2rem .55rem;
+  border-radius: 999px;
+  font-size: .75rem;
+  font-weight: 500;
+  &.badge-success { background: #d1fae5; color: #065f46; }
+  &.badge-fail    { background: #fee2e2; color: #991b1b; }
+  &.badge-neutral { color: var(--text-muted); }
+}
+
+.rate-pill {
+  display: inline-block;
+  padding: .2rem .55rem;
+  border-radius: 999px;
+  font-size: .78rem;
+  font-weight: 600;
+  &.rate-green  { background: #d1fae5; color: #065f46; }
+  &.rate-yellow { background: #fef3c7; color: #92400e; }
+  &.rate-red    { background: #fee2e2; color: #991b1b; }
+}
+
+.lead-tag {
+  display: inline-block;
+  padding: .2rem .55rem;
+  border-radius: 999px;
+  font-size: .75rem;
+  font-weight: 500;
+  &.lead-hot  { background: #fee2e2; color: #991b1b; }
+  &.lead-warm { background: #ffedd5; color: #9a3412; }
+  &.lead-cold { background: #dbeafe; color: #1e40af; }
+  &.lead-unknown { background: #f3f4f6; color: #6b7280; }
+}
+
+.summary-cell {
+  font-size: .8rem;
+  color: var(--text-secondary);
+  cursor: default;
+}
+
+.text-muted {
+  color: var(--text-muted);
+}
+
 .phone-mono {
   font-family: 'SF Mono', 'Fira Code', monospace;
   font-size: .825rem;

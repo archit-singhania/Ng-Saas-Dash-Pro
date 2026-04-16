@@ -1,4 +1,5 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
+import { SlicePipe } from '@angular/common';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
@@ -6,7 +7,7 @@ import { CallApiService, CallRow } from '../../../../core/services/call-api.serv
 
 @Component({
   selector: 'app-calls',
-  imports: [TableModule, ButtonModule, CardModule],
+  imports: [TableModule, ButtonModule, CardModule, SlicePipe],
   templateUrl: './calls.html',
   styleUrl: './calls.scss'
 })
@@ -39,5 +40,11 @@ export class Calls implements OnInit {
     this.limit.set(event.rows);
     this.page.set(Math.floor(event.first / event.rows) + 1);
     this.loadPage();
+  }
+
+  getRatePillClass(rate: number): string {
+    if (rate >= 70) return 'rate-green';
+    if (rate >= 40) return 'rate-yellow';
+    return 'rate-red';
   }
 }

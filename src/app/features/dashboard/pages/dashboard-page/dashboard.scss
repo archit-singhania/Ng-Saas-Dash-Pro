@@ -20,6 +20,28 @@
   margin: 0;
 }
 
+.badge {
+  display: inline-block;
+  padding: .2rem .55rem;
+  border-radius: 999px;
+  font-size: .75rem;
+  font-weight: 500;
+  &.badge-success { background: #d1fae5; color: #065f46; }
+  &.badge-fail    { background: #fee2e2; color: #991b1b; }
+  &.badge-neutral { color: var(--text-muted); }
+}
+
+.rate-pill {
+  display: inline-block;
+  padding: .2rem .55rem;
+  border-radius: 999px;
+  font-size: .78rem;
+  font-weight: 600;
+  &.rate-green  { background: #d1fae5; color: #065f46; }
+  &.rate-yellow { background: #fef3c7; color: #92400e; }
+  &.rate-red    { background: #fee2e2; color: #991b1b; }
+}
+
 .phone-mono {
   font-family: 'SF Mono', 'Fira Code', monospace;
   font-size: .825rem;

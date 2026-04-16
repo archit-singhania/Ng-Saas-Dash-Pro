@@ -4,13 +4,17 @@ import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 
 export interface CallRow {
-  id:           number;
-  phone:        string;
-  callerName:   string;
-  duration:     string;
-  date:         string;
-  transcript:   string | null;
-  recordingUrl: string | null;
+  id:                  number;
+  phone:               string;
+  callerName:          string;
+  duration:            string;
+  date:                string;
+  transcript:          string | null;
+  recordingUrl:        string | null;
+  aiSummary:           string | null;
+  successEvaluation:   boolean | null;
+  successRate:         number | null;
+  leadClassification:  string | null;
 }
 
 export interface CallsResponse {
