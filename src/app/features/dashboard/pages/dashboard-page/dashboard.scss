@@ -1,3 +1,12 @@
+.page-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+
+  .header-left h1 { margin-bottom: .25rem; }
+}
+
 .card-header-row {
   display: flex;
   align-items: flex-start;
@@ -6,11 +15,18 @@
   gap: 1rem;
 }
 
+.card-title-row {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  margin-bottom: .2rem;
+}
+
 .card-title {
   font-size: .9375rem;
   font-weight: 600;
   color: var(--text-primary);
-  margin: 0 0 .2rem 0;
+  margin: 0;
   letter-spacing: -0.02em;
 }
 
@@ -20,26 +36,49 @@
   margin: 0;
 }
 
-.badge {
-  display: inline-block;
-  padding: .2rem .55rem;
-  border-radius: 999px;
-  font-size: .75rem;
-  font-weight: 500;
-  &.badge-success { background: #d1fae5; color: #065f46; }
-  &.badge-fail    { background: #fee2e2; color: #991b1b; }
-  &.badge-neutral { color: var(--text-muted); }
+:host ::ng-deep .live-tag .p-tag {
+  animation: live-pulse 2s ease-in-out infinite;
+}
+@keyframes live-pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: .55; }
 }
 
-.rate-pill {
-  display: inline-block;
-  padding: .2rem .55rem;
+.skeleton-table {
+  padding: .5rem 0;
+}
+
+.skeleton-row {
+  display: grid;
+  grid-template-columns: 90px 110px 100px 60px 70px 80px;
+  gap: 1.5rem;
+  align-items: center;
+  padding: .65rem 1rem;
+
+  &:not(:last-child) {
+    border-bottom: 1px solid var(--surface-border, #e5e7eb);
+  }
+}
+
+.rate-cell { min-width: 110px; }
+
+.rate-bar-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: .25rem;
+}
+
+:host ::ng-deep .rate-bar .p-progressbar-value {
   border-radius: 999px;
-  font-size: .78rem;
+  transition: width .4s ease;
+}
+
+.rate-label {
+  font-size: .75rem;
   font-weight: 600;
-  &.rate-green  { background: #d1fae5; color: #065f46; }
-  &.rate-yellow { background: #fef3c7; color: #92400e; }
-  &.rate-red    { background: #fee2e2; color: #991b1b; }
+  &.rate-success { color: #065f46; }
+  &.rate-warn    { color: #92400e; }
+  &.rate-danger  { color: #991b1b; }
 }
 
 .phone-mono {
@@ -47,9 +86,13 @@
   font-size: .825rem;
 }
 
+.text-muted {
+  color: var(--text-muted);
+}
+
 .empty-state {
   text-align: center;
-  padding: 3rem 1rem !important;
+  padding: 3rem 1rem;
   color: var(--text-muted);
 
   i {

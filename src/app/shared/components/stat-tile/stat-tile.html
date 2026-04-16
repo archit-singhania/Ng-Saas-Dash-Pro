@@ -1,4 +1,4 @@
-<p-card styleClass="stat-tile-wrap">
+<p-card class="stat-tile-wrap">
   <div class="stat-top">
     <span class="stat-label">{{ label }}</span>
     <div class="stat-icon" [style.background]="'color-mix(in srgb, var(--p-primary-500) 12%, transparent)'" [style.color]="'var(--p-primary-500)'">
@@ -13,7 +13,7 @@
         [value]="trendLabel"
         [severity]="trend === 'up' ? 'success' : trend === 'down' ? 'danger' : 'secondary'"
         [icon]="trend === 'up' ? 'pi pi-arrow-up' : trend === 'down' ? 'pi pi-arrow-down' : 'pi pi-minus'"
-        styleClass="trend-tag" />
+        class="trend-tag" />
     }
   </div>
 </p-card>

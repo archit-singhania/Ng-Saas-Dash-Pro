@@ -1,97 +1,155 @@
 <div class="page-content">
   <div class="page-header">
-    <div class="header-row">
-      <div>
-        <h1>Call Logs</h1>
-        <p>Full history of inbound AI voice agent calls</p>
-      </div>
+    <div class="header-left">
+      <h1>Call Logs</h1>
+      <p>Full history of inbound AI voice agent calls</p>
     </div>
+
+    <p-iconfield>
+      <p-inputicon styleClass="pi pi-search" />
+      <input
+        pInputText
+        type="text"
+        placeholder="Search caller, phone, lead…"
+        [ngModel]="searchTerm()"
+        (ngModelChange)="onSearch($event)"
+        class="search-input" />
+      @if (searchTerm()) {
+        <p-inputicon styleClass="pi pi-times search-clear" (click)="clearSearch()" />
+      }
+    </p-iconfield>
   </div>
 
   <p-card>
-    <p-table
-      [value]="calls()"
-      [lazy]="true"
-      [paginator]="true"
-      [rows]="limit()"
-      [totalRecords]="total()"
-      [rowsPerPageOptions]="[10, 15, 25, 50]"
-      (onPage)="onPageChange($event)"
-      size="small"
-      [tableStyle]="{ 'min-width': '70rem' }">
-      <ng-template pTemplate="header">
-        <tr>
-          <th>Date &amp; Time</th>
-          <th>Phone Number</th>
-          <th>Caller Name</th>
-          <th>Duration</th>
-          <th>AI Summary</th>
-          <th>Result</th>
-          <th>Success Rate</th>
-          <th>Lead</th>
-        </tr>
-      </ng-template>
-      <ng-template pTemplate="body" let-call>
-        <tr>
-          <td>{{ call.date }}</td>
-          <td><span class="phone-mono">{{ call.phone }}</span></td>
-          <td>{{ call.callerName }}</td>
-          <td>{{ call.duration }}</td>
+    @if (loading()) {
+      <div class="skeleton-table">
+        @for (row of skeletonRows; track $index) {
+          <div class="skeleton-row">
+            <p-skeleton width="90px"  height="13px" borderRadius="4px" />
+            <p-skeleton width="110px" height="13px" borderRadius="4px" />
+            <p-skeleton width="100px" height="13px" borderRadius="4px" />
+            <p-skeleton width="55px"  height="13px" borderRadius="4px" />
+            <p-skeleton width="140px" height="13px" borderRadius="4px" />
+            <p-skeleton width="70px"  height="20px" borderRadius="999px" />
+            <p-skeleton width="80px"  height="8px"  borderRadius="4px" />
+            <p-skeleton width="65px"  height="20px" borderRadius="999px" />
+            <p-skeleton width="65px"  height="20px" borderRadius="999px" />
+          </div>
+        }
+      </div>
+    } @else {
+      <p-table
+        [value]="filteredCalls()"
+        [lazy]="true"
+        [paginator]="true"
+        [rows]="limit()"
+        [totalRecords]="total()"
+        [rowsPerPageOptions]="[10, 15, 25, 50]"
+        (onPage)="onPageChange($event)"
+        [currentPageReportTemplate]="'Showing {first} to {last} of {totalRecords} calls'"
+        [showCurrentPageReport]="true"
+        size="small"
+        [stripedRows]="true"
+        [tableStyle]="{ 'min-width': '72rem' }">
 
-          <td>
-            @if (call.aiSummary) {
-              <span class="summary-cell" [title]="call.aiSummary">
-                {{ call.aiSummary | slice:0:60 }}{{ call.aiSummary.length > 60 ? '…' : '' }}
-              </span>
-            } @else {
-              <span class="text-muted">—</span>
-            }
-          </td>
+        <ng-template pTemplate="header">
+          <tr>
+            <th pSortableColumn="date">Date & Time<p-sortIcon field="date" /></th>
+            <th>Phone Number</th>
+            <th pSortableColumn="callerName">Caller Name <p-sortIcon field="callerName" /></th>
+            <th pSortableColumn="duration">Duration <p-sortIcon field="duration" /></th>
+            <th>AI Summary</th>
+            <th>Result</th>
+            <th pSortableColumn="successRate">Success Rate <p-sortIcon field="successRate" /></th>
+            <th>Category</th>
+            <th>Lead Type</th>
+          </tr>
+        </ng-template>
 
-          <td>
-            @if (call.successEvaluation === true) {
-              <span class="badge badge-success">Success</span>
-            } @else if (call.successEvaluation === false) {
-              <span class="badge badge-fail">Failed</span>
-            } @else {
-              <span class="badge badge-neutral">—</span>
-            }
-          </td>
+        <ng-template pTemplate="body" let-call>
+          <tr>
+            <td>{{ call.date }}</td>
 
-          <td>
-            @if (call.successRate !== null) {
-              <span [class]="'rate-pill ' + getRatePillClass(call.successRate)">
-                {{ call.successRate }}%
-              </span>
-            } @else {
-              <span class="text-muted">—</span>
-            }
-          </td>
+            <td><span class="phone-mono">{{ call.phone }}</span></td>
 
-          <td>
-            @if (call.leadClassification) {
-              <span [class]="'lead-tag lead-' + call.leadClassification.toLowerCase()">
-                {{ call.leadClassification }}
-              </span>
-            } @else {
-              <span class="text-muted">—</span>
-            }
-          </td>
-        </tr>
-      </ng-template>
-      <ng-template pTemplate="emptymessage">
-        <tr>
-          <td colspan="8" class="empty-state">
-            @if (loading()) {
-              <i class="pi pi-spin pi-spinner"></i>
-              <p>Loading…</p>
-            } @else {
-              <i class="pi pi-phone"></i>
-              <p>No call records yet</p>
-            }
-          </td>
-        </tr>
-      </ng-template>
-    </p-table>
+            <td>{{ call.callerName }}</td>
+
+            <td>{{ call.duration }}</td>
+
+            <td class="summary-cell">
+              @if (call.aiSummary) {
+                <span
+                  [pTooltip]="call.aiSummary"
+                  tooltipPosition="top"
+                  class="summary-text">
+                  {{ call.aiSummary | slice:0:55 }}{{ call.aiSummary.length > 55 ? '…' : '' }}
+                </span>
+              } @else {
+                <span class="text-muted">—</span>
+              }
+            </td>
+
+            <td>
+              <p-tag
+                [value]="getResultLabel(call.successEvaluation)"
+                [severity]="getResultSeverity(call.successEvaluation)" />
+            </td>
+
+            <td class="rate-cell">
+              @if (call.successRate !== null && call.successRate !== undefined) {
+                <div class="rate-bar-wrap">
+                  <p-progressbar
+                    [value]="(call.successRate ?? 0) * 10"
+                    [showValue]="false"
+                    class="rate-bar"
+                    [style]="{'height': '6px'}" />
+                  <span class="rate-label rate-{{ getRateSeverity((call.successRate ?? 0) * 10) }}">
+                    {{ (call.successRate ?? 0) * 10 }}%
+                  </span>
+                </div>
+              } @else {
+                <span class="text-muted">—</span>
+              }
+            </td>
+
+            <td>
+              @if (call.leadClassification) {
+                <p-tag [value]="call.leadClassification" severity="secondary" />
+              } @else {
+                <span class="text-muted">—</span>
+              }
+            </td>
+
+            <td>
+              @if (call.successRate !== null && call.successRate !== undefined) {
+                <p-tag
+                  [value]="getLeadType(call.successRate)"
+                  [severity]="getLeadSeverity(getLeadType(call.successRate))"
+                  [icon]="getLeadIcon(getLeadType(call.successRate))" />
+              } @else {
+                <span class="text-muted">—</span>
+              }
+            </td>
+          </tr>
+        </ng-template>
+
+        <ng-template pTemplate="emptymessage">
+          <tr>
+            <td colspan="9">
+              <div class="empty-state">
+                <i class="pi pi-phone"></i>
+                <p>
+                  @if (searchTerm()) {
+                    No results for "{{ searchTerm() }}"
+                  } @else {
+                    No call records yet
+                  }
+                </p>
+              </div>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    }
   </p-card>
 </div>

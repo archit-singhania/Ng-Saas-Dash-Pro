@@ -1,52 +1,72 @@
-.header-row {
+.page-header {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
   gap: 1rem;
+  flex-wrap: wrap;
+
+  .header-left h1 { margin-bottom: .25rem; }
 }
 
-.badge {
-  display: inline-block;
-  padding: .2rem .55rem;
-  border-radius: 999px;
-  font-size: .75rem;
-  font-weight: 500;
-  &.badge-success { background: #d1fae5; color: #065f46; }
-  &.badge-fail    { background: #fee2e2; color: #991b1b; }
-  &.badge-neutral { color: var(--text-muted); }
+.search-input {
+  width: 240px;
+  font-size: .875rem;
 }
 
-.rate-pill {
-  display: inline-block;
-  padding: .2rem .55rem;
+.search-clear {
+  cursor: pointer;
+  opacity: .6;
+  transition: opacity .15s;
+  &:hover { opacity: 1; }
+}
+
+.skeleton-table {
+  padding: .5rem 0;
+}
+
+.skeleton-row {
+  display: grid;
+  grid-template-columns: 90px 110px 100px 55px 140px 70px 80px 65px;
+  gap: 1.5rem;
+  align-items: center;
+  padding: .6rem 1rem;
+
+  &:not(:last-child) {
+    border-bottom: 1px solid var(--surface-border, #e5e7eb);
+  }
+}
+
+.rate-cell { min-width: 100px; }
+
+.rate-bar-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: .25rem;
+}
+
+:host ::ng-deep .rate-bar .p-progressbar-value {
   border-radius: 999px;
-  font-size: .78rem;
+  transition: width .4s ease;
+}
+
+.rate-label {
+  font-size: .74rem;
   font-weight: 600;
-  &.rate-green  { background: #d1fae5; color: #065f46; }
-  &.rate-yellow { background: #fef3c7; color: #92400e; }
-  &.rate-red    { background: #fee2e2; color: #991b1b; }
+  &.rate-success { color: #065f46; }
+  &.rate-warn    { color: #92400e; }
+  &.rate-danger  { color: #991b1b; }
 }
 
-.lead-tag {
-  display: inline-block;
-  padding: .2rem .55rem;
-  border-radius: 999px;
-  font-size: .75rem;
-  font-weight: 500;
-  &.lead-hot  { background: #fee2e2; color: #991b1b; }
-  &.lead-warm { background: #ffedd5; color: #9a3412; }
-  &.lead-cold { background: #dbeafe; color: #1e40af; }
-  &.lead-unknown { background: #f3f4f6; color: #6b7280; }
-}
+.summary-cell { max-width: 200px; }
 
-.summary-cell {
+.summary-text {
   font-size: .8rem;
   color: var(--text-secondary);
-  cursor: default;
-}
-
-.text-muted {
-  color: var(--text-muted);
+  cursor: help;
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .phone-mono {
@@ -54,9 +74,13 @@
   font-size: .825rem;
 }
 
+.text-muted {
+  color: var(--text-muted);
+}
+
 .empty-state {
   text-align: center;
-  padding: 3.5rem 1rem !important;
+  padding: 3.5rem 1rem;
   color: var(--text-muted);
 
   i {

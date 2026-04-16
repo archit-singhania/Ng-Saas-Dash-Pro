@@ -1,7 +1,16 @@
 <div class="page-content">
   <div class="page-header">
-    <h1>Overview</h1>
-    <p>Real-time summary of your AI voice agent activity</p>
+    <div class="header-left">
+      <h1>Overview</h1>
+      <p>Real-time summary of your AI voice agent activity</p>
+    </div>
+    <p-button
+      [icon]="refreshing() ? 'pi pi-spin pi-refresh' : 'pi pi-refresh'"
+      label="Refresh"
+      severity="secondary"
+      size="small"
+      [disabled]="refreshing()"
+      (onClick)="refresh()" />
   </div>
 
   <div class="kpi-grid">
@@ -30,65 +39,92 @@
   <p-card>
     <ng-template pTemplate="header">
       <div class="card-header-row">
-        <div>
-          <h3 class="card-title">Recent Calls</h3>
+        <div class="card-header-text">
+          <div class="card-title-row">
+            <h3 class="card-title">Recent Calls</h3>
+            <p-tag value="Live" severity="danger" class="live-tag" />
+          </div>
           <p class="card-sub">Latest 10 inbound calls</p>
         </div>
-        <p-button label="View All" icon="pi pi-arrow-right" iconPos="right"
-          severity="secondary" size="small" routerLink="/calls" />
+        <p-button
+          label="View All"
+          icon="pi pi-arrow-right"
+          iconPos="right"
+          severity="secondary"
+          size="small"
+          routerLink="/calls" />
       </div>
     </ng-template>
 
-    <p-table [value]="recent()" size="small">
-      <ng-template pTemplate="header">
-        <tr>
-          <th>Date &amp; Time</th>
-          <th>Phone Number</th>
-          <th>Caller Name</th>
-          <th>Duration</th>
-          <th>Result</th>
-          <th>Success Rate</th>
-        </tr>
-      </ng-template>
-      <ng-template pTemplate="body" let-call>
-        <tr>
-          <td>{{ call.date }}</td>
-          <td><span class="phone-mono">{{ call.phone }}</span></td>
-          <td>{{ call.callerName }}</td>
-          <td>{{ call.duration }}</td>
-          <td>
-            @if (call.successEvaluation === true) {
-              <span class="badge badge-success">Success</span>
-            } @else if (call.successEvaluation === false) {
-              <span class="badge badge-fail">Failed</span>
-            } @else {
-              <span class="badge badge-neutral">—</span>
-            }
-          </td>
-          <td>
-            @if (call.successRate !== null) {
-              <span [class]="'rate-pill ' + getRatePillClass(call.successRate)">
-                {{ call.successRate }}%
-              </span>
-            } @else {
-              <span class="badge badge-neutral">—</span>
-            }
-          </td>
-        </tr>
-      </ng-template>
-      <ng-template pTemplate="emptymessage">
-        <tr>
-          <td colspan="6" class="empty-state">
-            @if (loading()) {
-              <i class="pi pi-spin pi-spinner"></i>
-              <p>Loading calls…</p>
-            } @else {
-              <i class="pi pi-phone"></i>
-              <p>No calls yet — data will appear here once calls come in</p>
-            }
-          </td>
-        </tr>
-      </ng-template>
-    </p-table>
+    @if (loading()) {
+      <div class="skeleton-table">
+        @for (row of skeletonRows; track $index) {
+          <div class="skeleton-row">
+            <p-skeleton width="90px"  height="14px" borderRadius="4px" />
+            <p-skeleton width="110px" height="14px" borderRadius="4px" />
+            <p-skeleton width="100px" height="14px" borderRadius="4px" />
+            <p-skeleton width="60px"  height="14px" borderRadius="4px" />
+            <p-skeleton width="70px"  height="20px" borderRadius="999px" />
+            <p-skeleton width="80px"  height="8px"  borderRadius="4px" />
+          </div>
+        }
+      </div>
+    } @else {
+      <p-table [value]="recent()" size="small" [stripedRows]="true">
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Date &amp; Time</th>
+            <th>Phone Number</th>
+            <th>Caller Name</th>
+            <th>Duration</th>
+            <th>Result</th>
+            <th>Success Rate</th>
+          </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-call>
+          <tr>
+            <td>{{ call.date }}</td>
+            <td><span class="phone-mono">{{ call.phone }}</span></td>
+            <td>{{ call.callerName }}</td>
+            <td>{{ call.duration }}</td>
+
+            <td>
+              <p-tag
+                [value]="getResultLabel(call.successEvaluation)"
+                [severity]="getResultSeverity(call.successEvaluation)" />
+            </td>
+
+            <td class="rate-cell">
+              @if (call.successRate !== null && call.successRate !== undefined) {
+                <div class="rate-bar-wrap">
+                  <p-progressbar
+                    [value]="(call.successRate ?? 0) * 10"
+                    [showValue]="false"
+                    class="rate-bar"
+                    [style]="{'height': '6px'}" />
+                  <span class="rate-label" [class]="'rate-' + getRateSeverity((call.successRate ?? 0) * 10)">
+                    {{ (call.successRate ?? 0) * 10 }}%
+                  </span>
+                </div>
+              } @else {
+                <span class="text-muted">—</span>
+              }
+            </td>
+          </tr>
+        </ng-template>
+
+        <ng-template pTemplate="emptymessage">
+          <tr>
+            <td colspan="6">
+              <div class="empty-state">
+                <i class="pi pi-phone"></i>
+                <p>No calls yet — data will appear here once calls come in</p>
+              </div>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    }
   </p-card>
 </div>
