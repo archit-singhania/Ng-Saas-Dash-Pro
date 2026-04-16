@@ -1,4 +1,4 @@
-export const APP_NAME = 'Operations Console';
+export const APP_NAME = 'Pre-Sales 360-AI Unified Customer Experience System';
 export const APP_VERSION = '1.0.0';
 
 export const API_BASE = '/api/v1';

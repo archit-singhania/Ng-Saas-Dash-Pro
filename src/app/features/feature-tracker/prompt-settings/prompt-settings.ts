@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, inject, computed } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
@@ -13,6 +13,7 @@ import { FileUploadModule } from 'primeng/fileupload';
 import { ToastModule } from 'primeng/toast';
 import { TagModule } from 'primeng/tag';
 import { MessageService } from 'primeng/api';
+import { AuthService } from '../../../core/services/auth.service';
 import { CardModule } from 'primeng/card';
 
 @Component({
@@ -30,6 +31,11 @@ import { CardModule } from 'primeng/card';
   styleUrl: './prompt-settings.scss'
 })
 export class PromptSettings {
+  private authService = inject(AuthService);
+
+  isSuperAdmin = computed(() =>
+    this.authService.currentUser()?.role?.toLowerCase() === 'super admin'
+  );
   greetingEnabled = signal(true);
   greetingText = signal('Hello! Thank you for calling. How may I assist you today?');
   agentName = signal('Aria');

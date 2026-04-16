@@ -6,7 +6,7 @@
     </div>
 
     <p-iconfield>
-      <p-inputicon styleClass="pi pi-search" />
+      <p-inputicon class="pi pi-search" />
       <input
         pInputText
         type="text"
@@ -15,7 +15,7 @@
         (ngModelChange)="onSearch($event)"
         class="search-input" />
       @if (searchTerm()) {
-        <p-inputicon styleClass="pi pi-times search-clear" (click)="clearSearch()" />
+        <p-inputicon class="pi pi-times search-clear" (click)="clearSearch()" />
       }
     </p-iconfield>
   </div>

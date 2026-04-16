@@ -1,3 +1,33 @@
+@if (!isSuperAdmin()) {
+  <div class="page-content">
+    <div class="page-header">
+      <div class="header-left">
+        <h1>Prompt &amp; Knowledge Base</h1>
+        <p>Configure your AI agent's behaviour, voice, and knowledge</p>
+      </div>
+    </div>
+
+    <div class="coming-soon-gate">
+      <div class="cs-icon">
+        <i class="pi pi-lock"></i>
+      </div>
+      <h2 class="cs-title">Coming Soon</h2>
+      <p class="cs-desc">
+        Prompt &amp; Knowledge Base configuration is currently restricted.<br />
+        Super Admin access is required to manage agent prompts, voice settings, and escalation rules.
+      </p>
+      <p-tag value="Super Admin Only" severity="warn" icon="pi pi-shield" />
+      <div class="cs-btn-row">
+        <p-button
+          label="Request Super Admin Access"
+          icon="pi pi-send"
+          severity="secondary"
+          variant="outlined"
+          [disabled]="true" />
+      </div>
+    </div>
+  </div>
+} @else {
 <div class="page-content prompt-page">
   <div class="page-header">
     <div class="header-row">
@@ -5,6 +35,7 @@
         <h1>Prompt &amp; Knowledge Base</h1>
         <p>Configure your AI agent's behaviour, voice, and knowledge</p>
       </div>
+      <p-tag value="Super Admin" severity="warn" icon="pi pi-shield" />
     </div>
   </div>
 
@@ -240,5 +271,6 @@
     <p-button label="Save Changes" icon="pi pi-check" (onClick)="saveAll()" />
   </div>
 </div>
+}
 
 <p-toast />

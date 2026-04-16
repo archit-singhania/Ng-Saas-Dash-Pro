@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
   imports: [],
   template: `
     <footer class="app-footer">
-      <span class="footer-copy">© {{ year }} Operations Console</span>
+      <span class="footer-copy">© {{ year }} Pre-Sales 360-AI Unified Customer Experience System</span>
       <span class="footer-version">v1.0.0</span>
     </footer>
   `,
